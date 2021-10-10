@@ -122,7 +122,7 @@ void Sprite::Render(int xPos, int yPos, double angle, Screen& screen)
 		targetRect.w = m_spriteDimension.x;
 		targetRect.h = m_spriteDimension.y;
 
-		SDL_Point centre{ m_spriteDimension.x * 0.5f, m_spriteDimension.y * 0.5f };
+		SDL_Point centre{ m_spriteDimension.x, m_spriteDimension.y };
 
 		SDL_RenderCopyEx(screen.GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, SDL_FLIP_NONE);
 	}
