@@ -18,4 +18,6 @@ private:
 
 	Sprite m_image;
 };
-
+//You could make screen a UP (UNIQUE POINTER)
+//then to pass the pointer around use screenPtr.get()
+//Receive the pointer using Screen* scrPtr

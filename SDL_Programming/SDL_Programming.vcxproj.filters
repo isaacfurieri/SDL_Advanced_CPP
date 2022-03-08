@@ -31,6 +31,24 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{2ffedef6-a395-44b4-9872-bfc9a89eaeae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Objects\Collision">
+      <UniqueIdentifier>{8bc8103c-6a94-4a46-b62e-b733b3f8c540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Objects\Character">
+      <UniqueIdentifier>{bdca675c-663e-4ff5-88a8-bfb1a0013f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game State">
+      <UniqueIdentifier>{02a1e10f-271d-4d28-8ad0-ff1705019977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Collision">
+      <UniqueIdentifier>{a591c857-73b7-4b90-a015-24fb11323f5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Character">
+      <UniqueIdentifier>{f7c4f35f-f63a-4f82-904f-eb22bb21d97d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State">
+      <UniqueIdentifier>{772c03eb-89cd-44fe-af1e-6a04db5e6698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp">
@@ -54,9 +72,6 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
@@ -64,15 +79,6 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Spell.cpp">
       <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
@@ -86,6 +92,33 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Source Files\Game Objects\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Source Files\Game Objects\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Source Files\Game Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\Game State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +140,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
@@ -117,15 +147,6 @@
       <Filter>Header Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereCollider.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Spell.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
@@ -139,6 +160,33 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Header Files\Game Objects\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Header Files\Game Objects\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Game Objects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Header Files\Game Objects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.h">
+      <Filter>Header Files\Game State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

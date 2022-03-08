@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+
 	Background background(screen);
 
 	Player player(screen);
