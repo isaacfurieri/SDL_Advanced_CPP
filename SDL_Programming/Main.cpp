@@ -6,9 +6,13 @@
 #include "Background.h"
 #include "Coin.h"
 #include "Enemy.h"
+#include "Game.h"
+#include "GameState.h"
 #include "Input.h"
+#include "MenuState.h"
 #include "Music.h"
 #include "Player.h"
+#include "PlayState.h"
 #include "Score.h"
 #include "Screen.h"
 #include "Sprite.h"
@@ -26,17 +30,26 @@ bool isGameRunning = true;
 //MAIN
 int main(int argc, char* argv[])
 {
-	Screen screen;
-	Input input;
+	//std::unique_ptr<Screen> screen;
 
 	//only call once before any music objects are loaded
-	Music::Initialize();
-	Text::Initialize();
+	//Music::Initialize();
+	//Text::Initialize();
 
 	//Sprite background;
 	//srand(time(NULL));
 	//std::srand(std::time(nullptr));
 
+	std::unique_ptr<Game> game = std::make_unique<Game>();
+
+	if (game->Initialize())
+	{
+		game->Run(new PlayState);
+		game->Shutdown();
+	}
+
+	
+	/*
 	if (!screen.Initialize("My game", 1280, 720))
 	{
 		return 0;
@@ -97,19 +110,19 @@ int main(int argc, char* argv[])
 			isGameRunning = false;
 		}
 
-		/* 
-		Could't find solution to use scoreto exit game.
+		// 
+		//Could't find solution to use scoreto exit game.
+		//
+		//scoreInt = score->GetScore();
+		//if (scoreInt >= 10 || scoreInt < 10)
+		//{
+		//	isGameRunning = false;
+		//}
+		//if (score->GetScore() >= 10 || score->GetScore() < 10)
+		//{
+		//	isGameRunning = false;
+		//}
 		
-		scoreInt = score->GetScore();
-		if (scoreInt >= 10 || scoreInt < 10)
-		{
-			isGameRunning = false;
-		}
-		if (score->GetScore() >= 10 || score->GetScore() < 10)
-		{
-			isGameRunning = false;
-		}
-		*/
 		//=======================================================================
 
 		background.Update(input);
@@ -189,6 +202,6 @@ int main(int argc, char* argv[])
 
 	background.~Background();
 	screen.Shutdown();
-
+	*/
 	return 0;
 }

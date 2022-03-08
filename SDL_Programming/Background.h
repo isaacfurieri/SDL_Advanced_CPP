@@ -8,7 +8,7 @@ class Background : public GameObject
 
 public:
 
-	Background(Screen& screen);
+	Background();
 	~Background();
 
 	virtual void Update(Input& input);

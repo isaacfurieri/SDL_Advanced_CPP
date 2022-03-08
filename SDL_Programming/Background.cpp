@@ -1,8 +1,9 @@
 #include "Background.h"
+#include "Game.h"
 
-Background::Background(Screen& screen)
+Background::Background()
 {
-	m_image.Load("Assets/Images/Background/Room.png", screen);
+	m_image.Load("Assets/Images/Background/Room.png", Game::GetScreen());
 	m_image.SetImageDimension(1, 1, 1280, 720);
 	m_image.SetSpriteDimension(1280, 720);
 }

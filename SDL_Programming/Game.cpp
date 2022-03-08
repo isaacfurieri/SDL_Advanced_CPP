@@ -1,27 +1,29 @@
 #include "Game.h"
 
-Game::Game(GameState* initialState)
+Screen Game::m_screen;
+Input Game::m_input;
+/*
+Game::Game()
 {
-	m_gameState.reset(initialState);
-}
+}*/
 
-bool Game::Initialize(Screen& screen)
+bool Game::Initialize()
 {
 	//===========================================
 	//Init screen 
 	//===========================================
 
-	if (screen.Initialize("My game", 1280, 720))
+	if (!m_screen.Initialize("My game", 1280, 720))
 	{
 		return 0;
 	}
 
+	//Music::Initialize(); //call once before any music object is loaded
 	
 
 	//===========================================
 	//Init music system
 	//===========================================
-	//Music::Initialize(); //call once before any music object is loaded
 	//Music music;	
 	
 	//===========================================
@@ -36,16 +38,17 @@ bool Game::Initialize(Screen& screen)
 	return true;
 }
 
-bool Game::Run()
+bool Game::Run(GameState* initialState)
 {
+	m_gameState.reset(initialState);
 	m_gameState->OnEnter();
 
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
 		//clearing the screen
-
+		Game::GetScreen().Clear();
 		//updating the input
-
+		//input.Update();
 		//checking delta time
 
 		//updating the current game state
@@ -83,7 +86,7 @@ void Game::Shutdown()
 	//Only call this once after the game has ended
 	//Music::Shutdown();
 	//Text::Shutdown();
+	//m_background.Shutdown();
 
-	m_background
 	m_screen.Shutdown();
 }
