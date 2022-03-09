@@ -1,5 +1,6 @@
 #pragma once
 #include "Background.h"
+#include "Player.h"
 #include "GameState.h"
 #include "Game.h"
 
@@ -18,6 +19,7 @@ public:
 private:
 
 	Background m_background;
+	Player m_player;
 	//All play variables declared here!
 	//All main game play mechanics live in this class!!!!!
 };

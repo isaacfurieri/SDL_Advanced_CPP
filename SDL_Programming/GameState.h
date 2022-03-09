@@ -1,15 +1,5 @@
 #pragma once
 
-#include "Background.h"
-#include "Coin.h"
-#include "Enemy.h"
-#include "Input.h"
-#include "Music.h"
-#include "Player.h"
-#include "Score.h"
-#include "Screen.h"
-#include "Text.h"
-
 //This is an ABC class because we have at least 1 puure virtual function (= 0)
 //You cannot instantiate this class!
 
@@ -30,5 +20,6 @@ public:
 protected:
 
 	//Screen& m_screen;
+	//Background m_background;
 
 };

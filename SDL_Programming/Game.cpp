@@ -2,6 +2,7 @@
 
 Screen Game::m_screen;
 Input Game::m_input;
+Music Game::m_music;
 /*
 Game::Game()
 {
@@ -24,7 +25,8 @@ bool Game::Initialize()
 	//===========================================
 	//Init music system
 	//===========================================
-	//Music music;	
+	
+	m_music.Initialize();
 	
 	//===========================================
 	//Init Font system
@@ -46,9 +48,10 @@ bool Game::Run(GameState* initialState)
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
 		//clearing the screen
-		Game::GetScreen().Clear();
+		m_screen.Clear();
+
 		//updating the input
-		//input.Update();
+		m_input.Update();
 		//checking delta time
 
 		//updating the current game state
@@ -72,6 +75,7 @@ bool Game::Run(GameState* initialState)
 		}
 
 		//rendering the screen
+		m_screen.Present();
 	}
 
 	return true;

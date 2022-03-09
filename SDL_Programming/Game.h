@@ -3,16 +3,12 @@
 #include <memory>
 #include <iostream>
 #include <string>
-#include "GameState.h"
+
 #include "Background.h"
-#include "Coin.h"
-#include "Enemy.h"
+#include "GameState.h"
 #include "Input.h"
 #include "Music.h"
-#include "Player.h"
-#include "Score.h"
 #include "Screen.h"
-#include "Text.h"
 
 class Game
 {
@@ -29,11 +25,22 @@ public:
 		return m_screen;
 	}
 
+	static Input& GetInput()
+	{
+		return m_input;
+	}
+
+	static Music& GetMusic()
+	{
+		return m_music;
+	}
+
 private:
 
 	std::unique_ptr<GameState> m_gameState;
-	std::unique_ptr<Background> m_background;
+	//std::unique_ptr<Background> m_background;
 
+	static Music m_music;
 	static Screen m_screen;
 	static Input m_input;
 };

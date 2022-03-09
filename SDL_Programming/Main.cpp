@@ -22,7 +22,7 @@
 #include "Vector2D.h"
 
 //Global var
-bool isGameRunning = true;
+//bool isGameRunning = true;
 //int scoreInt = 0;
 
 //Functions
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 	//std::srand(std::time(nullptr));
 
 	std::unique_ptr<Game> game = std::make_unique<Game>();
-
+	
 	if (game->Initialize())
 	{
 		game->Run(new PlayState);

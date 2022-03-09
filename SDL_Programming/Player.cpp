@@ -1,21 +1,21 @@
 #include "Player.h"
 
-Player::Player(Screen& screen) : m_screen(screen)
+Player::Player()
 {
 	m_velocity = 0;
 	m_spell = nullptr;
 	isCasting = false;
 	m_state = IDLE;
 
-	m_images[IDLE].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", screen);
-	m_images[MOVING_UP].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", screen);
-	m_images[MOVING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", screen);
-	m_images[MOVING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", screen);
-	m_images[MOVING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", screen);
-	m_images[CASTING_UP].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", screen);
-	m_images[CASTING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", screen);
-	m_images[CASTING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", screen);
-	m_images[CASTING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", screen);
+	m_images[IDLE].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Game::GetScreen());
+	m_images[MOVING_UP].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Game::GetScreen());
+	m_images[MOVING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Game::GetScreen());
+	m_images[MOVING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Game::GetScreen());
+	m_images[MOVING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Game::GetScreen());
+	m_images[CASTING_UP].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Game::GetScreen());
+	m_images[CASTING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Game::GetScreen());
+	m_images[CASTING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Game::GetScreen());
+	m_images[CASTING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Game::GetScreen());
 
 	for (int i = 0; i < TOTAL_STATES; i++)
 	{
@@ -78,6 +78,7 @@ void Player::Update(Input& input)
 	//Manupulate/Read keys here, WASD, left up right down
 
 	//UP DOWN LEFT RIGHT ARROW MOVIMENT
+	
 	if (input.GetKeyDown() == SDL_SCANCODE_RIGHT)
 	{
 		m_state = MOVING_RIGHT;
@@ -112,7 +113,7 @@ void Player::Update(Input& input)
 	}
 
 	//WASD - Movement
-
+	/*
 	if (input.GetKeyDown() == SDLK_w || input.GetKeyDown() == SDLK_w && isCasting)
 	{
 		if (isCasting)
@@ -171,6 +172,7 @@ void Player::Update(Input& input)
 			std::cout << "D key pressed. Move player right." << std::endl;
 		}
 		m_direction.x = 1;
+		std::cout << m_direction.x << std::endl;
 		m_direction.y = 0;
 	}
 	else
@@ -200,7 +202,7 @@ void Player::Update(Input& input)
 			//m_spellPosition = m_position.Add(m_images[m_state].GetSpriteDimension().Divide(2));
 			m_spellPosition = m_position;
 			m_mousePosition = input.GetMousePosition();
-			m_spell = new Spell(m_screen, m_spellPosition, m_mousePosition);
+			m_spell = new Spell(Game::GetScreen(), m_spellPosition, m_mousePosition);
 		}
 	}
 	else if (input.GetKeyUp() == SDLK_e)
@@ -248,15 +250,15 @@ void Player::Update(Input& input)
 	if (m_spell)
 	{
 		m_spell->Update(input);
-	}
+	}*/
 }	
 
 void Player::Render(Screen& screen)
 {
-	m_images[m_state].Render(m_position.x, m_position.y, m_angle, screen);
+	m_images[m_state].Render(m_position.x, m_position.y, m_angle, Game::GetScreen());
 
 	if (m_spell)
 	{
-		m_spell->Render(screen);
+		m_spell->Render(Game::GetScreen());
 	}
 }

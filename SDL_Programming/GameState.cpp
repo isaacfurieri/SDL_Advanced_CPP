@@ -5,10 +5,9 @@ bool GameState::OnEnter()
 	//Load Screen Asset
 	//===========================================
 
-
 	//Init music Asset
 	//===========================================
-	Music::Initialize();
+	//Music::Initialize();
 
 	//Music music;
 
@@ -52,6 +51,7 @@ bool GameState::Render()
 	//Render player
 	//render enemy
 	//render ...
+	//m_background.Render(Game::GetScreen());
 
 	return true;
 }

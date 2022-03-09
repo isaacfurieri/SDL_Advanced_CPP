@@ -3,8 +3,15 @@
 
 bool PlayState::OnEnter()
 {
+	m_player.IsVisible(true);
+	m_player.SetPosition(100, 200);
+	m_player.SetAngle(0.0);
+	m_player.SetSize(60, 100);
+	m_player.SetVelocity(5);
 	//Load assets for player and enemy
 	//Load all music for game
+	Game::GetMusic().Load("Assets/Music/background_music.mp3");
+	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load images and fonts
 	return true;
 }
@@ -12,6 +19,7 @@ bool PlayState::OnEnter()
 GameState* PlayState::Update()
 {
 	//Check keypress and mouse clicks
+	m_player.Update(Game::GetInput());
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
 	/*
@@ -33,6 +41,11 @@ GameState* PlayState::Update()
 bool PlayState::Render()
 {
 	//Render player
+
+	if (m_player.IsVisible())
+	{
+		m_player.Render(Game::GetScreen());
+	}
 	//render enemy
 	//render background
 	m_background.Render(Game::GetScreen());
@@ -44,5 +57,6 @@ bool PlayState::Render()
 void PlayState::OnExit()
 {
 	//unload all music, text, sprites for this state
+	Game::GetMusic().Shutdown();
 
 }

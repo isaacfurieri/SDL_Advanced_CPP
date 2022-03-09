@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "BoxCollider.h"
+#include "Game.h"
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Sound.h"
@@ -32,7 +33,7 @@ public:
 		TOTAL_STATES
 	};
 
-	Player(Screen& screen);
+	Player();
 	~Player();
 
 	void SetVelocity(int velocity);
@@ -49,7 +50,6 @@ private:
 	State m_state;
 	Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	Sprite m_images[TOTAL_STATES];       //containment - player has an image
-	Screen& m_screen;
 	Sound m_spellCast, m_footSteps;
 
 	bool isCasting;
