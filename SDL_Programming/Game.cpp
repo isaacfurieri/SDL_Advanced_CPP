@@ -88,7 +88,7 @@ void Game::Shutdown()
 	//delete score;
 
 	//Only call this once after the game has ended
-	//Music::Shutdown();
+	Music::Shutdown();
 	//Text::Shutdown();
 	//m_background.Shutdown();
 

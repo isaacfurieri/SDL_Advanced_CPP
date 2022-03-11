@@ -85,6 +85,7 @@ void Player::Update(Input& input)
 		std::cout << "Right key pressed. Move player right." << std::endl;
 		m_direction.x = 1;
 		m_direction.y = 0;
+		std::cout << m_direction.x << std::endl;
 	}
 	else if (input.GetKeyDown() == SDL_SCANCODE_LEFT)
 	{
@@ -111,6 +112,8 @@ void Player::Update(Input& input)
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
+	
+	m_position = m_position.Add(m_direction);
 
 	//WASD - Movement
 	/*

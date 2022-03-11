@@ -18,8 +18,10 @@ bool PlayState::OnEnter()
 
 GameState* PlayState::Update()
 {
+	//auto screen = Game::GetScreen();
+	auto input = Game::GetInput();
 	//Check keypress and mouse clicks
-	m_player.Update(Game::GetInput());
+	m_player.Update(input);
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
 	/*
@@ -33,22 +35,27 @@ GameState* PlayState::Update()
 		return new PauseState;
 	}
 	*/
-	//auto screen = Game::GetScreen();
+	
+	//If user press ESC > EXIT GAME
+	if (input.GetKeyDown() == SDLK_ESCAPE)
+	{
+		return nullptr;
+	}
 
 	return this;
 }
 
 bool PlayState::Render()
 {
+	//render background
+	m_background.Render(Game::GetScreen());
+	
 	//Render player
-
 	if (m_player.IsVisible())
 	{
 		m_player.Render(Game::GetScreen());
 	}
 	//render enemy
-	//render background
-	m_background.Render(Game::GetScreen());
 	//render ...
 
 	return true;
@@ -58,5 +65,6 @@ void PlayState::OnExit()
 {
 	//unload all music, text, sprites for this state
 	Game::GetMusic().Shutdown();
-
+	//m_background.Shutdown();
+	m_player.~Player();
 }
