@@ -1,18 +1,20 @@
 #include <iostream>
 #include <SDL.h>
 #include <stdlib.h>
+
+#include "Game.h"
+#include "GameState.h"
+#include "MenuState.h"
+#include "PlayState.h"
+/*
 #include <ctime>
 
 #include "Background.h"
 #include "Coin.h"
 #include "Enemy.h"
-#include "Game.h"
-#include "GameState.h"
 #include "Input.h"
-#include "MenuState.h"
 #include "Music.h"
 #include "Player.h"
-#include "PlayState.h"
 #include "Score.h"
 #include "Screen.h"
 #include "Sprite.h"
@@ -20,7 +22,7 @@
 #include "Stone.h"
 #include "Text.h"
 #include "Vector2D.h"
-
+*/
 //Global var
 //bool isGameRunning = true;
 //int scoreInt = 0;
@@ -47,7 +49,9 @@ int main(int argc, char* argv[])
 		game->Run(new PlayState);
 		game->Shutdown();
 	}
-
+	
+	return 0;
+}
 	
 	/*
 	if (!screen.Initialize("My game", 1280, 720))
@@ -203,5 +207,3 @@ int main(int argc, char* argv[])
 	background.~Background();
 	screen.Shutdown();
 	*/
-	return 0;
-}

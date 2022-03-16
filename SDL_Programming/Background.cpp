@@ -19,5 +19,5 @@ void Background::Update(Input& input)
 
 void Background::Render(Screen& screen)
 {
-	m_image.Render(m_position.x, m_position.y, m_angle, screen);
+	m_image.Render(m_position.x, m_position.y, m_angle, Game::GetScreen());
 }

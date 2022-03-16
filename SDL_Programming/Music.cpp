@@ -19,18 +19,16 @@ void Music::Shutdown()
 
 Music::Music()
 {
-
 	m_music = nullptr;
-
 }
 
 bool Music::Load(const std::string& filename)
 {
-
 	m_music = Mix_LoadMUS(filename.c_str());
 
 	if (!m_music)
 	{
+		std::cout << Mix_GetError() << std::endl;
 		std::cout << "Error loading audio file." << std::endl;
 		return false;
 	}
@@ -53,6 +51,7 @@ void Music::Play(PlayLoop playLoop)
 	{
 		if (Mix_PlayMusic(m_music, static_cast<int>(playLoop) == -1))
 		{
+			std::cout << Mix_GetError() << std::endl;
 			std::cout << "Error loading audio file." << std::endl;
 		}
 	}
@@ -72,7 +71,6 @@ void Music::Resume()
 	{
 		Mix_ResumeMusic();
 	}
-
 }
 
 void Music::Stop()

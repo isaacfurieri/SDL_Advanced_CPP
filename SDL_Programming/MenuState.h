@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "Sprite.h"
 
 class MenuState : public GameState
 {
@@ -16,5 +17,5 @@ public:
 private:
 
 	//All menu stuff declared here!
-
+	Sprite m_image;
 };
