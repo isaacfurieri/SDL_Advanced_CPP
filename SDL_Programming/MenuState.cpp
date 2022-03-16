@@ -4,9 +4,23 @@
 bool MenuState::OnEnter()
 {
 	//Load assets for menu buttons
-	m_image.Load("Assets/Menu/LargeButtons/PlayButton.png", Game::GetScreen());
+		//Play Button
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png", Game::GetScreen());
 	m_image.SetImageDimension(1, 1, 600, 200);
-	m_image.SetSpriteDimension(600, 200);
+	m_image.SetSpriteDimension(150, 75);
+		//Settings Button
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png", Game::GetScreen());
+	m_image.SetImageDimension(1, 1, 600, 200);
+	m_image.SetSpriteDimension(150, 75);
+		//New Game Button
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/NewgameButton.png", Game::GetScreen());
+	m_image.SetImageDimension(1, 1, 600, 200);
+	m_image.SetSpriteDimension(150, 75);
+		//Exit Button
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png", Game::GetScreen());
+	m_image.SetImageDimension(1, 1, 600, 200);
+	m_image.SetSpriteDimension(150, 75);
+
 	//Load menu background music
 	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
 	Game::GetMusic().Play(Music::PlayLoop::PLAY_ONCE);
@@ -36,7 +50,7 @@ GameState* MenuState::Update()
 bool MenuState::Render()
 {
 	//render all buttons
-	m_image.Render(885, 700, 0.0f, Game::GetScreen());
+	m_image.Render(565, 200, 0.0f, Game::GetScreen());
 	//render menu text
 
 	return false;

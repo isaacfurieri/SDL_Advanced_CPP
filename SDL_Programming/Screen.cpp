@@ -9,6 +9,8 @@ Screen::Screen()
 
 bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 {
+	m_size.x = width;
+	m_size.y = height;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
@@ -38,6 +40,11 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 	}
 
     return true;
+}
+
+Vector2D Screen::GetScreenSize()
+{
+	return m_size;
 }
 
 void Screen::Clear()

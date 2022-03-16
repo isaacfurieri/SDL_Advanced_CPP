@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Game State">
       <UniqueIdentifier>{772c03eb-89cd-44fe-af1e-6a04db5e6698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Objects\GUI">
+      <UniqueIdentifier>{e46c9679-8555-4016-8c4f-523786a66f12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\GUI">
+      <UniqueIdentifier>{2ecd7a30-ecee-4b02-8da5-829fc17341f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp">
@@ -120,6 +126,9 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
+    <ClCompile Include="MenuButtons.cpp">
+      <Filter>Source Files\Game Objects\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -187,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButtons.h">
+      <Filter>Header Files\Game Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	
 	if (game->Initialize())
 	{
-		game->Run(new PlayState);
+		game->Run(new MenuState);
 		game->Shutdown();
 	}
 	

@@ -21,16 +21,16 @@ public:
 
 	enum State
 	{
-		IDLE,
-		MOVING_UP,
-		MOVING_DOWN,
-		MOVING_LEFT,
-		MOVING_RIGHT,
-		CASTING_UP,
-		CASTING_DOWN,
-		CASTING_LEFT,
-		CASTING_RIGHT,
-		TOTAL_STATES
+		Idle,
+		MovingUp,
+		MovingDown,
+		MovingLeft,
+		MovingRight,
+		CastingUp,
+		CastingDown,
+		CastingLeft,
+		CastingRight,
+		TotalStates
 	};
 
 	Player();
@@ -49,7 +49,7 @@ private:
 
 	State m_state;
 	Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
-	Sprite m_images[TOTAL_STATES];       //containment - player has an image
+	Sprite m_images[TotalStates];       //containment - player has an image
 	Sound m_spellCast, m_footSteps;
 
 	bool isCasting;

@@ -5,26 +5,26 @@ Player::Player()
 	m_velocity = 0;
 	m_spell = nullptr;
 	isCasting = false;
-	m_state = IDLE;
+	m_state = Idle;
 
-	m_images[IDLE].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Game::GetScreen());
-	m_images[MOVING_UP].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Game::GetScreen());
-	m_images[MOVING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Game::GetScreen());
-	m_images[MOVING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Game::GetScreen());
-	m_images[MOVING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Game::GetScreen());
-	m_images[CASTING_UP].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Game::GetScreen());
-	m_images[CASTING_DOWN].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Game::GetScreen());
-	m_images[CASTING_LEFT].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Game::GetScreen());
-	m_images[CASTING_RIGHT].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Game::GetScreen());
+	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Game::GetScreen());
+	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Game::GetScreen());
+	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Game::GetScreen());
+	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Game::GetScreen());
+	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Game::GetScreen());
+	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Game::GetScreen());
+	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Game::GetScreen());
+	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Game::GetScreen());
+	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Game::GetScreen());
 
-	for (int i = 0; i < TOTAL_STATES; i++)
+	for (int i = 0; i < TotalStates; i++)
 	{
 		m_images[i].IsAnimationLooping(true);
 		m_images[i].SetSpriteDimension(100, 100);
 		m_images[i].IsAnimated(true);
 		m_images[i].SetAnimationVelocity(1.5f);
 
-		if (i == IDLE || i == MOVING_UP || i == MOVING_DOWN || i == MOVING_LEFT || i == MOVING_RIGHT)
+		if (i == Idle || i == MovingUp || i == MovingDown || i == MovingLeft || i == MovingRight)
 		{
 			m_images[i].SetImageDimension(9, 1, 315, 35);
 		}
@@ -81,7 +81,7 @@ void Player::Update(Input& input)
 	
 	if (input.GetKeyDown() == SDL_SCANCODE_RIGHT)
 	{
-		m_state = MOVING_RIGHT;
+		m_state = MovingRight;
 		std::cout << "Right key pressed. Move player right." << std::endl;
 		m_direction.x = 1;
 		m_direction.y = 0;
@@ -90,25 +90,25 @@ void Player::Update(Input& input)
 	else if (input.GetKeyDown() == SDL_SCANCODE_LEFT)
 	{
 		std::cout << "Left key pressed. Move player left." << std::endl;
-		m_state = MOVING_LEFT;
+		m_state = MovingLeft;
 		m_direction.x = -1;
 		m_direction.y = 0;
 	}
 	else if (input.GetKeyDown() == SDL_SCANCODE_UP) {
 		std::cout << "Up key pressed. Move player up." << std::endl;
-		m_state = MOVING_UP;
+		m_state = MovingUp;
 		m_direction.x = 0;
 		m_direction.y = -1;
 	}
 	else if (input.GetKeyDown() == SDL_SCANCODE_DOWN) {
 		std::cout << "Down key pressed. Move player down." << std::endl;
-		m_state = MOVING_DOWN;
+		m_state = MovingDown;
 		m_direction.x = 0;
 		m_direction.y = 1;
 	}
 	else
 	{
-		m_state = IDLE;
+		m_state = Idle;
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
@@ -121,12 +121,12 @@ void Player::Update(Input& input)
 	{
 		if (isCasting)
 		{
-			m_state = CASTING_UP;
+			m_state = CastingUp;
 			std::cout << "W key pressed while casting. Move player up with casting animation." << std::endl;
 		}
 		else
 		{
-			m_state = MOVING_UP;
+			m_state = MovingUp;
 			std::cout << "W key pressed. Move player up." << std::endl;
 		}
 		m_direction.x = 0;
@@ -136,12 +136,12 @@ void Player::Update(Input& input)
 	{
 		if (isCasting)
 		{
-			m_state = CASTING_LEFT;
+			m_state = CastingLeft;
 			std::cout << "A key pressed while casting. Move player left with casting animation." << std::endl;
 		}
 		else
 		{
-			m_state = MOVING_LEFT;
+			m_state = MovingLeft;
 			std::cout << "A key pressed. Move player left." << std::endl;
 		}
 		m_direction.x = -1;
@@ -151,12 +151,12 @@ void Player::Update(Input& input)
 	{
 		if (isCasting)
 		{
-			m_state = CASTING_DOWN;
+			m_state = CastingDown;
 			std::cout << "S key pressed while casting. Move player down with casting animation." << std::endl;
 		}
 		else
 		{
-			m_state = MOVING_DOWN;
+			m_state = MovingDown;
 			std::cout << "S key pressed. Move player down." << std::endl;
 		}
 		m_direction.x = 0;
@@ -166,12 +166,12 @@ void Player::Update(Input& input)
 	{
 		if (isCasting)
 		{
-			m_state = CASTING_RIGHT;
+			m_state = CastingRight;
 			std::cout << "D key pressed while casting. Move player right with casting animation." << std::endl;
 		}
 		else
 		{
-			m_state = MOVING_RIGHT;
+			m_state = MovingRight;
 			std::cout << "D key pressed. Move player right." << std::endl;
 		}
 		m_direction.x = 1;
@@ -182,7 +182,7 @@ void Player::Update(Input& input)
 	{
 		if (isCasting)
 		{
-			m_state = CASTING_DOWN;
+			m_state = CastingDown;
 			std::cout << "D key pressed while casting. Move player right with casting animation." << std::endl;
 		}
 		else

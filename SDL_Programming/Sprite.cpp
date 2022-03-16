@@ -74,6 +74,7 @@ bool Sprite::Load(const std::string& filename, Screen& screen)
 
 	if (!rawImageData)
 	{
+		std::cout << SDL_GetError() << std::endl;
 		std::cout << "Error loading image file." << std::endl;
 		return false;
 	}
