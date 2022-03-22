@@ -1,6 +1,6 @@
 #include "Stone.h"
 
-Stone::Stone(Screen& screen)
+Stone::Stone(Screen* screen)
 {
 	m_velocity = 0;
 	m_image.Load("Assets/Images/Background/Stone.png", screen);
@@ -42,7 +42,7 @@ void Stone::Update(Input& input)
 	//m_collider.SetPosition(m_position.x, m_position.y);
 }
 
-void Stone::Render(Screen& screen)
+void Stone::Render(Screen* screen)
 {
 	m_image.Render(m_position.x, m_position.y, m_angle, screen);
 }

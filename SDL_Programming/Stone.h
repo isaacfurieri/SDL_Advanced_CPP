@@ -10,7 +10,7 @@ class Stone : public GameObject
 
 public:
 
-	Stone(Screen& screen);
+	Stone(Screen* screen);
 	~Stone();
 
 	void SetVelocity(int velocity);
@@ -18,7 +18,7 @@ public:
 	//const SphereCollider& GetCollider() const;
 
 	virtual void Update(Input& input);
-	virtual void Render(Screen& screen);
+	virtual void Render(Screen* screen);
 
 private:
 

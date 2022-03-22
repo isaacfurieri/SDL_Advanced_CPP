@@ -11,7 +11,7 @@
 class Enemy : public GameObject
 {
 	public:
-		Enemy(Screen& screen);
+		Enemy(Screen* screen);
 		~Enemy();
 
 		void SetVelocity(int velocity);
@@ -19,7 +19,7 @@ class Enemy : public GameObject
 		void Respawn(int posX, int posY);
 
 		virtual void Update(Input& input);
-		virtual void Render(Screen& screen);
+		virtual void Render(Screen* screen);
 
 private:
 

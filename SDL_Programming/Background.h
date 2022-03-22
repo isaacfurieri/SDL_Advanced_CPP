@@ -12,7 +12,7 @@ public:
 	~Background();
 
 	virtual void Update(Input& input);
-	virtual void Render(Screen& screen);
+	virtual void Render(Screen* screen);
 
 private:
 

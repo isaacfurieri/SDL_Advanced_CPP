@@ -11,12 +11,12 @@ class Spell : public GameObject
 
 public:
 
-	Spell(Screen& screen, Vector2D& spellPosition, Vector2D& mousePosition);
+	Spell(Screen* screen, Vector2D& spellPosition, Vector2D& mousePosition);
 
 	const BoxCollider& GetCollider() const;
 
 	virtual void Update(Input& input);
-	virtual void Render(Screen& screen);
+	virtual void Render(Screen* screen);
 
 private:
 

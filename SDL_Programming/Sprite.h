@@ -25,15 +25,15 @@ public:
 	Vector2D GetImageDimension() const;
 	Vector2D GetSpriteDimension();
 
-	bool Load(const std::string& filename, Screen& screen);
+	bool Load(const std::string& filename, Screen* screen);
 	void Unload();
 
 	void Update();
-	void Render(int xPos, int yPos, double angle, Screen& screen);
+	void Render(int xPos, int yPos, double angle, Screen* screen);
 
 private:
 
-	int m_imageCel;
+	int m_imageCel{ 0 };
 	float m_animationVelocity;
 
 	bool m_isAnimated;

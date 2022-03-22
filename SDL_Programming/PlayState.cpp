@@ -48,12 +48,12 @@ GameState* PlayState::Update()
 bool PlayState::Render()
 {
 	//render background
-	m_background.Render(Game::GetScreen());
+	m_background.Render(Screen::Instance());
 	
 	//Render player
 	if (m_player.IsVisible())
 	{
-		m_player.Render(Game::GetScreen());
+		m_player.Render(Screen::Instance());
 	}
 	//render enemy
 	//render ...

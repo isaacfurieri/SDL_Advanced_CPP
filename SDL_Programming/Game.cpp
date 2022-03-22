@@ -1,20 +1,17 @@
 #include "Game.h"
 
-Screen Game::m_screen;
+//Screen Game::m_screen;
 Input Game::m_input;
 Music Game::m_music;
-/*
-Game::Game()
-{
-}*/
 
 bool Game::Initialize()
 {
 	//===========================================
 	//Init screen 
 	//===========================================
+	Screen::Instance();
 
-	if (!m_screen.Initialize("My game", 1280, 720))
+	if (!Screen::Instance()->Initialize("My game", 1280, 720))
 	{
 		return 0;
 	}
@@ -48,7 +45,7 @@ bool Game::Run(GameState* initialState)
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
 		//clearing the screen
-		m_screen.Clear();
+		Screen::Instance()->Clear();
 
 		//updating the input
 		m_input.Update();
@@ -75,7 +72,7 @@ bool Game::Run(GameState* initialState)
 		}
 
 		//rendering the screen
-		m_screen.Present();
+		Screen::Instance()->Present();
 	}
 
 	return true;
@@ -92,5 +89,5 @@ void Game::Shutdown()
 	//Text::Shutdown();
 	//m_background.Shutdown();
 
-	m_screen.Shutdown();
+	Screen::Instance()->Shutdown();
 }

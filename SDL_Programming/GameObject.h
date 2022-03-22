@@ -38,7 +38,7 @@ public:
 	void SetSize(int width, int height);
 
 	virtual void Update(Input& input) = 0;
-	virtual void Render(Screen& screen) = 0;
+	virtual void Render(Screen* screen) = 0;
 
 protected:
 

@@ -7,15 +7,15 @@ Player::Player()
 	isCasting = false;
 	m_state = Idle;
 
-	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Game::GetScreen());
-	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Game::GetScreen());
-	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Game::GetScreen());
-	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Game::GetScreen());
-	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Game::GetScreen());
-	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Game::GetScreen());
-	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Game::GetScreen());
-	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Game::GetScreen());
-	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Game::GetScreen());
+	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Screen::Instance());
+	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Screen::Instance());
+	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Screen::Instance());
+	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Screen::Instance());
+	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Screen::Instance());
+	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Screen::Instance());
+	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Screen::Instance());
+	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Screen::Instance());
+	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Screen::Instance());
 
 	for (int i = 0; i < TotalStates; i++)
 	{
@@ -256,12 +256,12 @@ void Player::Update(Input& input)
 	}*/
 }	
 
-void Player::Render(Screen& screen)
+void Player::Render(Screen* screen)
 {
-	m_images[m_state].Render(m_position.x, m_position.y, m_angle, Game::GetScreen());
+	m_images[m_state].Render(m_position.x, m_position.y, m_angle, Screen::Instance());
 
 	if (m_spell)
 	{
-		m_spell->Render(Game::GetScreen());
+		m_spell->Render(Screen::Instance());
 	}
 }

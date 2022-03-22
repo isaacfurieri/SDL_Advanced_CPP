@@ -9,14 +9,14 @@ class Coin : public GameObject
 
 public:
 
-	Coin(Screen& screen);
+	Coin(Screen* screen);
 	~Coin();
 
 	const BoxCollider& GetCollider() const;
 	void RespawnObject(int posX, int posY);
 
 	virtual void Update(Input& input);
-	virtual void Render(Screen& screen);
+	virtual void Render(Screen* screen);
 
 private:
 

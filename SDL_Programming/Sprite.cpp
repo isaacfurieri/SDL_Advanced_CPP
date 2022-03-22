@@ -68,7 +68,7 @@ Vector2D Sprite::GetSpriteDimension()
 	return m_spriteDimension;
 }
 
-bool Sprite::Load(const std::string& filename, Screen& screen)
+bool Sprite::Load(const std::string& filename, Screen* screen)
 {
 	SDL_Surface* rawImageData = IMG_Load(filename.c_str());
 
@@ -79,7 +79,7 @@ bool Sprite::Load(const std::string& filename, Screen& screen)
 		return false;
 	}
 
-	m_image = SDL_CreateTextureFromSurface(screen.GetRenderer(), rawImageData);
+	m_image = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), rawImageData);
 
 	return true;
 }
@@ -106,7 +106,7 @@ void Sprite::Update()
 	}
 }
 
-void Sprite::Render(int xPos, int yPos, double angle, Screen& screen)
+void Sprite::Render(int xPos, int yPos, double angle, Screen* screen)
 {
 	if (!m_isAnimationDead)
 	{
@@ -125,6 +125,6 @@ void Sprite::Render(int xPos, int yPos, double angle, Screen& screen)
 
 		SDL_Point centre{ m_spriteDimension.x, m_spriteDimension.y };
 
-		SDL_RenderCopyEx(screen.GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, SDL_FLIP_NONE);
 	}
 }

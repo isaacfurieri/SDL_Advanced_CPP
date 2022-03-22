@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprite.h"
+#include "Screen.h"
 
 class MenuButtons : public GameObject
 {

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <Windows.h>
 #include <string>
 #include <SDL.h>
 #include "Vector2D.h"
@@ -9,21 +9,29 @@ class Screen
 
 public:
 
-	Screen();
+	static Screen* Instance();
+	SDL_Renderer* GetRenderer();
+	SDL_Window* GetWindow();
+	Vector2D GetResolution();
+	
 	bool Initialize(const std::string& windowTitle = "<No name>",
 		int width = 1280,
 		int height = 720);
-	
-	Vector2D GetScreenSize();
+
 	void Clear();
 	void Present();
 	void Shutdown();
 
-	SDL_Renderer* GetRenderer();
-
 private:
 
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+	Screen() {}
+	Screen(const Screen&);
+	Screen& operator=(const Screen&);
+
+	//int m_width{ 0 };
+	//int m_height{ 0 };
+
+	SDL_Window* m_window{ nullptr };
+	SDL_Renderer* m_renderer{ nullptr };
 	Vector2D m_size;
 };

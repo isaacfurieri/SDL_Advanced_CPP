@@ -1,7 +1,7 @@
 
 #include "Spell.h"
 
-Spell::Spell(Screen& screen, Vector2D& spellPosition, Vector2D& mousePosition)
+Spell::Spell(Screen* screen, Vector2D& spellPosition, Vector2D& mousePosition)
 {
 	m_image.Load("Assets/Images/Character/GreenFireball.png", screen);
 	m_image.SetImageDimension(1, 1, 50, 50);
@@ -36,7 +36,7 @@ void Spell::Update(Input& input)
 	m_collider.Update();
 }
 
-void Spell::Render(Screen& screen)
+void Spell::Render(Screen* screen)
 {
 	m_image.Render(m_position.x, m_position.y, m_angle, screen);
 }

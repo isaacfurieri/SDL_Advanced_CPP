@@ -2,7 +2,7 @@
 
 Background::Background()
 {
-	m_image.Load("Assets/Images/Background/Room.png", Game::GetScreen());
+	m_image.Load("Assets/Images/Background/Room.png", Screen::Instance());
 	m_image.SetImageDimension(1, 1, 1280, 720);
 	m_image.SetSpriteDimension(1280, 720);
 }
@@ -17,7 +17,7 @@ void Background::Update(Input& input)
 	//create background manipulation
 }
 
-void Background::Render(Screen& screen)
+void Background::Render(Screen* screen)
 {
-	m_image.Render(m_position.x, m_position.y, m_angle, Game::GetScreen());
+	m_image.Render(m_position.x, m_position.y, m_angle, Screen::Instance());
 }

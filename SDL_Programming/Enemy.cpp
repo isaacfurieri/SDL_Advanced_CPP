@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(Screen& screen)
+Enemy::Enemy(Screen* screen)
 {
 	m_image.Load("Assets/Images/Character/Enemy/Enemy.png", screen);
 	m_image.IsAnimationLooping(false);
@@ -46,7 +46,7 @@ void Enemy::Update(Input& input)
 	m_collider.Update();
 }
 
-void Enemy::Render(Screen& screen)
+void Enemy::Render(Screen* screen)
 {
 	m_image.Render(m_position.x, m_position.y, m_angle, screen);
 }

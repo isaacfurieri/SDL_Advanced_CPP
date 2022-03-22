@@ -1,10 +1,11 @@
 #include <iostream>
+#include <SDL_syswm.h>
 #include "Screen.h"
 
-Screen::Screen()
+Screen* Screen::Instance()
 {
-	m_window = nullptr;
-	m_renderer = nullptr;
+	static Screen* screenObject = new Screen();
+	return screenObject;
 }
 
 bool Screen::Initialize(const std::string& windowTitle, int width, int height)
@@ -42,7 +43,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
     return true;
 }
 
-Vector2D Screen::GetScreenSize()
+Vector2D Screen::GetResolution()
 {
 	return m_size;
 }
@@ -67,4 +68,9 @@ void Screen::Shutdown()
 SDL_Renderer* Screen::GetRenderer()
 {
 	return m_renderer;
+}
+
+SDL_Window* Screen::GetWindow()
+{
+	return m_window;
 }
