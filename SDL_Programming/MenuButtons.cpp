@@ -40,7 +40,7 @@ MenuButtons::MenuButtons()
 
 }
 
-void MenuButtons::Update(Input& input)
+void MenuButtons::Update(Input* input)
 {
 }
 

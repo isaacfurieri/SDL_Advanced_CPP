@@ -1,48 +1,47 @@
 #include "Input.h"
 
-Input::Input()
+Input* Input::Instance()
 {
-	m_isKeyPressed = false;
-	m_isMouseClicked = false;
-	m_isWindowClosed = false;
+	static Input* inputObject = new Input();
+	return inputObject;
 }
 
-char Input::GetKeyUp()
+char Input::GetKeyUp() const
 {
 	return m_keyUp;
 }
 
-char Input::GetKeyDown()
+char Input::GetKeyDown() const
 {
 	return m_keyDown;
 }
 
-int Input::GetMouseButtonUp()
+int Input::GetMouseButtonUp() const
 {
 	return m_mouseButtonUp;
 }
 
-int Input::GetMouseButtonDown()
+int Input::GetMouseButtonDown() const
 {
 	return m_mouseButtonDown;
 }
 
-bool Input::IsKeyPressed()
+bool Input::IsKeyPressed() const
 {
 	return m_isKeyPressed;
 }
 
-bool Input::IsMouseClicked()
+bool Input::IsMouseClicked() const
 {
 	return m_isMouseClicked;
 }
 
-bool Input::IsWindowClosed()
+bool Input::IsWindowClosed() const
 {
 	return m_isWindowClosed;
 }
 
-Vector2D Input::GetMousePosition()
+Vector2D Input::GetMousePosition() const
 {
 	return m_mousePosition;
 }

@@ -20,6 +20,7 @@ public:
 	bool Run(GameState* initialState);
 	void Shutdown();
 
+	/*
 	static Screen& GetScreen()
 	{
 		return m_screen;
@@ -28,7 +29,7 @@ public:
 	static Input& GetInput()
 	{
 		return m_input;
-	}
+	}*/
 
 	static Music& GetMusic()
 	{
@@ -41,6 +42,6 @@ private:
 	//std::unique_ptr<Background> m_background;
 
 	static Music m_music;
-	static Screen m_screen;
-	static Input m_input;
+	//static Screen m_screen;
+	//static Input m_input;
 };

@@ -30,7 +30,7 @@ const BoxCollider& Stone::GetCollider() const
 	return m_collider;
 }
 
-void Stone::Update(Input& input)
+void Stone::Update(Input* input)
 {
 	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);

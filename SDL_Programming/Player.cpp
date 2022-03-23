@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	m_velocity = 0;
+	m_velocity = 0.5f;
 	m_spell = nullptr;
 	isCasting = false;
 	m_state = Idle;
@@ -73,38 +73,38 @@ bool Player::GetCasting() const
 	return isCasting;
 }
 
-void Player::Update(Input& input)
+void Player::Update(Input* input)
 {
-	//Manupulate/Read keys here, WASD, left up right down
-
+	//Manupulate/Read keys here, WASD, left up right downinput->
+	
 	//UP DOWN LEFT RIGHT ARROW MOVIMENT
 	
-	if (input.GetKeyDown() == SDL_SCANCODE_RIGHT)
+	if (input->GetKeyDown() == SDL_SCANCODE_RIGHT)
 	{
 		m_state = MovingRight;
 		std::cout << "Right key pressed. Move player right." << std::endl;
-		m_direction.x = 1;
+		m_direction.x = m_velocity;
 		m_direction.y = 0;
 		std::cout << m_direction.x << std::endl;
 	}
-	else if (input.GetKeyDown() == SDL_SCANCODE_LEFT)
+	else if (input->GetKeyDown() == SDL_SCANCODE_LEFT)
 	{
 		std::cout << "Left key pressed. Move player left." << std::endl;
 		m_state = MovingLeft;
-		m_direction.x = -1;
+		m_direction.x = -m_velocity;
 		m_direction.y = 0;
 	}
-	else if (input.GetKeyDown() == SDL_SCANCODE_UP) {
+	else if (input->GetKeyDown() == SDL_SCANCODE_UP) {
 		std::cout << "Up key pressed. Move player up." << std::endl;
 		m_state = MovingUp;
 		m_direction.x = 0;
-		m_direction.y = -1;
+		m_direction.y = -m_velocity;
 	}
-	else if (input.GetKeyDown() == SDL_SCANCODE_DOWN) {
+	else if (input->GetKeyDown() == SDL_SCANCODE_DOWN) {
 		std::cout << "Down key pressed. Move player down." << std::endl;
 		m_state = MovingDown;
 		m_direction.x = 0;
-		m_direction.y = 1;
+		m_direction.y = m_velocity;
 	}
 	else
 	{
@@ -117,7 +117,7 @@ void Player::Update(Input& input)
 
 	//WASD - Movement
 	/*
-	if (input.GetKeyDown() == SDLK_w || input.GetKeyDown() == SDLK_w && isCasting)
+	if (input->GetKeyDown() == SDLK_w || input->GetKeyDown() == SDLK_w && isCasting)
 	{
 		if (isCasting)
 		{
@@ -132,7 +132,7 @@ void Player::Update(Input& input)
 		m_direction.x = 0;
 		m_direction.y = -1;
 	}
-	else if (input.GetKeyDown() == SDLK_a || input.GetKeyDown() == SDLK_a && isCasting)
+	else if (input->GetKeyDown() == SDLK_a || input->GetKeyDown() == SDLK_a && isCasting)
 	{
 		if (isCasting)
 		{
@@ -147,7 +147,7 @@ void Player::Update(Input& input)
 		m_direction.x = -1;
 		m_direction.y = 0;
 	}
-	else if (input.GetKeyDown() == SDLK_s || input.GetKeyDown() == SDLK_s && isCasting)
+	else if (input->GetKeyDown() == SDLK_s || input->GetKeyDown() == SDLK_s && isCasting)
 	{
 		if (isCasting)
 		{
@@ -162,7 +162,7 @@ void Player::Update(Input& input)
 		m_direction.x = 0;
 		m_direction.y = 1;
 	}
-	else if (input.GetKeyDown() == SDLK_d || input.GetKeyDown() == SDLK_d && isCasting)
+	else if (input->GetKeyDown() == SDLK_d || input->GetKeyDown() == SDLK_d && isCasting)
 	{
 		if (isCasting)
 		{
@@ -195,7 +195,7 @@ void Player::Update(Input& input)
 	}
 	
 	// Spells
-	if (input.GetKeyDown() == SDLK_e) {
+	if (input->GetKeyDown() == SDLK_e) {
 		std::cout << "E pressed. Shoot Fireball." << std::endl;
 		m_spellCast.Play();
 		isCasting = true;
@@ -204,11 +204,11 @@ void Player::Update(Input& input)
 		{
 			//m_spellPosition = m_position.Add(m_images[m_state].GetSpriteDimension().Divide(2));
 			m_spellPosition = m_position;
-			m_mousePosition = input.GetMousePosition();
+			m_mousePosition = input->GetMousePosition();
 			m_spell = new Spell(Game::GetScreen(), m_spellPosition, m_mousePosition);
 		}
 	}
-	else if (input.GetKeyUp() == SDLK_e)
+	else if (input->GetKeyUp() == SDLK_e)
 	{
 		isCasting = false;
 		std::cout << "Spell Unload." << std::endl;

@@ -17,7 +17,7 @@ public:
 	const BoxCollider& GetCollider() const;
 	//const SphereCollider& GetCollider() const;
 
-	virtual void Update(Input& input);
+	virtual void Update(Input* input);
 	virtual void Render(Screen* screen);
 
 private:

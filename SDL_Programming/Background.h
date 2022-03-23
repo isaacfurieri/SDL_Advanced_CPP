@@ -11,7 +11,7 @@ public:
 	Background();
 	~Background();
 
-	virtual void Update(Input& input);
+	virtual void Update(Input* input);
 	virtual void Render(Screen* screen);
 
 private:

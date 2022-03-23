@@ -12,7 +12,7 @@ Background::~Background()
 	m_image.Unload();
 }
 
-void Background::Update(Input& input)
+void Background::Update(Input* input)
 {
 	//create background manipulation
 }

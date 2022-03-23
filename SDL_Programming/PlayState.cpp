@@ -19,7 +19,7 @@ bool PlayState::OnEnter()
 GameState* PlayState::Update()
 {
 	//auto screen = Game::GetScreen();
-	auto input = Game::GetInput();
+	auto input = Input::Instance();
 	//Check keypress and mouse clicks
 	m_player.Update(input);
 	//check if buttons are clicked on
@@ -37,9 +37,9 @@ GameState* PlayState::Update()
 	*/
 	
 	//If user press ESC > EXIT GAME
-	if (input.GetKeyDown() == SDLK_ESCAPE)
+	if (input->GetKeyDown() == SDLK_ESCAPE)
 	{
-		return nullptr;
+		return new MenuState;
 	}
 
 	return this;

@@ -28,7 +28,7 @@ void Coin::RespawnObject(int posX, int posY)
 	m_position.y = posY;
 }
 
-void Coin::Update(Input& input)
+void Coin::Update(Input* input)
 {
 	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);

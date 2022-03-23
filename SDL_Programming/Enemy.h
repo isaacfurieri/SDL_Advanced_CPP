@@ -18,7 +18,7 @@ class Enemy : public GameObject
 		const BoxCollider& GetCollider() const;
 		void Respawn(int posX, int posY);
 
-		virtual void Update(Input& input);
+		virtual void Update(Input* input);
 		virtual void Render(Screen* screen);
 
 private:

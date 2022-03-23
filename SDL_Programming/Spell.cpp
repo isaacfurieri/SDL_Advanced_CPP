@@ -20,7 +20,7 @@ const BoxCollider& Spell::GetCollider() const
 	return m_collider;
 }
 
-void Spell::Update(Input& input)
+void Spell::Update(Input* input)
 {
 	m_direction = m_mousePosition.Subtract(m_position);
 	

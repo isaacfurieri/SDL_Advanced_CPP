@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //Screen Game::m_screen;
-Input Game::m_input;
+//Input Game::m_input;
 Music Game::m_music;
 
 bool Game::Initialize()
@@ -10,6 +10,7 @@ bool Game::Initialize()
 	//Init screen 
 	//===========================================
 	Screen::Instance();
+	Input::Instance();
 
 	if (!Screen::Instance()->Initialize("My game", 1280, 720))
 	{
@@ -48,7 +49,7 @@ bool Game::Run(GameState* initialState)
 		Screen::Instance()->Clear();
 
 		//updating the input
-		m_input.Update();
+		Input::Instance()->Update();
 		//checking delta time
 
 		//updating the current game state
@@ -81,6 +82,7 @@ bool Game::Run(GameState* initialState)
 void Game::Shutdown()
 {
 	//Close down everything you initialized in init()
+
 
 	//delete score;
 

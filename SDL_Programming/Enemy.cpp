@@ -34,7 +34,7 @@ void Enemy::Respawn(int posX, int posY)
 	m_position.y = posY;
 }
 
-void Enemy::Update(Input& input)
+void Enemy::Update(Input* input)
 {
 	m_direction = m_direction.Scale(m_velocity);
 	m_position = m_position.Add(m_direction);
