@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Screen.h"
 #include "Vector2D.h"
+#include "Vector.h"
 
 //Abstract base class - any class with at least 1 pure virtual function
 
@@ -21,8 +22,8 @@ public:
 
 	float GetAngle() const;
 	const std::string& GetTag() const;
-	const Vector2D& GetSize() const;
-	const Vector2D& GetPosition() const;
+	const Vector<int>& GetSize() const;
+	const Vector<int>& GetPosition() const;
 
 	void IsAlive(bool flag);
 	void IsActive(bool flag);
@@ -32,13 +33,13 @@ public:
 	void SetTag(const std::string& tag);
 
 	void SetPosition(int x, int y);
-	void SetPosition(const Vector2D& position);
+	void SetPosition(const Vector<int>& position);
 
-	void SetSize(const Vector2D& size);
+	void SetSize(const Vector<int>& size);
 	void SetSize(int width, int height);
 
-	virtual void Update(Input* input) = 0;
-	virtual void Render(Screen* screen) = 0;
+	virtual void Update() = 0;
+	virtual void Render() = 0;
 
 protected:
 
@@ -49,7 +50,7 @@ protected:
 	bool m_isActive;
 	bool m_isVisible;
 
-	Vector2D m_size;
-	Vector2D m_position;
+	Vector<int> m_size;
+	Vector<int> m_position;
 
 };

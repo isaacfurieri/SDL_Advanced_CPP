@@ -1,9 +1,9 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(Screen* screen)
+Enemy::Enemy()
 {
-	m_image.Load("Assets/Images/Character/Enemy/Enemy.png", screen);
+	m_image.Load("Assets/Images/Character/Enemy/Enemy.png");
 	m_image.IsAnimationLooping(false);
 	m_image.SetImageDimension(1, 1, 72, 96);
 	m_image.SetSpriteDimension(72, 96);
@@ -34,10 +34,10 @@ void Enemy::Respawn(int posX, int posY)
 	m_position.y = posY;
 }
 
-void Enemy::Update(Input* input)
+void Enemy::Update()
 {
-	m_direction = m_direction.Scale(m_velocity);
-	m_position = m_position.Add(m_direction);
+	m_direction = m_direction * m_velocity;
+	m_position = m_position + m_direction;
 
 	m_image.Update();
 
@@ -46,7 +46,7 @@ void Enemy::Update(Input* input)
 	m_collider.Update();
 }
 
-void Enemy::Render(Screen* screen)
+void Enemy::Render()
 {
-	m_image.Render(m_position.x, m_position.y, m_angle, screen);
+	m_image.Render(m_position.x, m_position.y, m_angle);
 }

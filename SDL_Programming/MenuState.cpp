@@ -5,19 +5,19 @@ bool MenuState::OnEnter()
 {
 	//Load assets for menu buttons
 		//Play Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png", Screen::Instance());
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png");
 	m_image.SetImageDimension(1, 1, 600, 200);
 	m_image.SetSpriteDimension(150, 75);
 		//Settings Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png", Screen::Instance());
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png");
 	m_image.SetImageDimension(1, 1, 600, 200);
 	m_image.SetSpriteDimension(150, 75);
 		//New Game Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/NewgameButton.png", Screen::Instance());
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/NewgameButton.png");
 	m_image.SetImageDimension(1, 1, 600, 200);
 	m_image.SetSpriteDimension(150, 75);
 		//Exit Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png", Screen::Instance());
+	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png");
 	m_image.SetImageDimension(1, 1, 600, 200);
 	m_image.SetSpriteDimension(150, 75);
 
@@ -50,7 +50,7 @@ GameState* MenuState::Update()
 bool MenuState::Render()
 {
 	//render all buttons
-	m_image.Render(565, 200, 0.0f, Screen::Instance());
+	m_image.Render(565, 200, 0.0f);
 	//render menu text
 
 	return false;

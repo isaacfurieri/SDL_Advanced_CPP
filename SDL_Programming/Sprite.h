@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include "Screen.h"
 #include "Vector2D.h"
+#include "Vector.h"
 
 class Sprite
 {
@@ -21,15 +22,15 @@ public:
 	void SetSpriteDimension(int width, int height); //on-screen
 	void SetImageDimension(int columns, int rows, int width, int height); //in-folder
 
-	Vector2D GetSpriteDimension() const;
-	Vector2D GetImageDimension() const;
-	Vector2D GetSpriteDimension();
+	Vector<int> GetSpriteDimension() const;
+	Vector<int> GetImageDimension() const;
+	Vector<int> GetSpriteDimension();
 
-	bool Load(const std::string& filename, Screen* screen);
+	bool Load(const std::string& filename);
 	void Unload();
 
 	void Update();
-	void Render(int xPos, int yPos, double angle, Screen* screen);
+	void Render(int xPos, int yPos, double angle);
 
 private:
 
@@ -41,7 +42,7 @@ private:
 	bool m_isAnimationLooping;
 
 	SDL_Texture* m_image;
-	Vector2D m_celDimension;
-	Vector2D m_imageDimension;
-	Vector2D m_spriteDimension;
+	Vector<int> m_celDimension;
+	Vector<int> m_imageDimension;
+	Vector<int> m_spriteDimension;
 };

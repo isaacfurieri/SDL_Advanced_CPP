@@ -4,27 +4,27 @@ MenuButtons::MenuButtons()
 {
 	//Mouse Out Buttons
 	//Play Button
-	m_image[Play].Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png", Screen::Instance());
+	m_image[Play].Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png");
 	//Resume Button
-	m_image[Resume].Load("Assets/Menu/LargeButtons/LargeButtons/ResumeButton.png", Screen::Instance());
+	m_image[Resume].Load("Assets/Menu/LargeButtons/LargeButtons/ResumeButton.png");
 	//Settings Button
-	m_image[Settings].Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png", Screen::Instance());
+	m_image[Settings].Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png");
 	//Exit Button
-	m_image[Exit].Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png", Screen::Instance());
+	m_image[Exit].Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png");
 	//Back Button
-	m_image[Back].Load("Assets/Menu/LargeButtons/LargeButtons/BackButton.png", Screen::Instance());
+	m_image[Back].Load("Assets/Menu/LargeButtons/LargeButtons/BackButton.png");
 
 	//Mouse Over Colored Buttons
 	//Play Button
-	m_image[Play].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Playcol_Button.png", Screen::Instance());
+	m_image[Play].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Playcol_Button.png");
 	//Resume Button
-	m_image[Resume].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Resumecol_Button.png", Screen::Instance());
+	m_image[Resume].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Resumecol_Button.png");
 	//Settings Button
-	m_image[Settings].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Settingscol_Button.png", Screen::Instance());
+	m_image[Settings].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Settingscol_Button.png");
 	//Exit Button
-	m_image[Exit].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Exitcol_Button.png", Screen::Instance());
+	m_image[Exit].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Exitcol_Button.png");
 	//Back Button
-	m_image[Back].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Backcol_Button.png", Screen::Instance());
+	m_image[Back].Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Backcol_Button.png");
 
 	m_image[Play].SetSpriteDimension(150, 75);
 	m_image[Resume].SetSpriteDimension(150, 75);
@@ -48,6 +48,6 @@ void MenuButtons::Render(Screen& screen)
 {
 	for (auto i = 0; i < TotalButtons; i++)
 	{
-		m_image[i].Render(Screen::Instance()->GetResolution().x + m_image[i].GetSpriteDimension().x, 200 + m_image[i].GetSpriteDimension().y, 0.0f, Screen::Instance() );
+		m_image[i].Render(Screen::Instance()->GetResolution().x + m_image[i].GetSpriteDimension().x, 200 + m_image[i].GetSpriteDimension().y, 0.0f );
 	}
 }

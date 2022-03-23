@@ -9,19 +9,19 @@ class Coin : public GameObject
 
 public:
 
-	Coin(Screen* screen);
+	Coin();
 	~Coin();
 
 	const BoxCollider& GetCollider() const;
 	void RespawnObject(int posX, int posY);
 
-	virtual void Update(Input* input);
-	virtual void Render(Screen* screen);
+	virtual void Update();
+	virtual void Render();
 
 private:
 
 	Sprite m_image;
 
-	Vector2D m_direction;
+	Vector<int> m_direction;
 	BoxCollider m_collider;
 };

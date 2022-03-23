@@ -53,22 +53,22 @@ void Sprite::SetImageDimension(int columns, int rows, int width, int height)
 	m_celDimension.y = height / rows;
 }
 
-Vector2D Sprite::GetSpriteDimension() const
+Vector<int> Sprite::GetSpriteDimension() const
 {
 	return m_spriteDimension;
 }
 
-Vector2D Sprite::GetImageDimension() const
+Vector<int> Sprite::GetImageDimension() const
 {
 	return m_imageDimension;
 }
 
-Vector2D Sprite::GetSpriteDimension()
+Vector<int> Sprite::GetSpriteDimension()
 {
 	return m_spriteDimension;
 }
 
-bool Sprite::Load(const std::string& filename, Screen* screen)
+bool Sprite::Load(const std::string& filename)
 {
 	SDL_Surface* rawImageData = IMG_Load(filename.c_str());
 
@@ -106,7 +106,7 @@ void Sprite::Update()
 	}
 }
 
-void Sprite::Render(int xPos, int yPos, double angle, Screen* screen)
+void Sprite::Render(int xPos, int yPos, double angle)
 {
 	if (!m_isAnimationDead)
 	{

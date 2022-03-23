@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include <deque>
 #include "BoxCollider.h"
 #include "Game.h"
 #include "GameObject.h"
@@ -42,19 +42,21 @@ public:
 
 	bool GetCasting() const;
 
-	virtual void Update(Input* input);
-	virtual void Render(Screen* screen);
+	virtual void Update();
+	virtual void Render();
 
 private:
 
 	State m_state;
-	Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
+	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	Sprite m_images[TotalStates];       //containment - player has an image
 	Sound m_spellCast, m_footSteps;
 
+	std::deque<Spell> m_spells;
+
 	bool isCasting;
 	int m_velocity;
-	Vector2D m_direction, m_spellPosition, m_mousePosition;
+	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;
 	//SphereCollider m_collider;

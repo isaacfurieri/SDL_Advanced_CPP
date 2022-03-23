@@ -1,9 +1,9 @@
 
 #include "Spell.h"
 
-Spell::Spell(Screen* screen, Vector2D& spellPosition, Vector2D& mousePosition)
+Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 {
-	m_image.Load("Assets/Images/Character/GreenFireball.png", screen);
+	m_image.Load("Assets/Images/Character/GreenFireball.png");
 	m_image.SetImageDimension(1, 1, 50, 50);
 	m_image.SetSpriteDimension(50, 50);
 
@@ -11,8 +11,15 @@ Spell::Spell(Screen* screen, Vector2D& spellPosition, Vector2D& mousePosition)
 	m_image.IsAnimationLooping(false);
 	//m_image.SetAnimationVelocity(1.1f);
 
+	m_spellSpeed = 10;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
+	
+	m_direction = m_mousePosition - m_position;
+
+	
+	//m_direction = m_direction.Normalize();
+
 }
 
 const BoxCollider& Spell::GetCollider() const
@@ -20,14 +27,23 @@ const BoxCollider& Spell::GetCollider() const
 	return m_collider;
 }
 
-void Spell::Update(Input* input)
+void Spell::Update()
 {
-	m_direction = m_mousePosition.Subtract(m_position);
 	
-	//m_direction = m_direction.Normalize();
-	m_direction = m_direction.Scale(0.03f);
+	//m_direction = m_direction * 0.03f;
 
-	m_position = m_position.Add(m_direction);
+	Vector<float> dir;
+	dir.x = m_direction.x;
+	dir.y = m_direction.y;
+
+	dir = dir.Normalize();
+	dir *= m_spellSpeed;
+
+	Vector<int> d;
+	d.x = dir.x;
+	d.y = dir.y;
+
+	m_position = m_position + d;
 
 	m_image.Update();
 
@@ -36,7 +52,7 @@ void Spell::Update(Input* input)
 	m_collider.Update();
 }
 
-void Spell::Render(Screen* screen)
+void Spell::Render()
 {
-	m_image.Render(m_position.x, m_position.y, m_angle, screen);
+	m_image.Render(m_position.x, m_position.y, m_angle);
 }

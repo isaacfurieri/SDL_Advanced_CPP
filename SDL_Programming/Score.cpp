@@ -24,7 +24,7 @@ int Score::GetScore()
 	return m_score;
 }
 
-void Score::Render(Screen& screen)
+void Score::Render()
 {
-	m_text.Render(10, 10, screen);
+	m_text.Render(10, 10);
 }

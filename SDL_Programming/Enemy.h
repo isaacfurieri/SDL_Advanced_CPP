@@ -11,15 +11,15 @@
 class Enemy : public GameObject
 {
 	public:
-		Enemy(Screen* screen);
+		Enemy();
 		~Enemy();
 
 		void SetVelocity(int velocity);
 		const BoxCollider& GetCollider() const;
 		void Respawn(int posX, int posY);
 
-		virtual void Update(Input* input);
-		virtual void Render(Screen* screen);
+		virtual void Update();
+		virtual void Render();
 
 private:
 
@@ -28,7 +28,7 @@ private:
 
 	bool isAlive;
 	int m_velocity;
-	Vector2D m_direction;
+	Vector<int> m_direction;
 
 	BoxCollider m_collider;
 };

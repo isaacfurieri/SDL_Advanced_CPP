@@ -198,6 +198,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Stone.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Coin.h" />
   </ItemGroup>

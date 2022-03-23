@@ -2,20 +2,20 @@
 
 Player::Player()
 {
-	m_velocity = 0.5f;
-	m_spell = nullptr;
+	m_velocity = 1;
+	//m_spell = nullptr;
 	isCasting = false;
 	m_state = Idle;
 
-	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png", Screen::Instance());
-	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png", Screen::Instance());
-	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png", Screen::Instance());
-	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png", Screen::Instance());
-	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png", Screen::Instance());
-	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png", Screen::Instance());
-	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png", Screen::Instance());
-	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png", Screen::Instance());
-	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png", Screen::Instance());
+	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png");
+	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png");
+	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png");
+	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png");
+	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png");
+	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png");
+	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png");
+	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png");
+	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png");
 
 	for (int i = 0; i < TotalStates; i++)
 	{
@@ -73,13 +73,13 @@ bool Player::GetCasting() const
 	return isCasting;
 }
 
-void Player::Update(Input* input)
+void Player::Update()
 {
-	//Manupulate/Read keys here, WASD, left up right downinput->
+	auto input = Input::Instance();
 	
-	//UP DOWN LEFT RIGHT ARROW MOVIMENT
-	
-	if (input->GetKeyDown() == SDL_SCANCODE_RIGHT)
+	//Manupulate/Read keys here
+	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
+	if (input->IsKeyPressed(HM_KEY_RIGHT))
 	{
 		m_state = MovingRight;
 		std::cout << "Right key pressed. Move player right." << std::endl;
@@ -87,20 +87,21 @@ void Player::Update(Input* input)
 		m_direction.y = 0;
 		std::cout << m_direction.x << std::endl;
 	}
-	else if (input->GetKeyDown() == SDL_SCANCODE_LEFT)
+	else if (input->IsKeyPressed(HM_KEY_LEFT))
 	{
 		std::cout << "Left key pressed. Move player left." << std::endl;
 		m_state = MovingLeft;
 		m_direction.x = -m_velocity;
 		m_direction.y = 0;
 	}
-	else if (input->GetKeyDown() == SDL_SCANCODE_UP) {
+	else if (input->IsKeyPressed(HM_KEY_UP))
+	{
 		std::cout << "Up key pressed. Move player up." << std::endl;
 		m_state = MovingUp;
 		m_direction.x = 0;
 		m_direction.y = -m_velocity;
 	}
-	else if (input->GetKeyDown() == SDL_SCANCODE_DOWN) {
+	else if (input->IsKeyPressed(HM_KEY_DOWN)) {
 		std::cout << "Down key pressed. Move player down." << std::endl;
 		m_state = MovingDown;
 		m_direction.x = 0;
@@ -112,12 +113,12 @@ void Player::Update(Input* input)
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
-	
-	m_position = m_position.Add(m_direction);
+
+	m_position = m_position + m_direction;
 
 	//WASD - Movement
-	/*
-	if (input->GetKeyDown() == SDLK_w || input->GetKeyDown() == SDLK_w && isCasting)
+	
+	if (input->IsKeyPressed(HM_KEY_W) || input->IsKeyPressed(HM_KEY_W) && isCasting)
 	{
 		if (isCasting)
 		{
@@ -132,7 +133,7 @@ void Player::Update(Input* input)
 		m_direction.x = 0;
 		m_direction.y = -1;
 	}
-	else if (input->GetKeyDown() == SDLK_a || input->GetKeyDown() == SDLK_a && isCasting)
+	else if (input->IsKeyPressed(HM_KEY_A) || input->IsKeyPressed(HM_KEY_A) && isCasting)
 	{
 		if (isCasting)
 		{
@@ -147,7 +148,7 @@ void Player::Update(Input* input)
 		m_direction.x = -1;
 		m_direction.y = 0;
 	}
-	else if (input->GetKeyDown() == SDLK_s || input->GetKeyDown() == SDLK_s && isCasting)
+	else if (input->IsKeyPressed(HM_KEY_S) || input->IsKeyPressed(HM_KEY_S) && isCasting)
 	{
 		if (isCasting)
 		{
@@ -162,7 +163,7 @@ void Player::Update(Input* input)
 		m_direction.x = 0;
 		m_direction.y = 1;
 	}
-	else if (input->GetKeyDown() == SDLK_d || input->GetKeyDown() == SDLK_d && isCasting)
+	else if (input->IsKeyPressed(HM_KEY_D) || input->IsKeyPressed(HM_KEY_D) && isCasting)
 	{
 		if (isCasting)
 		{
@@ -187,36 +188,70 @@ void Player::Update(Input* input)
 		}
 		else
 		{
-			m_state = IDLE;
+			m_state = Idle;
 			std::cout << "D key pressed. Move player right." << std::endl;
 		}
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
-	
+
 	// Spells
-	if (input->GetKeyDown() == SDLK_e) {
-		std::cout << "E pressed. Shoot Fireball." << std::endl;
-		m_spellCast.Play();
+	//if (input->GetKeyDown() == SDLK_e) {
+	//	std::cout << "E pressed. Shoot Fireball." << std::endl;
+	//	m_spellCast.Play();
+	//	isCasting = true;
+
+	//	//if (!m_spell)
+	//	//{
+	//	//	//m_spellPosition = m_position.Add(m_images[m_state].GetSpriteDimension().Divide(2));
+	//	//	m_spellPosition = m_position;
+	//	//	m_mousePosition = input->GetMousePosition();
+	//	//	m_spell = new Spell(m_spellPosition, m_mousePosition);
+	//	//}
+	//}
+	
+	//==========================================================
+	
+	m_mousePosition = input->GetMousePosition();
+
+	if (input->IsKeyPressed(HM_KEY_E) && !isCasting)
+	{
+		std::cout << "Spell cast." << std::endl;
+		m_spells.push_front(Spell(m_position, m_mousePosition));
 		isCasting = true;
 
-		if (!m_spell)
-		{
-			//m_spellPosition = m_position.Add(m_images[m_state].GetSpriteDimension().Divide(2));
-			m_spellPosition = m_position;
-			m_mousePosition = input->GetMousePosition();
-			m_spell = new Spell(Game::GetScreen(), m_spellPosition, m_mousePosition);
-		}
-	}
-	else if (input->GetKeyUp() == SDLK_e)
-	{
-		isCasting = false;
-		std::cout << "Spell Unload." << std::endl;
-		delete m_spell;
-		m_spell = nullptr;
+		///**/delete m_spell;
+		//m_spell = nullptr;*/
 	}
 
-	m_direction = m_direction.Scale(m_velocity);
+	//==========================================================
+	//timer for 10 secs
+	//switch isCasting = false;
+	
+	static float time = 0.0f;
+	time += 0.1f;
+
+	if (time >= 10.0f)
+	{
+		isCasting = false;
+		m_spells.pop_back();
+		time = 0.0f;
+	}
+
+	//==========================================================
+
+	for (auto& spell : m_spells)
+	{
+		spell.Update();
+
+		if (spell.GetPosition().x >= 1000)
+		{
+			spell.IsAlive(false);
+		}
+	}
+
+	//==========================================================
+	m_direction = m_direction * m_velocity;
 
 	if (m_position.x < 0)
 	{
@@ -241,7 +276,7 @@ void Player::Update(Input* input)
 	}
 	else
 	{
-		m_position = m_position.Add(m_direction);
+		m_position = m_position + m_direction;
 	}
 
 	m_images[m_state].Update();
@@ -250,18 +285,23 @@ void Player::Update(Input* input)
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
 
-	if (m_spell)
+	/*if (m_spell)
 	{
-		m_spell->Update(input);
+		m_spell->Update();
 	}*/
-}	
+}
 
-void Player::Render(Screen* screen)
+void Player::Render()
 {
-	m_images[m_state].Render(m_position.x, m_position.y, m_angle, Screen::Instance());
+	m_images[m_state].Render(m_position.x, m_position.y, m_angle);
 
-	if (m_spell)
+	/*if (m_spell)
 	{
-		m_spell->Render(Screen::Instance());
+		m_spell->Render();
+	}*/
+
+	for (auto& spell : m_spells)
+	{
+		spell.Render();
 	}
 }

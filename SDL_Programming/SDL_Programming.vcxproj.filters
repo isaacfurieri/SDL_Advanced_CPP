@@ -200,5 +200,8 @@
     <ClInclude Include="MenuButtons.h">
       <Filter>Header Files\Game Objects\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

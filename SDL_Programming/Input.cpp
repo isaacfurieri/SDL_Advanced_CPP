@@ -1,96 +1,154 @@
+#include <SDL.h>
 #include "Input.h"
 
+//======================================================================================================
 Input* Input::Instance()
 {
 	static Input* inputObject = new Input();
 	return inputObject;
 }
-
-char Input::GetKeyUp() const
+//======================================================================================================
+char Input::GetKey() const
 {
-	return m_keyUp;
+	return m_key;
 }
-
-char Input::GetKeyDown() const
+//======================================================================================================
+int Input::GetMouseWheel() const
 {
-	return m_keyDown;
+	return m_mouseWheel;
 }
-
-int Input::GetMouseButtonUp() const
+//======================================================================================================
+const Vector<int>& Input::GetMouseMotion() const
 {
-	return m_mouseButtonUp;
+	return m_mouseMotion;
 }
-
-int Input::GetMouseButtonDown() const
+//======================================================================================================
+const Vector<int>& Input::GetMousePosition() const
 {
-	return m_mouseButtonDown;
+	return m_mousePosition;
 }
-
-bool Input::IsKeyPressed() const
+//======================================================================================================
+void Input::SetCursorState(bool isCursorEnabled, bool isCursorVisible)
 {
-	return m_isKeyPressed;
+	SDL_ShowCursor(static_cast<int>(isCursorVisible));
+	SDL_SetRelativeMouseMode(static_cast<SDL_bool>(isCursorEnabled));
 }
-
-bool Input::IsMouseClicked() const
-{
-	return m_isMouseClicked;
-}
-
+//======================================================================================================
 bool Input::IsWindowClosed() const
 {
 	return m_isWindowClosed;
 }
-
-Vector2D Input::GetMousePosition() const
+//======================================================================================================
+bool Input::IsKeyPressed() const
 {
-	return m_mousePosition;
+	return m_isKeyPressed;
 }
-
+//======================================================================================================
+bool Input::IsKeyPressed(int keyCode) const
+{
+	const Uint8* m_keyStates = SDL_GetKeyboardState(nullptr);
+	return m_keyStates[keyCode];
+}
+//======================================================================================================
+bool Input::IsModifierPressed(int modifier_1, int modifier_2) const
+{
+	return m_modifier == (modifier_1 | modifier_2);
+}
+//======================================================================================================
+bool Input::IsMouseClicked() const
+{
+	return m_isMouseClicked;
+}
+//======================================================================================================
+bool Input::IsMouseClicked(int mouseButton_1, int mouseButton_2) const
+{
+	return m_mouseButton == (mouseButton_1 | mouseButton_2);
+}
+//======================================================================================================
 void Input::Update()
 {
-
 	SDL_Event events;
+
+	m_mouseWheel = 0;
+	m_mouseMotion.x = 0;
+	m_mouseMotion.y = 0;
+	m_isWindowClosed = false;
 
 	while (SDL_PollEvent(&events))
 	{
+		switch (events.type)
+		{
 
-		if (events.type == SDL_QUIT)
+		case SDL_QUIT:
 		{
 			m_isWindowClosed = true;
+			break;
 		}
 
-		else if (events.type == SDL_KEYDOWN)
-		{
-			m_isKeyPressed = true;
-			m_keyDown = events.key.keysym.sym;
-		}
-
-		else if (events.type == SDL_KEYUP)
+		case SDL_KEYUP:
 		{
 			m_isKeyPressed = false;
-			m_keyDown = ' ';
-			m_keyUp = events.key.keysym.sym;
+			m_key = SDLK_UNKNOWN;
+			m_modifier = events.key.keysym.mod;
+			break;
 		}
 
-		else if (events.type == SDL_MOUSEBUTTONDOWN)
+		case SDL_KEYDOWN:
 		{
-			m_isMouseClicked = true;
-			m_mouseButtonDown = events.button.button;
+			m_isKeyPressed = true;
+			m_key = events.key.keysym.sym;
+			m_modifier |= events.key.keysym.mod;
+			break;
 		}
 
-		else if (events.type == SDL_MOUSEBUTTONUP)
-		{
-			m_isMouseClicked = false;
-			m_mouseButtonUp = events.button.button;
-		}
-
-		else if (events.type == SDL_MOUSEMOTION)
+		case SDL_MOUSEMOTION:
 		{
 			m_mousePosition.x = events.motion.x;
 			m_mousePosition.y = events.motion.y;
+
+			m_mouseMotion.x = events.motion.xrel;
+			m_mouseMotion.y = events.motion.yrel;
+			break;
 		}
 
+		case SDL_MOUSEWHEEL:
+		{
+			m_mouseWheel = events.wheel.y;
+			break;
+		}
 
+		case SDL_MOUSEBUTTONUP:
+		{
+			m_isMouseClicked = false;
+			m_mousePosition.x = events.motion.x;
+			m_mousePosition.y = events.motion.y;
+
+			switch (events.button.button)
+			{
+			case SDL_BUTTON_LEFT: { m_mouseButton ^= HM_MOUSE_LEFT; break;   }
+			case SDL_BUTTON_MIDDLE: { m_mouseButton ^= HM_MOUSE_MIDDLE; break; }
+			case SDL_BUTTON_RIGHT: { m_mouseButton ^= HM_MOUSE_RIGHT; break;  }
+			}
+
+			break;
+		}
+
+		case SDL_MOUSEBUTTONDOWN:
+		{
+			m_isMouseClicked = true;
+			m_mousePosition.x = events.motion.x;
+			m_mousePosition.y = events.motion.y;
+
+			switch (events.button.button)
+			{
+			case SDL_BUTTON_LEFT: { m_mouseButton |= HM_MOUSE_LEFT; break;   }
+			case SDL_BUTTON_MIDDLE: { m_mouseButton |= HM_MOUSE_MIDDLE; break; }
+			case SDL_BUTTON_RIGHT: { m_mouseButton |= HM_MOUSE_RIGHT; break;  }
+			}
+
+			break;
+		}
+
+		}
 	}
-
 }

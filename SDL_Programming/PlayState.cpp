@@ -21,7 +21,7 @@ GameState* PlayState::Update()
 	//auto screen = Game::GetScreen();
 	auto input = Input::Instance();
 	//Check keypress and mouse clicks
-	m_player.Update(input);
+	m_player.Update();
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
 	/*
@@ -37,7 +37,7 @@ GameState* PlayState::Update()
 	*/
 	
 	//If user press ESC > EXIT GAME
-	if (input->GetKeyDown() == SDLK_ESCAPE)
+	if (input->IsKeyPressed(HM_KEY_ESCAPE))
 	{
 		return new MenuState;
 	}
@@ -48,12 +48,12 @@ GameState* PlayState::Update()
 bool PlayState::Render()
 {
 	//render background
-	m_background.Render(Screen::Instance());
+	m_background.Render();
 	
 	//Render player
 	if (m_player.IsVisible())
 	{
-		m_player.Render(Screen::Instance());
+		m_player.Render();
 	}
 	//render enemy
 	//render ...

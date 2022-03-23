@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Input.h"
 #include "Sprite.h"
+
 class Background : public GameObject
 {
 
@@ -11,8 +12,8 @@ public:
 	Background();
 	~Background();
 
-	virtual void Update(Input* input);
-	virtual void Render(Screen* screen);
+	virtual void Update();
+	virtual void Render();
 
 private:
 
