@@ -18,8 +18,8 @@ void SphereCollider::SetPosition(int x, int y)
 
 bool SphereCollider::IsColliding(const SphereCollider& secondBox) const
 {
-	Vector2D centerPointA = Vector2D(m_position.x + m_radius, m_position.y + m_radius);
-	Vector2D centerPointB = Vector2D(secondBox.m_position.x + m_radius,
+	Vector<int> centerPointA = Vector<int>(m_position.x + m_radius, m_position.y + m_radius);
+	Vector<int> centerPointB = Vector<int>(secondBox.m_position.x + m_radius,
 		secondBox.m_position.y + m_radius);
 
 	int distanceBetweenPoints = centerPointA.Distance(centerPointB);

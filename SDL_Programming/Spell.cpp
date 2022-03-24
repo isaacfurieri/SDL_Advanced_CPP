@@ -1,4 +1,3 @@
-
 #include "Spell.h"
 
 Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
@@ -11,7 +10,7 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 	m_image.IsAnimationLooping(false);
 	//m_image.SetAnimationVelocity(1.1f);
 
-	m_spellSpeed = 10;
+	m_spellSpeed = 20;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
 	

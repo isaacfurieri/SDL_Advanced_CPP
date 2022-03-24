@@ -49,6 +49,7 @@ private:
 
 	State m_state;
 	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
+	//std::unique_ptr<Spell> m_spell;
 	Sprite m_images[TotalStates];       //containment - player has an image
 	Sound m_spellCast, m_footSteps;
 

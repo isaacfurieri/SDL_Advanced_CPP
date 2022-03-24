@@ -77,6 +77,8 @@ void Player::Update()
 {
 	auto input = Input::Instance();
 	
+	m_mousePosition = input->GetMousePosition();
+	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
 	if (input->IsKeyPressed(HM_KEY_RIGHT))
@@ -212,7 +214,6 @@ void Player::Update()
 	
 	//==========================================================
 	
-	m_mousePosition = input->GetMousePosition();
 
 	if (input->IsKeyPressed(HM_KEY_E) && !isCasting)
 	{
@@ -231,7 +232,7 @@ void Player::Update()
 	static float time = 0.0f;
 	time += 0.1f;
 
-	if (time >= 10.0f)
+	if (time >= 10.0f && !m_spells.empty())
 	{
 		isCasting = false;
 		m_spells.pop_back();
@@ -244,7 +245,11 @@ void Player::Update()
 	{
 		spell.Update();
 
-		if (spell.GetPosition().x >= 1000)
+		if (spell.GetPosition().x < 0 || spell.GetPosition().x >= 1280)
+		{
+			spell.IsAlive(false);
+		}
+		else if (spell.GetPosition().y < 0 || spell.GetPosition().x >= 720)
 		{
 			spell.IsAlive(false);
 		}

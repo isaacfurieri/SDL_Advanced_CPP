@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector.h"
 
 class BoxCollider
 {
@@ -14,8 +14,8 @@ public:
 
 private:
 
-	Vector2D m_min;
-	Vector2D m_max;
-	Vector2D m_position;
-	Vector2D m_dimension;
+	Vector<int> m_min;
+	Vector<int> m_max;
+	Vector<int> m_position;
+	Vector<int> m_dimension;
 };

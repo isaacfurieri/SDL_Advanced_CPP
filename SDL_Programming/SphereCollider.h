@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector.h"
 
 class SphereCollider
 {
@@ -16,5 +16,5 @@ public:
 private:
 
 	int m_radius;
-	Vector2D m_position;
+	Vector<int> m_position;
 };
