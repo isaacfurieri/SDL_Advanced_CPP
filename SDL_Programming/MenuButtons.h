@@ -4,38 +4,25 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprite.h"
-#include "Screen.h"
 
 class MenuButtons : public GameObject
 {
 
 public:
 
-	enum class ButtonState
-	{
-		MouseOut,
-		MouseOver,
-		Clicked
-	};
-
-	enum ButtonName
-	{
-		Play,
-		Resume,
-		Settings,
-		Exit,
-		Back,
-		TotalButtons
-	};
-
 	MenuButtons();
 
-	virtual void Update(Input* input);
-	virtual void Render(Screen& screen);
+	bool checkButton();
+	void changeButtonSprite();
+
+	virtual void Update();
+	virtual void Render();
 
 private:
 
-	Sprite m_image[ButtonName::TotalButtons];
+	bool m_isClicked;
+	bool m_isOver;
+	SDL_Rect m_spritePosition;
 
 };
 

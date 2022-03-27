@@ -22,6 +22,8 @@ public:
 	void SetSpriteDimension(int width, int height); //on-screen
 	void SetImageDimension(int columns, int rows, int width, int height); //in-folder
 
+	SDL_Rect GetSpritePositions() const;
+
 	Vector<int> GetSpriteDimension() const;
 	Vector<int> GetImageDimension() const;
 	Vector<int> GetSpriteDimension();
@@ -42,6 +44,7 @@ private:
 	bool m_isAnimationLooping;
 
 	SDL_Texture* m_image;
+	SDL_Rect m_spritePositions;
 	Vector<int> m_celDimension;
 	Vector<int> m_imageDimension;
 	Vector<int> m_spriteDimension;

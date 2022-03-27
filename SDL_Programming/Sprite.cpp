@@ -14,6 +14,7 @@ Sprite::Sprite()
 	m_celDimension = { 0, 0 };
 	m_imageDimension = { 0, 0 };
 	m_spriteDimension = { 0, 0 };
+	m_spritePositions = { 0, 0, 0, 0 };
 }
 
 void Sprite::IsAnimated(bool flag)
@@ -51,6 +52,11 @@ void Sprite::SetImageDimension(int columns, int rows, int width, int height)
 
 	m_celDimension.x = width / columns;
 	m_celDimension.y = height / rows;
+}
+
+SDL_Rect Sprite::GetSpritePositions() const
+{
+	return m_spritePositions;
 }
 
 Vector<int> Sprite::GetSpriteDimension() const
@@ -118,10 +124,16 @@ void Sprite::Render(int xPos, int yPos, double angle)
 		sourceRect.w = m_celDimension.x;
 		sourceRect.h = m_celDimension.y;
 
-		targetRect.x = xPos;
-		targetRect.y = yPos;
-		targetRect.w = m_spriteDimension.x;
-		targetRect.h = m_spriteDimension.y;
+		targetRect.x = xPos; 
+		targetRect.y = yPos; 
+		targetRect.w = m_spriteDimension.x; 
+		targetRect.h = m_spriteDimension.y; 
+
+		//Saving Positions
+		m_spritePositions.x = xPos;
+		m_spritePositions.y = yPos;
+		m_spritePositions.w = m_spriteDimension.x;
+		m_spritePositions.h = m_spriteDimension.y;
 
 		SDL_Point centre{ m_spriteDimension.x, m_spriteDimension.y };
 

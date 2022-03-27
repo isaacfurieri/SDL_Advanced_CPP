@@ -43,7 +43,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
     return true;
 }
 
-Vector2D Screen::GetResolution()
+Vector<int> Screen::GetResolution()
 {
 	return m_size;
 }

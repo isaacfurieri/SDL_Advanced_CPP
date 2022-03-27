@@ -47,7 +47,7 @@ public:
 
 private:
 
-	State m_state;
+	State m_state{ Idle };
 	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	//std::unique_ptr<Spell> m_spell;
 	Sprite m_images[TotalStates];       //containment - player has an image
@@ -55,8 +55,8 @@ private:
 
 	std::deque<Spell> m_spells;
 
-	bool isCasting;
-	int m_velocity;
+	bool isCasting{ false };
+	int m_velocity{ 1 };
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;

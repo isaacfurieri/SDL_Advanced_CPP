@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include <SDL.h>
-#include "Vector2D.h"
+#include "Vector.h"
 
 class Screen
 {
@@ -12,7 +12,7 @@ public:
 	static Screen* Instance();
 	SDL_Renderer* GetRenderer();
 	SDL_Window* GetWindow();
-	Vector2D GetResolution();
+	Vector<int> GetResolution();
 	
 	bool Initialize(const std::string& windowTitle = "<No name>",
 		int width = 1280,
@@ -33,5 +33,5 @@ private:
 
 	SDL_Window* m_window{ nullptr };
 	SDL_Renderer* m_renderer{ nullptr };
-	Vector2D m_size;
+	Vector<int> m_size;
 };

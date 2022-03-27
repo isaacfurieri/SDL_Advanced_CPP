@@ -12,7 +12,7 @@ bool Game::Initialize()
 	Screen::Instance();
 	Input::Instance();
 
-	if (!Screen::Instance()->Initialize("My game", 1280, 720))
+	if (!Screen::Instance()->Initialize("Isaac", 1280, 720))
 	{
 		return 0;
 	}

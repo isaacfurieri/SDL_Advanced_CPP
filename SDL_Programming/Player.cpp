@@ -2,11 +2,6 @@
 
 Player::Player()
 {
-	m_velocity = 1;
-	//m_spell = nullptr;
-	isCasting = false;
-	m_state = Idle;
-
 	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png");
 	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png");
 	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png");
@@ -81,11 +76,13 @@ void Player::Update()
 	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
+	
+	//==========================================================
 	if (input->IsKeyPressed(HM_KEY_RIGHT))
 	{
 		m_state = MovingRight;
 		std::cout << "Right key pressed. Move player right." << std::endl;
-		m_direction.x = m_velocity;
+		m_direction.x = 1;
 		m_direction.y = 0;
 		std::cout << m_direction.x << std::endl;
 	}
@@ -93,7 +90,7 @@ void Player::Update()
 	{
 		std::cout << "Left key pressed. Move player left." << std::endl;
 		m_state = MovingLeft;
-		m_direction.x = -m_velocity;
+		m_direction.x = -1;
 		m_direction.y = 0;
 	}
 	else if (input->IsKeyPressed(HM_KEY_UP))
@@ -101,13 +98,13 @@ void Player::Update()
 		std::cout << "Up key pressed. Move player up." << std::endl;
 		m_state = MovingUp;
 		m_direction.x = 0;
-		m_direction.y = -m_velocity;
+		m_direction.y = -1;
 	}
 	else if (input->IsKeyPressed(HM_KEY_DOWN)) {
 		std::cout << "Down key pressed. Move player down." << std::endl;
 		m_state = MovingDown;
 		m_direction.x = 0;
-		m_direction.y = m_velocity;
+		m_direction.y = 1;
 	}
 	else
 	{
@@ -116,14 +113,15 @@ void Player::Update()
 		m_direction.y = 0;
 	}
 
-	m_position = m_position + m_direction;
 
 	//WASD - Movement
-	
-	if (input->IsKeyPressed(HM_KEY_W) || input->IsKeyPressed(HM_KEY_W) && isCasting)
+	//==========================================================
+	/*
+	if (input->IsKeyPressed(HM_KEY_W))
 	{
 		if (isCasting)
 		{
+			m_spellCast.Play();
 			m_state = CastingUp;
 			std::cout << "W key pressed while casting. Move player up with casting animation." << std::endl;
 		}
@@ -139,6 +137,7 @@ void Player::Update()
 	{
 		if (isCasting)
 		{
+			m_spellCast.Play();
 			m_state = CastingLeft;
 			std::cout << "A key pressed while casting. Move player left with casting animation." << std::endl;
 		}
@@ -154,11 +153,13 @@ void Player::Update()
 	{
 		if (isCasting)
 		{
+			m_spellCast.Play();
 			m_state = CastingDown;
 			std::cout << "S key pressed while casting. Move player down with casting animation." << std::endl;
 		}
 		else
 		{
+			m_spellCast.Play();
 			m_state = MovingDown;
 			std::cout << "S key pressed. Move player down." << std::endl;
 		}
@@ -169,6 +170,7 @@ void Player::Update()
 	{
 		if (isCasting)
 		{
+			m_spellCast.Play();
 			m_state = CastingRight;
 			std::cout << "D key pressed while casting. Move player right with casting animation." << std::endl;
 		}
@@ -181,22 +183,26 @@ void Player::Update()
 		std::cout << m_direction.x << std::endl;
 		m_direction.y = 0;
 	}
+	//==========================================================
 	else
 	{
+		m_spellCast.Play();
 		if (isCasting)
 		{
 			m_state = CastingDown;
-			std::cout << "D key pressed while casting. Move player right with casting animation." << std::endl;
+			std::cout << "Player casting Idle." << std::endl;
 		}
 		else
 		{
 			m_state = Idle;
-			std::cout << "D key pressed. Move player right." << std::endl;
+			std::cout << "Player Idle." << std::endl;
 		}
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
-
+	
+	*/
+	//==========================================================
 	// Spells
 	//if (input->GetKeyDown() == SDLK_e) {
 	//	std::cout << "E pressed. Shoot Fireball." << std::endl;
@@ -215,22 +221,25 @@ void Player::Update()
 	//==========================================================
 	
 
-	if (input->IsKeyPressed(HM_KEY_E) && !isCasting)
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !isCasting)
 	{
+		// IsKeyPressed(HM_KEY_E)
 		std::cout << "Spell cast." << std::endl;
 		m_spells.push_front(Spell(m_position, m_mousePosition));
 		isCasting = true;
-
-		///**/delete m_spell;
-		//m_spell = nullptr;*/
 	}
 
+		//delete m_spell;
+		//m_spell = nullptr;
+
 	//==========================================================
+	
 	//timer for 10 secs
+	static float time = 0.0f;
+	std::cout << time << std::endl;
+	time += 0.1f;
 	//switch isCasting = false;
 	
-	static float time = 0.0f;
-	time += 0.1f;
 
 	if (time >= 10.0f && !m_spells.empty())
 	{
@@ -245,65 +254,59 @@ void Player::Update()
 	{
 		spell.Update();
 
-		if (spell.GetPosition().x < 0 || spell.GetPosition().x >= 1280)
+		if (spell.GetPosition().x < 0 || Screen::Instance()->GetResolution().x)
 		{
 			spell.IsAlive(false);
 		}
-		else if (spell.GetPosition().y < 0 || spell.GetPosition().x >= 720)
+		else if (spell.GetPosition().y < 0 || spell.GetPosition().y >= Screen::Instance()->GetResolution().y)
 		{
 			spell.IsAlive(false);
 		}
 	}
 
 	//==========================================================
+	
 	m_direction = m_direction * m_velocity;
 
-	if (m_position.x < 0)
+	if (m_position.x < 20) 
 	{
 		//Do not move
 		std::cout << "Can't move." << std::endl;
-		m_position.x = m_position.x + 1;
+		m_position.x = 20;
 	}
-	else if (m_position.x > 1155)
+	else if ( m_position.x > Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x )
 	{
 		std::cout << "Can't move." << std::endl;
-		m_position.x = m_position.x - 1;
+		m_position.x = Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x;
 	}
 	else if (m_position.y < 65)
 	{
 		std::cout << "Can't move." << std::endl;
-		m_position.y = m_position.y + 1;
+		m_position.y = 65;
 	}
-	else if (m_position.y > 590)
+	else if (m_position.y > Screen::Instance()->GetResolution().y - m_images[m_state].GetSpriteDimension().y)
 	{
 		std::cout << "Can't move." << std::endl;
-		m_position.y = m_position.y - 1;
+		m_position.y = Screen::Instance()->GetResolution().y - m_images[m_state].GetSpriteDimension().y;
 	}
 	else
 	{
 		m_position = m_position + m_direction;
 	}
 
+	//m_position = m_position + m_direction;
+	
 	m_images[m_state].Update();
 
 	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
 
-	/*if (m_spell)
-	{
-		m_spell->Update();
-	}*/
 }
 
 void Player::Render()
 {
 	m_images[m_state].Render(m_position.x, m_position.y, m_angle);
-
-	/*if (m_spell)
-	{
-		m_spell->Render();
-	}*/
 
 	for (auto& spell : m_spells)
 	{
