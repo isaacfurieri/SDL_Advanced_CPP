@@ -4,28 +4,11 @@
 bool MenuState::OnEnter()
 {
 	//Load assets for menu buttons
-	//Play Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/PlayButton.png");
-	m_image.SetImageDimension(1, 1, 600, 200);
-	m_image.SetSpriteDimension(150, 75);
-	//Settings Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/SettingsButton.png");
-	m_image.SetImageDimension(1, 1, 600, 200);
-	m_image.SetSpriteDimension(150, 75);
-	//New Game Button
-	m_image.Load("Assets/Menu/LargeButtons/LargeButtons/NewgameButton.png");
-	m_image.SetImageDimension(1, 1, 600, 200);
-	m_image.SetSpriteDimension(150, 75);
-	//Exit Button
-	m_exitButton.Load("Assets/Menu/LargeButtons/LargeButtons/ExitButton.png");
-	m_exitButton.SetImageDimension(1, 1, 600, 200);
-	m_exitButton.SetSpriteDimension(150, 75);
-
-	//Red Exit Button
-	m_exitButtonRed.Load("Assets/Menu/LargeButtons/ColoredLargeButtons/Exitcol_Button.png");
-	m_exitButtonRed.SetImageDimension(1, 1, 600, 200);
-	m_exitButtonRed.SetSpriteDimension(150, 75);
-
+	//All Button Sprites
+	m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
+	m_buttonSprites.SetImageDimension(2, 13, 1200, 2600);
+	m_buttonSprites.SetImageCel(2, 4);
+	m_buttonSprites.SetSpriteDimension(150, 75);
 
 	//Load menu background music
 	Game::GetMusic().Initialize();
@@ -45,23 +28,31 @@ GameState* MenuState::Update()
 	mousePos.w = 1;
 	mousePos.h = 1;
 
-	exitButtonPos.x = m_exitButton.GetSpritePositions().x;
-	exitButtonPos.y = m_exitButton.GetSpritePositions().y;
-	exitButtonPos.w = m_exitButton.GetSpritePositions().w;
-	exitButtonPos.h = m_exitButton.GetSpritePositions().h;
+	exitButtonPos.x = m_buttonSprites.GetSpritePositions().x;
+	exitButtonPos.y = m_buttonSprites.GetSpritePositions().y;
+	exitButtonPos.w = m_buttonSprites.GetSpritePositions().w;
+	exitButtonPos.h = m_buttonSprites.GetSpritePositions().h;
 
 	if (SDL_HasIntersection(&mousePos, &exitButtonPos))
 	{
 		isOver = true;
+		m_buttonSprites.SetImageCel(1, 4);
 		std::cout << "Mouse is Colliding" << std::endl;
 	}
 	else
 	{
 		isOver = false;
+		m_buttonSprites.SetImageCel(2, 4);
+	}
+
+	if (isOver && Input::Instance()->IsMouseClicked())
+	{
+		return nullptr;
 	}
 
 	std::cout << mousePos.x << std::endl;
 	std::cout << mousePos.y << std::endl;
+	std::cout << isOver << std::endl;
 	
 	//Check keypress and mouse clicks
 	//check if buttons are clicked on
@@ -84,15 +75,15 @@ GameState* MenuState::Update()
 bool MenuState::Render()
 {
 	//render all buttons
-	if(isOver)
-	{ 
-		m_exitButtonRed.Render(565, 200, 0.0f);
-	}
-	else
-	{
-		m_exitButton.Render(565, 200, 0.0f);
-	}
-
+	//if(isOver)
+	//{ 
+	//	m_buttonSprites.Render(565, 200, 0.0f);
+	//}
+	//else
+	//{
+	//	m_buttonSprites.Render(565, 200, 0.0f);
+	//}
+	m_buttonSprites.Render(565, 400, 0.0f);
 	//render menu text
 
 	return false;

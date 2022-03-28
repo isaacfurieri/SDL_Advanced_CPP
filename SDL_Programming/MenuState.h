@@ -21,7 +21,9 @@ private:
 
 	//All menu stuff declared here!
 	bool isOver{ false };
-	Sprite m_image;
+
+	Sprite m_playButton;
+	Sprite m_settingsButton;
 	Sprite m_exitButton;
-	Sprite m_exitButtonRed;
+	Sprite m_buttonSprites;
 };
