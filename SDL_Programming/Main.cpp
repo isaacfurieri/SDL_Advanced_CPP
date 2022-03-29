@@ -6,42 +6,10 @@
 #include "GameState.h"
 #include "MenuState.h"
 #include "PlayState.h"
-/*
-#include <ctime>
-
-#include "Background.h"
-#include "Coin.h"
-#include "Enemy.h"
-#include "Input.h"
-#include "Music.h"
-#include "Player.h"
-#include "Score.h"
-#include "Screen.h"
-#include "Sprite.h"
-#include "Spell.h"
-#include "Stone.h"
-#include "Text.h"
-#include "Vector2D.h"
-*/
-//Global var
-//bool isGameRunning = true;
-//int scoreInt = 0;
-
-//Functions
 
 //MAIN
 int main(int argc, char* argv[])
 {
-	//std::unique_ptr<Screen> screen;
-
-	//only call once before any music objects are loaded
-	//Music::Initialize();
-	//Text::Initialize();
-
-	//Sprite background;
-	//srand(time(NULL));
-	//std::srand(std::time(nullptr));
-
 	std::unique_ptr<Game> game = std::make_unique<Game>();
 	
 	if (game->Initialize())

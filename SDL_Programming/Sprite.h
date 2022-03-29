@@ -3,7 +3,6 @@
 #include <string>
 #include <SDL.h>
 #include "Screen.h"
-#include "Vector2D.h"
 #include "Vector.h"
 
 class Sprite

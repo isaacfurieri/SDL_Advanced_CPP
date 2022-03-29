@@ -8,16 +8,12 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 
 	m_image.IsAnimated(false);
 	m_image.IsAnimationLooping(false);
-	//m_image.SetAnimationVelocity(1.1f);
 
 	m_spellSpeed = 20;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
 	
 	m_direction = m_mousePosition - m_position;
-
-	
-	//m_direction = m_direction.Normalize();
 
 }
 
@@ -28,8 +24,6 @@ const BoxCollider& Spell::GetCollider() const
 
 void Spell::Update()
 {
-	
-	//m_direction = m_direction * 0.03f;
 
 	Vector<float> dir;
 	dir.x = m_direction.x;

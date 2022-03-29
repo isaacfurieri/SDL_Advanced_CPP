@@ -1,21 +1,53 @@
+#include <windows.h>
+
 #include "MenuState.h"
 #include "PlayState.h"
 
 bool MenuState::OnEnter()
 {
+
+	buttons.push_back(Button("Play"));
+	buttons.push_back(Button("Exit"));
+	buttons.push_back(Button("Load"));
+	buttons.push_back(Button("Menu"));
+	buttons.push_back(Button("Options"));
+	buttons.push_back(Button("Resume"));
+
+	for (auto button : buttons)
+	{
+		button.Update();
+		button.Render();
+
+		if (button.GetState() == Button::ButtonState::Clicked)
+		{
+			auto tag = button.GetTag();
+
+			if (tag == "Play")
+			{
+				//..play
+			}
+		}
+	}
 	//Load assets for menu buttons
 	//All Button Sprites
-	m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
-	m_buttonSprites.SetImageDimension(2, 13, 1200, 2600);
-	m_buttonSprites.SetImageCel(2, 4);
-	m_buttonSprites.SetSpriteDimension(150, 75);
+	//m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
+	//m_buttonSprites.SetImageDimension(2, 13, 1200, 2600);
+	//m_buttonSprites.SetImageCel(2, 4);
+	//m_buttonSprites.SetSpriteDimension(150, 75);
 
 	//Load menu background music
-	Game::GetMusic().Initialize();
+	//Game::GetMusic().Initialize();
 
-	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	Game::GetMusic().Play(Music::PlayLoop::PLAY_ONCE);
+	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
+	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load backdrop image
+	//Load Music
+	//m_isClickedMusic.Initialize();
+	//m_isOverMusic.Initialize();
+
+	m_isClickedMusic.Load("Assets/Music/GUI_Sounds/GUI_Button_Clicked_Sound_Effects.wav");
+	m_isOverMusic.Load("Assets/Music/GUI_Sounds/GUI_Button_Over_Sound_Effects3.wav");
+
 	return true;
 }
 
@@ -33,13 +65,14 @@ GameState* MenuState::Update()
 	exitButtonPos.w = m_buttonSprites.GetSpritePositions().w;
 	exitButtonPos.h = m_buttonSprites.GetSpritePositions().h;
 
-	if (SDL_HasIntersection(&mousePos, &exitButtonPos))
+	if (SDL_HasIntersection(&mousePos, &exitButtonPos) && isOver == false)
 	{
+		m_isOverMusic.Play(Music::PlayLoop::PLAY_ONCE);
 		isOver = true;
 		m_buttonSprites.SetImageCel(1, 4);
 		std::cout << "Mouse is Colliding" << std::endl;
 	}
-	else
+	else if (!SDL_HasIntersection(&mousePos, &exitButtonPos))
 	{
 		isOver = false;
 		m_buttonSprites.SetImageCel(2, 4);
@@ -47,6 +80,8 @@ GameState* MenuState::Update()
 
 	if (isOver && Input::Instance()->IsMouseClicked())
 	{
+		m_isClickedMusic.Play(Music::PlayLoop::PLAY_ONCE);
+		Sleep(2500);
 		return nullptr;
 	}
 
@@ -92,5 +127,7 @@ bool MenuState::Render()
 void MenuState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	Game::GetMusic().Shutdown();
+	//Game::GetMusic().Shutdown();
+	m_isClickedMusic.Shutdown();
+	m_isOverMusic.Shutdown();
 }
