@@ -6,27 +6,23 @@
 bool MenuState::OnEnter()
 {
 
+	//buttons.push_back(Button("Menu"));
 	buttons.push_back(Button("Play"));
-	buttons.push_back(Button("Exit"));
-	buttons.push_back(Button("Load"));
-	buttons.push_back(Button("Menu"));
+	//buttons.push_back(Button("Load"));
 	buttons.push_back(Button("Options"));
-	buttons.push_back(Button("Resume"));
-
-	for (auto button : buttons)
+	buttons.push_back(Button("Exit"));
+	//buttons.push_back(Button("Resume"));
+	
+	/*for (auto button : buttons.size())
 	{
-		button.Update();
-		button.Render();
+		buttons[0].SetPosition(buttonPos);
+		buttonPos.y = buttonPos.y + 100;
+	}*/
 
-		if (button.GetState() == Button::ButtonState::Clicked)
-		{
-			auto tag = button.GetTag();
-
-			if (tag == "Play")
-			{
-				//..play
-			}
-		}
+	for (int i = 0; i < buttons.size(); i++)
+	{
+		buttons[i].SetPosition(buttonPos);
+		buttonPos.y = buttonPos.y + 100;
 	}
 	//Load assets for menu buttons
 	//All Button Sprites
@@ -53,41 +49,54 @@ bool MenuState::OnEnter()
 
 GameState* MenuState::Update()
 {
-	SDL_Rect mousePos, exitButtonPos;
 
-	mousePos.x = Input::Instance()->GetMousePosition().x;
-	mousePos.y = Input::Instance()->GetMousePosition().y;
-	mousePos.w = 1;
-	mousePos.h = 1;
-
-	exitButtonPos.x = m_buttonSprites.GetSpritePositions().x;
-	exitButtonPos.y = m_buttonSprites.GetSpritePositions().y;
-	exitButtonPos.w = m_buttonSprites.GetSpritePositions().w;
-	exitButtonPos.h = m_buttonSprites.GetSpritePositions().h;
-
-	if (SDL_HasIntersection(&mousePos, &exitButtonPos) && isOver == false)
+	for (auto button : buttons)
 	{
-		m_isOverMusic.Play(Music::PlayLoop::PLAY_ONCE);
-		isOver = true;
-		m_buttonSprites.SetImageCel(1, 4);
-		std::cout << "Mouse is Colliding" << std::endl;
-	}
-	else if (!SDL_HasIntersection(&mousePos, &exitButtonPos))
-	{
-		isOver = false;
-		m_buttonSprites.SetImageCel(2, 4);
+		button.Update();
+		button.Render();
+
+		if (button.GetState() == Button::ButtonState::Hover)
+		{
+			m_isOverMusic.Play(1);
+		}
+
+		if (button.GetState() == Button::ButtonState::Clicked)
+		{
+			m_isClickedMusic.Play(1);
+			auto tag = button.GetTag();
+
+			if (tag == "Play")
+			{
+				return new PlayState;
+			}
+		}
 	}
 
-	if (isOver && Input::Instance()->IsMouseClicked())
-	{
-		m_isClickedMusic.Play(Music::PlayLoop::PLAY_ONCE);
-		Sleep(2500);
-		return nullptr;
-	}
 
-	std::cout << mousePos.x << std::endl;
-	std::cout << mousePos.y << std::endl;
-	std::cout << isOver << std::endl;
+
+
+
+	//if (SDL_HasIntersection(&mousePos, &exitButtonPos) && isOver == false)
+	//{
+	//	//m_isOverMusic.Play(Music::PlayLoop::PLAY_ONCE);
+	//	m_isOverMusic.Play(1);
+	//	isOver = true;
+	//	m_buttonSprites.SetImageCel(1, 4);
+	//	std::cout << "Mouse is Colliding" << std::endl;
+	//}
+	//else if (!SDL_HasIntersection(&mousePos, &exitButtonPos))
+	//{
+	//	isOver = false;
+	//	m_buttonSprites.SetImageCel(2, 4);
+	//}
+
+	//if (isOver && Input::Instance()->IsMouseClicked())
+	//{
+	//	//m_isClickedMusic.Play(Music::PlayLoop::PLAY_ONCE);
+	//	m_isClickedMusic.Play(1);
+	//	Sleep(2500);
+	//	return nullptr;
+	//}
 	
 	//Check keypress and mouse clicks
 	//check if buttons are clicked on
@@ -118,7 +127,7 @@ bool MenuState::Render()
 	//{
 	//	m_buttonSprites.Render(565, 200, 0.0f);
 	//}
-	m_buttonSprites.Render(565, 400, 0.0f);
+	//m_buttonSprites.Render(565, 400, 0.0f);
 	//render menu text
 
 	return false;
@@ -128,6 +137,6 @@ void MenuState::OnExit()
 {
 	//unload all music, text, sprites for this state
 	//Game::GetMusic().Shutdown();
-	m_isClickedMusic.Shutdown();
-	m_isOverMusic.Shutdown();
+	m_isClickedMusic.Unload();
+	m_isOverMusic.Unload();
 }

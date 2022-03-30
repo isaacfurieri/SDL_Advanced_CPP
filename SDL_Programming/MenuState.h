@@ -28,8 +28,5 @@ private:
 	std::vector<Button> buttons;
 
 	Sound m_isClickedMusic, m_isOverMusic;
-	Sprite m_playButton;
-	Sprite m_settingsButton;
-	Sprite m_exitButton;
-	Sprite m_buttonSprites;
+	Vector<int> buttonPos{ 565, 100 };
 };

@@ -24,9 +24,6 @@ public:
 	virtual void Render();
 
 private:
-
-	bool m_isClicked{ false };
-	bool m_isOver{ false };
 	
 	ButtonState m_buttonState;
 	SDL_Rect m_mousePosition, m_spritePosition;
