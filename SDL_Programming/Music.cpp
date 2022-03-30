@@ -5,6 +5,7 @@ bool Music::Initialize()
 {
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024))
 	{
+		std::cout << Mix_GetError() << std::endl;
 		std::cout << "Error initializing audio system." << std::endl;
 		return false;
 	}

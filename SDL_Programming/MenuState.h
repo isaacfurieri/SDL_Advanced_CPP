@@ -27,6 +27,6 @@ private:
 
 	std::vector<Button> buttons;
 
-	Sound m_isClickedMusic, m_isOverMusic;
+	//Sound m_isClickedMusic, m_isOverMusic;
 	Vector<int> buttonPos{ 565, 100 };
 };

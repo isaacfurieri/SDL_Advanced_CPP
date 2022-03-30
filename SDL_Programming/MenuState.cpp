@@ -1,5 +1,3 @@
-#include <windows.h>
-
 #include "MenuState.h"
 #include "PlayState.h"
 
@@ -41,29 +39,24 @@ bool MenuState::OnEnter()
 	//m_isClickedMusic.Initialize();
 	//m_isOverMusic.Initialize();
 
-	m_isClickedMusic.Load("Assets/Music/GUI_Sounds/GUI_Button_Clicked_Sound_Effects.wav");
-	m_isOverMusic.Load("Assets/Music/GUI_Sounds/GUI_Button_Over_Sound_Effects3.wav");
-
 	return true;
 }
 
 GameState* MenuState::Update()
 {
 
-	for (auto button : buttons)
+	for (int i = 0; i < buttons.size(); i++)
 	{
-		button.Update();
-		button.Render();
+		buttons[i].Update();
+		buttons[i].Render();
 
-		if (button.GetState() == Button::ButtonState::Hover)
+		if (buttons[i].GetState() == Button::ButtonState::Hover)
 		{
-			m_isOverMusic.Play(1);
 		}
 
-		if (button.GetState() == Button::ButtonState::Clicked)
+		if (buttons[i].GetState() == Button::ButtonState::Clicked)
 		{
-			m_isClickedMusic.Play(1);
-			auto tag = button.GetTag();
+			auto tag = buttons[i].GetTag();
 
 			if (tag == "Play")
 			{
@@ -137,6 +130,6 @@ void MenuState::OnExit()
 {
 	//unload all music, text, sprites for this state
 	//Game::GetMusic().Shutdown();
-	m_isClickedMusic.Unload();
-	m_isOverMusic.Unload();
+	//m_isClickedMusic.Unload();
+	//m_isOverMusic.Unload();
 }

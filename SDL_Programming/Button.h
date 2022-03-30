@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <string>
 
 #include "GameObject.h"
@@ -24,10 +25,10 @@ public:
 	virtual void Render();
 
 private:
-	
+	bool isHover{ false };
 	ButtonState m_buttonState;
 	SDL_Rect m_mousePosition, m_spritePosition;
-	Sound sfxOver, sfxClicked;
+	Sound sfxHover, sfxClicked;
 	Sprite m_buttonSprite;
 };
 

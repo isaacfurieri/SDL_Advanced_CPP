@@ -12,6 +12,7 @@ bool Sound::Load(const std::string& filename)
 
 	if (!m_sound)
 	{
+		std::cout << Mix_GetError() << std::endl;
 		std::cout << "Error loading audio file." << std::endl;
 		return false;
 	}
@@ -32,6 +33,7 @@ void Sound::Play(int loop)
 {
 	if (!Mix_PlayChannel(-1, m_sound, loop)) 
 	{
+		std::cout << Mix_GetError() << std::endl;
 		std::cout << "Error playing audio file." << std::endl;
 	}
 }
