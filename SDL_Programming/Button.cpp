@@ -13,8 +13,8 @@ Button::Button(const std::string& filename)
 	m_buttonSprite.SetSpriteDimension(150, 75);
 
 	//Sounds
-	sfxClicked.Load("Assets/Music/fireball_cast.wav");
-	//sfxClicked.Load("Assets/Sounds/buttonClicked.wav");
+	//sfxClicked.Load("Assets/Music/fireball_cast.wav");
+	sfxClicked.Load("Assets/Sounds/buttonClicked.wav");
 	sfxHover.Load("Assets/Sounds/buttonHover.wav");
 }
 
@@ -37,17 +37,28 @@ void Button::Update()
 	m_mousePosition.h = 1;
 
 	m_buttonState = ButtonState::Default;
+	std::cout << isHover << std::endl;
 
 	if (SDL_HasIntersection(&m_mousePosition, &m_spritePosition))
 	{
+		m_buttonSprite.SetImageCel(2, 1);
+		m_buttonState = ButtonState::Hover;
 		if (Input::Instance()->IsMouseClicked())
 		{
 			sfxClicked.Play(1);
 			m_buttonState = ButtonState::Clicked;
 		}
-		m_buttonSprite.SetImageCel(2, 1);
-		sfxHover.Play(1);
-		m_buttonState = ButtonState::Hover;
+		if (!isHover)
+		{
+			sfxHover.Play(1);
+			isHover = true;
+			std::cout << isHover << std::endl;
+		}
+	}
+	if (!SDL_HasIntersection(&m_mousePosition, &m_spritePosition))
+	{
+		std::cout << isHover << std::endl;
+		isHover = false;
 	}
 }
 

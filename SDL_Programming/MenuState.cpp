@@ -32,8 +32,9 @@ bool MenuState::OnEnter()
 	//Load menu background music
 	//Game::GetMusic().Initialize();
 
-	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
+	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
+	Game::GetMusic().SetVolume(15);
+	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load backdrop image
 	//Load Music
 	//m_isClickedMusic.Initialize();
@@ -47,6 +48,8 @@ GameState* MenuState::Update()
 
 	for (int i = 0; i < buttons.size(); i++)
 	{
+		auto tag = buttons[i].GetTag();
+		
 		buttons[i].Update();
 		buttons[i].Render();
 
@@ -56,11 +59,14 @@ GameState* MenuState::Update()
 
 		if (buttons[i].GetState() == Button::ButtonState::Clicked)
 		{
-			auto tag = buttons[i].GetTag();
 
 			if (tag == "Play")
 			{
 				return new PlayState;
+			}
+			if (tag == "Exit")
+			{
+				return nullptr;
 			}
 		}
 	}
@@ -71,7 +77,7 @@ GameState* MenuState::Update()
 
 	//if (SDL_HasIntersection(&mousePos, &exitButtonPos) && isOver == false)
 	//{
-	//	//m_isOverMusic.Play(Music::PlayLoop::PLAY_ONCE);
+	//	m_isOverMusic.Play(Music::PlayLoop::PLAY_ONCE);
 	//	m_isOverMusic.Play(1);
 	//	isOver = true;
 	//	m_buttonSprites.SetImageCel(1, 4);
@@ -129,7 +135,7 @@ bool MenuState::Render()
 void MenuState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	//Game::GetMusic().Shutdown();
+	Game::GetMusic().Shutdown();
 	//m_isClickedMusic.Unload();
 	//m_isOverMusic.Unload();
 }
