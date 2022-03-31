@@ -1,3 +1,5 @@
+#include<dos.h>
+
 #include "MenuState.h"
 #include "PlayState.h"
 
@@ -30,7 +32,6 @@ bool MenuState::OnEnter()
 	//m_buttonSprites.SetSpriteDimension(150, 75);
 
 	//Load menu background music
-	//Game::GetMusic().Initialize();
 
 	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
 	Game::GetMusic().SetVolume(15);
@@ -135,7 +136,7 @@ bool MenuState::Render()
 void MenuState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	Game::GetMusic().Shutdown();
+	Game::GetMusic().Unload();
 	//m_isClickedMusic.Unload();
 	//m_isOverMusic.Unload();
 }

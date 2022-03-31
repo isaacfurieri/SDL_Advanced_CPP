@@ -64,7 +64,7 @@ bool PlayState::Render()
 void PlayState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	Game::GetMusic().Shutdown();
+	Game::GetMusic().Unload();
 	//m_background.Shutdown();
 	m_player.~Player();
 }
