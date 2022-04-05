@@ -9,7 +9,7 @@ bool PlayState::OnEnter()
 	m_player.SetSize(60, 100);
 	m_player.SetVelocity(5);
 	//Load assets for player and enemy
-	//Load all music for game
+	//Load all music for game 
 	Game::GetMusic().Load("Assets/Music/background_music.mp3");
 	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load images and fonts

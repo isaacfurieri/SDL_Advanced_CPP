@@ -9,11 +9,14 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 	m_image.IsAnimated(false);
 	m_image.IsAnimationLooping(false);
 
-	m_spellSpeed = 20;
+	m_spellSpeed = 10;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
 	
 	m_direction = m_mousePosition - m_position;
+
+	m_spellSound.Load("Assets/Music/fireball_cast.wav");
+	m_spellSound.Play(0);
 
 }
 
@@ -24,7 +27,6 @@ const BoxCollider& Spell::GetCollider() const
 
 void Spell::Update()
 {
-
 	Vector<float> dir;
 	dir.x = m_direction.x;
 	dir.y = m_direction.y;

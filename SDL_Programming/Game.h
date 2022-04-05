@@ -15,21 +15,9 @@ class Game
 
 public:
 
-	//Game();
 	bool Initialize();
 	bool Run(GameState* initialState);
 	void Shutdown();
-
-	/*
-	static Screen& GetScreen()
-	{
-		return m_screen;
-	}
-
-	static Input& GetInput()
-	{
-		return m_input;
-	}*/
 
 	static Music& GetMusic()
 	{
@@ -38,10 +26,6 @@ public:
 
 private:
 
-	std::unique_ptr<GameState> m_gameState;
-	//std::unique_ptr<Background> m_background;
-
 	static Music m_music;
-	//static Screen m_screen;
-	//static Input m_input;
+	std::unique_ptr<GameState> m_gameState;
 };

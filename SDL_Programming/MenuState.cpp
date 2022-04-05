@@ -6,18 +6,12 @@
 bool MenuState::OnEnter()
 {
 
-	//buttons.push_back(Button("Menu"));
+	buttons.push_back(Button("Menu"));
 	buttons.push_back(Button("Play"));
 	//buttons.push_back(Button("Load"));
 	buttons.push_back(Button("Options"));
 	buttons.push_back(Button("Exit"));
 	//buttons.push_back(Button("Resume"));
-	
-	/*for (auto button : buttons.size())
-	{
-		buttons[0].SetPosition(buttonPos);
-		buttonPos.y = buttonPos.y + 100;
-	}*/
 
 	for (int i = 0; i < buttons.size(); i++)
 	{
@@ -118,17 +112,12 @@ GameState* MenuState::Update()
 
 bool MenuState::Render()
 {
-	//render all buttons
-	//if(isOver)
-	//{ 
-	//	m_buttonSprites.Render(565, 200, 0.0f);
-	//}
-	//else
-	//{
-	//	m_buttonSprites.Render(565, 200, 0.0f);
-	//}
-	//m_buttonSprites.Render(565, 400, 0.0f);
-	//render menu text
+	for (int i = 0; i < buttons.size(); i++)
+	{
+		auto tag = buttons[i].GetTag();
+
+		buttons[i].Render();
+	}
 
 	return false;
 }

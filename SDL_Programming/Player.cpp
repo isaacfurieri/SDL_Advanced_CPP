@@ -34,7 +34,7 @@ Player::Player()
 
 	//m_image.SetAnimationVelocity(4.5f);
 
-	m_spellCast.Load("Assets/Music/fireball_cast.wav");
+	//m_spellCast.Load("Assets/Music/fireball_cast.wav");
 	m_footSteps.Load("Assets/Music/footsteps_walking.wav");
 }
 
@@ -76,39 +76,69 @@ void Player::Update()
 	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
-	
 	//==========================================================
 	if (input->IsKeyPressed(HM_KEY_RIGHT))
 	{
-		m_state = MovingRight;
-		std::cout << "Right key pressed. Move player right." << std::endl;
+		if (isCasting)
+		{
+			m_state = CastingRight;
+		}
+		else if (!isCasting)
+		{
+			m_state = MovingRight;
+			std::cout << m_direction.x << std::endl;
+		}
 		m_direction.x = 1;
 		m_direction.y = 0;
-		std::cout << m_direction.x << std::endl;
 	}
 	else if (input->IsKeyPressed(HM_KEY_LEFT))
 	{
-		std::cout << "Left key pressed. Move player left." << std::endl;
-		m_state = MovingLeft;
+		if (isCasting)
+		{
+			m_state = CastingLeft;
+		}
+		else
+		{
+			m_state = MovingLeft;
+		}
 		m_direction.x = -1;
 		m_direction.y = 0;
 	}
 	else if (input->IsKeyPressed(HM_KEY_UP))
 	{
-		std::cout << "Up key pressed. Move player up." << std::endl;
-		m_state = MovingUp;
+		if (isCasting)
+		{
+			m_state = CastingUp;
+		}
+		else
+		{
+			m_state = MovingUp;
+		}
 		m_direction.x = 0;
 		m_direction.y = -1;
 	}
 	else if (input->IsKeyPressed(HM_KEY_DOWN)) {
-		std::cout << "Down key pressed. Move player down." << std::endl;
-		m_state = MovingDown;
+		if(isCasting)
+		{
+			m_state = CastingDown;
+		}
+		else if (!isCasting)
+		{
+			m_state = MovingDown;
+		}
 		m_direction.x = 0;
 		m_direction.y = 1;
 	}
 	else
 	{
-		m_state = Idle;
+		if (isCasting)
+		{
+			m_state = CastingDown;
+		}
+		else
+		{
+			m_state = Idle;
+		}
 		m_direction.x = 0;
 		m_direction.y = 0;
 	}
@@ -223,8 +253,8 @@ void Player::Update()
 
 	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !isCasting)
 	{
-		// IsKeyPressed(HM_KEY_E)
 		std::cout << "Spell cast." << std::endl;
+		//m_spellCast.Play(0);
 		m_spells.push_front(Spell(m_position, m_mousePosition));
 		isCasting = true;
 	}

@@ -21,7 +21,9 @@ public:
 private:
 
 	int m_spellSpeed;
+
+	BoxCollider m_collider;
+	Sound m_spellSound;
 	Sprite m_image;
 	Vector<int> m_direction, m_mousePosition;
-	BoxCollider m_collider;
 };
