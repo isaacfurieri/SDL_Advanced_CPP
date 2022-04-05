@@ -36,8 +36,8 @@ public:
 	Player();
 	~Player();
 
-	void SetVelocity(int velocity);
-	void SetState(State state);
+	void SetVelocity(const int& velocity);
+	void SetState(const State& state);
 	const BoxCollider& GetCollider() const;
 
 	bool GetCasting() const;

@@ -43,12 +43,12 @@ Player::~Player()
 	m_images[m_state].Unload();
 }
 
-void Player::SetVelocity(int velocity)
+void Player::SetVelocity(const int& velocity)
 {
 	m_velocity = velocity;
 }
 
-void Player::SetState(State state)
+void Player::SetState(const State& state)
 {
 	m_state = state;
 }
@@ -95,75 +95,25 @@ void Player::Update()
 	if (input->IsKeyPressed(HM_KEY_RIGHT))
 	{
 		ChangeStateAndDir(CastingRight, MovingRight, Vector<int>(1, 0));
-
-		/*if (isCasting)
-		{
-			m_state = CastingRight;
-		}
-		else if (!isCasting)
-		{
-			m_state = MovingRight;
-			std::cout << m_direction.x << std::endl;
-		}
-		m_direction.x = 1;
-		m_direction.y = 0;*/
-
 	}
 	else if (input->IsKeyPressed(HM_KEY_LEFT))
 	{
 		ChangeStateAndDir(CastingLeft, MovingLeft, Vector<int>(-1, 0));
-		/*if (isCasting)
-		{
-			m_state = CastingLeft;
-		}
-		else
-		{
-			m_state = MovingLeft;
-		}
-		m_direction.x = -1;
-		m_direction.y = 0;*/
 	}
 	else if (input->IsKeyPressed(HM_KEY_UP))
 	{
-		
-		if (isCasting)
-		{
-			m_state = CastingUp;
-		}
-		else
-		{
-			m_state = MovingUp;
-		}
-		m_direction.x = 0;
-		m_direction.y = -1;
+		ChangeStateAndDir(CastingUp, MovingUp, Vector<int>(0, -1));
 	}
 	else if (input->IsKeyPressed(HM_KEY_DOWN)) 
 	{
-		if(isCasting)
-		{
-			m_state = CastingDown;
-		}
-		else if (!isCasting)
-		{
-			m_state = MovingDown;
-		}
-		m_direction.x = 0;
-		m_direction.y = 1;
+		ChangeStateAndDir(CastingDown, MovingDown, Vector<int>(0, 1));
 	}
 	else
 	{
-		if (isCasting)
-		{
-			m_state = CastingDown;
-		}
-		else
-		{
-			m_state = Idle;
-		}
-		m_direction.x = 0;
-		m_direction.y = 0;
+		ChangeStateAndDir(CastingDown, Idle, Vector<int>(0, 0));
 	}
 
+	//TODO -- DIAGONAL MOVEMENTS IF PRESSING TWO BUTTONS
 
 	//WASD - Movement
 	//==========================================================

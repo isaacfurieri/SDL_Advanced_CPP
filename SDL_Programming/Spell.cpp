@@ -9,7 +9,7 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 	m_image.IsAnimated(false);
 	m_image.IsAnimationLooping(false);
 
-	m_spellSpeed = 10;
+	m_spellSpeed = 20;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
 	
