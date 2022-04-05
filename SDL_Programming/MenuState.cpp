@@ -41,19 +41,18 @@ bool MenuState::OnEnter()
 
 GameState* MenuState::Update()
 {
-
-	for (int i = 0; i < buttons.size(); i++)
+	for (auto& button : buttons)
 	{
-		auto tag = buttons[i].GetTag();
+		auto tag = button.GetTag();
 		
-		buttons[i].Update();
-		buttons[i].Render();
+		button.Update();
+		button.Render();
 
-		if (buttons[i].GetState() == Button::ButtonState::Hover)
+		if (button.GetState() == Button::ButtonState::Hover)
 		{
 		}
 
-		if (buttons[i].GetState() == Button::ButtonState::Clicked)
+		if (button.GetState() == Button::ButtonState::Clicked)
 		{
 
 			if (tag == "Play")
@@ -113,11 +112,11 @@ GameState* MenuState::Update()
 
 bool MenuState::Render()
 {
-	for (int i = 0; i < buttons.size(); i++)
+	for (auto& button : buttons)
 	{
-		auto tag = buttons[i].GetTag();
+		auto tag = button.GetTag();
 
-		buttons[i].Render();
+		button.Render();
 	}
 
 	return false;
