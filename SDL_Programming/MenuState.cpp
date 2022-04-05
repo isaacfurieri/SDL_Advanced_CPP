@@ -13,11 +13,12 @@ bool MenuState::OnEnter()
 	buttons.push_back(Button("Exit"));
 	//buttons.push_back(Button("Resume"));
 
-	for (int i = 0; i < buttons.size(); i++)
+	for (auto& button : buttons)
 	{
-		buttons[i].SetPosition(buttonPos);
-		buttonPos.y = buttonPos.y + 100;
+		button.SetPosition(buttonPos);
+		buttonPos.y += 100;
 	}
+
 	//Load assets for menu buttons
 	//All Button Sprites
 	//m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
