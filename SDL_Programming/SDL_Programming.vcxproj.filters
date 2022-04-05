@@ -81,9 +81,6 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
