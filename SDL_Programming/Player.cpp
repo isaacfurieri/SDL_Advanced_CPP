@@ -77,9 +77,26 @@ void Player::Update()
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
 	//==========================================================
-	if (input->IsKeyPressed(HM_KEY_RIGHT))
+
+	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction) 
 	{
 		if (isCasting)
+		{
+			m_state = castingState;
+		}
+		else if (!isCasting)
+		{
+			m_state = movingState;
+			std::cout << direction.x << std::endl;
+		}
+		m_direction = direction;
+	};
+
+	if (input->IsKeyPressed(HM_KEY_RIGHT))
+	{
+		ChangeStateAndDir(CastingRight, MovingRight, Vector<int>(1, 0));
+
+		/*if (isCasting)
 		{
 			m_state = CastingRight;
 		}
@@ -89,11 +106,13 @@ void Player::Update()
 			std::cout << m_direction.x << std::endl;
 		}
 		m_direction.x = 1;
-		m_direction.y = 0;
+		m_direction.y = 0;*/
+
 	}
 	else if (input->IsKeyPressed(HM_KEY_LEFT))
 	{
-		if (isCasting)
+		ChangeStateAndDir(CastingLeft, MovingLeft, Vector<int>(-1, 0));
+		/*if (isCasting)
 		{
 			m_state = CastingLeft;
 		}
@@ -102,10 +121,11 @@ void Player::Update()
 			m_state = MovingLeft;
 		}
 		m_direction.x = -1;
-		m_direction.y = 0;
+		m_direction.y = 0;*/
 	}
 	else if (input->IsKeyPressed(HM_KEY_UP))
 	{
+		
 		if (isCasting)
 		{
 			m_state = CastingUp;
@@ -117,7 +137,8 @@ void Player::Update()
 		m_direction.x = 0;
 		m_direction.y = -1;
 	}
-	else if (input->IsKeyPressed(HM_KEY_DOWN)) {
+	else if (input->IsKeyPressed(HM_KEY_DOWN)) 
+	{
 		if(isCasting)
 		{
 			m_state = CastingDown;
