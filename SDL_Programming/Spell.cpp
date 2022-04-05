@@ -28,15 +28,15 @@ const BoxCollider& Spell::GetCollider() const
 void Spell::Update()
 {
 	Vector<float> dir;
-	dir.x = m_direction.x;
-	dir.y = m_direction.y;
+	dir.x = static_cast<float>(m_direction.x);
+	dir.y = static_cast<float>(m_direction.y);
 
 	dir = dir.Normalize();
-	dir *= m_spellSpeed;
+	dir *= static_cast<float>(m_spellSpeed);
 
 	Vector<int> d;
-	d.x = dir.x;
-	d.y = dir.y;
+	d.x = static_cast<int>(dir.x);
+	d.y = static_cast<int>(dir.y);
 
 	m_position = m_position + d;
 
