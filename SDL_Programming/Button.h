@@ -28,7 +28,7 @@ private:
 	bool isHover{ false };
 	ButtonState m_buttonState;
 	SDL_Rect m_mousePosition, m_spritePosition;
-	Sound sfxHover, sfxClicked;
+	Sound m_sfxHover, m_sfxClicked;
 	Sprite m_buttonSprite;
 };
 

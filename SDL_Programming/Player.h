@@ -50,7 +50,7 @@ private:
 	State m_state{ Idle };
 	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	//std::unique_ptr<Spell> m_spell;
-	Sprite m_images[TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar;       //containment - player has an image
+	Sprite m_images[TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
 	//Sound m_spellCast, m_footSteps;
 	Sound m_footSteps;
 

@@ -14,6 +14,8 @@ Background::~Background()
 
 void Background::Update()
 {
+	m_image.SetSpriteDimension(Screen::Instance()->GetResolution().x, Screen::Instance()->GetResolution().y);
+	//m_image.GetImageDimension();
 	//create background manipulation
 }
 

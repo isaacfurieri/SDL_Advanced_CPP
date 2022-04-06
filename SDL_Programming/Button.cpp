@@ -13,8 +13,8 @@ Button::Button(const std::string& filename)
 	m_buttonSprite.SetSpriteDimension(150, 75);
 
 	//Sounds
-	sfxClicked.Load("Assets/Sounds/buttonClicked.wav");
-	sfxHover.Load("Assets/Sounds/buttonHover.wav");
+	m_sfxClicked.Load("Assets/Sounds/buttonClicked.wav");
+	m_sfxHover.Load("Assets/Sounds/buttonHover.wav");
 }
 
 const Button::ButtonState& Button::GetState() const
@@ -27,6 +27,10 @@ void Button::Update()
 	m_buttonSprite.SetImageCel(1, 1);
 	m_spritePosition.x = this->GetPosition().x;
 	m_spritePosition.y = this->GetPosition().y;
+	
+	//m_spritePosition.x = Screen::Instance()->GetResolution().x - m_buttonSprite.GetSpriteDimension().x / 2;
+	//m_spritePosition.y = this->GetPosition().y;
+	
 	m_spritePosition.w = m_buttonSprite.GetSpriteDimension().x;
 	m_spritePosition.h = m_buttonSprite.GetSpriteDimension().y;
 	
@@ -49,16 +53,18 @@ void Button::Update()
 		m_buttonState = ButtonState::Hover;
 		if (Input::Instance()->IsMouseClicked())
 		{
-			sfxClicked.Play(0);
+			m_sfxClicked.Play(0);
 			m_buttonState = ButtonState::Clicked;
 		}
 		if (!isHover)
 		{
-			sfxHover.Play(0);
+			m_sfxHover.Play(0);
 			isHover = true;
 			//std::cout << isHover << std::endl;
 		}
 	}
+
+	this->SetPosition((Screen::Instance()->GetResolution().x / 2) - m_buttonSprite.GetSpriteDimension().x / 2, this->GetPosition().y);
 }
 
 void Button::Render()

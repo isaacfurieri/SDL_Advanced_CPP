@@ -10,8 +10,6 @@ Screen* Screen::Instance()
 
 bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 {
-	m_size.x = width;
-	m_size.y = height;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
@@ -24,7 +22,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 							    SDL_WINDOWPOS_CENTERED,    //pos y
 							    width,                     //width
 							    height,                    //height
-							    0);                        //flags
+							    SDL_WINDOW_RESIZABLE);                        //flags
 
 	if (!m_window)
 	{
@@ -45,6 +43,8 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 
 Vector<int> Screen::GetResolution()
 {
+	SDL_GetWindowSize(m_window, &m_size.x, &m_size.y);
+
 	return m_size;
 }
 

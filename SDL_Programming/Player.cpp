@@ -17,7 +17,7 @@ Player::Player()
 		m_images[i].IsAnimationLooping(true);
 		m_images[i].SetSpriteDimension(100, 100);
 		m_images[i].IsAnimated(true);
-		m_images[i].SetAnimationVelocity(1.5f);
+		m_images[i].SetAnimationVelocity(0.5f);
 
 		if (i == Idle || i == MovingUp || i == MovingDown || i == MovingLeft || i == MovingRight)
 		{
@@ -28,21 +28,30 @@ Player::Player()
 			m_images[i].SetImageDimension(9, 1, 351, 38);
 		}
 	}
-	m_necromancerHud.Load("Assets/Images/Character/Info/NecromancerHud.png");
-	m_necromancerHud.SetSpriteDimension(67, 55);
+
+	m_playerSpellHud.Load("Assets/Images/Character/Hud/SpellHud.png");
+	m_playerSpellHud.SetImageDimension(10, 9, 1000, 900);
+	m_playerSpellHud.IsAnimationLooping(true);
+	m_playerSpellHud.IsAnimated(true);
+	m_playerSpellHud.SetAnimationVelocity(5.0f);
+	m_playerSpellHud.SetSpriteDimension(95,95);
+
+
+	m_necromancerHud.Load("Assets/Images/Character/Hud/NecromancerHud.png");
 	m_necromancerHud.SetImageDimension(1, 1, 67, 55);
+	m_necromancerHud.SetSpriteDimension(63, 55);
 
-	m_playerHud.Load("Assets/Images/Character/Info/PlayerHud.png");
-	m_playerHud.SetSpriteDimension(258,70);
-	m_playerHud.SetImageDimension(1, 1, 258, 70);
+	m_playerHud.Load("Assets/Images/Character/Hud/PlayerHud.png");
+	m_playerHud.SetImageDimension(1, 1, 273, 74);
+	m_playerHud.SetSpriteDimension(280,75);
 
-	m_playerHpBar.Load("Assets/Images/Character/Info/PlayerHpBar.png");
-	m_playerHpBar.SetSpriteDimension(185, 24);
-	m_playerHpBar.SetImageDimension(1, 1, 175, 24);
+	m_playerHpBar.Load("Assets/Images/Character/Hud/PlayerHpBar.png");
+	m_playerHpBar.SetImageDimension(1, 1, 174, 24);
+	m_playerHpBar.SetSpriteDimension(187, 24);
 
-	m_playerMpBar.Load("Assets/Images/Character/Info/PlayerMpBar.png");
-	m_playerMpBar.SetSpriteDimension(206, 24);
+	m_playerMpBar.Load("Assets/Images/Character/Hud/PlayerMpBar.png");
 	m_playerMpBar.SetImageDimension(1, 1, 206, 24);
+	m_playerMpBar.SetSpriteDimension(208, 24);
 
 	//m_image.SetSpriteDimension(200, 257);
 	//m_image.SetImageDimension(10, 1, 5880, 600);
@@ -318,8 +327,17 @@ void Player::Update()
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
 
-	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
-	m_playerMpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
+	//if (m_playerHpBar.GetSpriteDimension().x > 0)
+	//{
+	//	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
+	//}
+	//if (m_playerHpBar.GetSpriteDimension().x > 0)
+	//{
+	//	m_playerMpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
+	//}
+
+	//Update Spell
+	m_playerSpellHud.Update();
 }
 
 void Player::Render()
@@ -331,8 +349,9 @@ void Player::Render()
 		spell.Render();
 	}
 
-	m_necromancerHud.Render(4, 3, m_angle);
-	m_playerHpBar.Render(65, 8, m_angle);
-	m_playerMpBar.Render(65, 34, m_angle);
-	m_playerHud.Render(1, 1, m_angle);
+	m_playerHpBar.Render(69, 9, m_angle);
+	m_playerMpBar.Render(69, 33, m_angle);
+	m_playerSpellHud.Render(-10, -9, m_angle);
+	m_necromancerHud.Render(6, -1, m_angle);
+	m_playerHud.Render(1, 0, m_angle);
 }
