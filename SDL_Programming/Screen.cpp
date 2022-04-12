@@ -22,7 +22,8 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 							    SDL_WINDOWPOS_CENTERED,    //pos y
 							    width,                     //width
 							    height,                    //height
-							    SDL_WINDOW_RESIZABLE);                        //flags
+							    0);                        //flags
+							    //SDL_WINDOW_RESIZABLE);                        //flags
 
 	if (!m_window)
 	{

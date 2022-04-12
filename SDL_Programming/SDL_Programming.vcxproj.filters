@@ -129,6 +129,12 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Game Objects\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SliderButton.cpp">
+      <Filter>Source Files\Game Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -202,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Header Files\Game Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SliderButton.h">
+      <Filter>Header Files\Game Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsState.h">
+      <Filter>Header Files\Game State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

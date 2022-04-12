@@ -1,7 +1,6 @@
 #include<dos.h>
 
 #include "MenuState.h"
-#include "PlayState.h"
 
 bool MenuState::OnEnter()
 {
@@ -19,6 +18,13 @@ bool MenuState::OnEnter()
 		buttonPos.y += 100;
 	}
 
+	sliders.push_back(SliderButton("SliderBar", "SliderPin"));
+
+	for (auto& slider : sliders)
+	{
+		slider.SetPosition(buttonPos);
+		buttonPos.y += 100;
+	}
 	//Load assets for menu buttons
 	//All Button Sprites
 	//m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
@@ -59,6 +65,10 @@ GameState* MenuState::Update()
 			{
 				return new PlayState;
 			}
+			if (tag == "Options")
+			{
+				return new OptionsState;
+			}
 			if (tag == "Exit")
 			{
 				return nullptr;
@@ -66,7 +76,26 @@ GameState* MenuState::Update()
 		}
 	}
 
+	for (auto& slider : sliders)
+	{
+		auto tag = slider.GetTag();
 
+		slider.Update();
+		slider.Render();
+
+		if (slider.GetState() == SliderButton::SliderState::Hover)
+		{
+		}
+
+		if (slider.GetState() == SliderButton::SliderState::Clicked)
+		{
+
+			if (tag == "SliderBar")
+			{
+				slider.SetSliderPinPosition();
+			}
+		}
+	}
 
 
 
@@ -114,9 +143,12 @@ bool MenuState::Render()
 {
 	for (auto& button : buttons)
 	{
-		auto tag = button.GetTag();
-
 		button.Render();
+	}
+
+	for (auto& slider : sliders)
+	{
+		slider.Render();
 	}
 
 	return false;

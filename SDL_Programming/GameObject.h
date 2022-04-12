@@ -4,7 +4,6 @@
 #include <string>
 #include "Input.h"
 #include "Screen.h"
-#include "Vector2D.h"
 #include "Vector.h"
 
 //Abstract base class - any class with at least 1 pure virtual function

@@ -3,8 +3,6 @@
 MenuButtons::MenuButtons()
 {
 	
-	
-
 }
 
 void MenuButtons::Update()
