@@ -11,6 +11,7 @@ bool MenuState::OnEnter()
 	buttons.push_back(Button("Options"));
 	buttons.push_back(Button("Exit"));
 	//buttons.push_back(Button("Resume"));
+	//buttons.push_back(Button("Back"));
 
 	for (auto& button : buttons)
 	{
@@ -18,13 +19,13 @@ bool MenuState::OnEnter()
 		buttonPos.y += 100;
 	}
 
-	sliders.push_back(SliderButton("SliderBar", "SliderPin"));
+	/*sliders.push_back(SliderButton("SliderBar", "SliderPin"));
 
 	for (auto& slider : sliders)
 	{
 		slider.SetPosition(buttonPos);
 		buttonPos.y += 100;
-	}
+	}*/
 	//Load assets for menu buttons
 	//All Button Sprites
 	//m_buttonSprites.Load("Assets/Menu/MenuButtons2.png");
@@ -60,7 +61,6 @@ GameState* MenuState::Update()
 
 		if (button.GetState() == Button::ButtonState::Clicked)
 		{
-
 			if (tag == "Play")
 			{
 				return new PlayState;
@@ -76,26 +76,26 @@ GameState* MenuState::Update()
 		}
 	}
 
-	for (auto& slider : sliders)
-	{
-		auto tag = slider.GetTag();
+	//for (auto& slider : sliders)
+	//{
+	//	auto tag = slider.GetTag();
 
-		slider.Update();
-		slider.Render();
+	//	slider.Update();
+	//	slider.Render();
 
-		if (slider.GetState() == SliderButton::SliderState::Hover)
-		{
-		}
+	//	if (slider.GetState() == SliderButton::SliderState::Hover)
+	//	{
+	//	}
 
-		if (slider.GetState() == SliderButton::SliderState::Clicked)
-		{
+	//	if (slider.GetState() == SliderButton::SliderState::Clicked)
+	//	{
 
-			if (tag == "SliderBar")
-			{
-				slider.SetSliderPinPosition();
-			}
-		}
-	}
+	//		if (tag == "SliderBar")
+	//		{
+	//			slider.SetSliderPinPosition();
+	//		}
+	//	}
+	//}
 
 
 
@@ -146,10 +146,10 @@ bool MenuState::Render()
 		button.Render();
 	}
 
-	for (auto& slider : sliders)
-	{
-		slider.Render();
-	}
+	//for (auto& slider : sliders)
+	//{
+	//	slider.Render();
+	//}
 
 	return false;
 }
