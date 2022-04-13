@@ -283,7 +283,10 @@ public:
 	static Input* Instance();
 
 	char GetKey() const;
+
+	int GetMouseButtonUp() const;
 	int GetMouseWheel() const;
+
 
 	const Vector<int>& GetMouseMotion() const;
 	const Vector<int>& GetMousePosition() const;
@@ -312,6 +315,7 @@ private:
 	int m_mouseWheel{ 0 };
 	int m_modifier{ HM_MOD_NONE };
 	int m_mouseButton{ HM_MOUSE_NONE };
+	int m_mouseButtonUp;
 
 	bool m_isKeyPressed{ false };
 	bool m_isMouseClicked{ false };

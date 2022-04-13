@@ -12,6 +12,10 @@ char Input::GetKey() const
 {
 	return m_key;
 }
+int Input::GetMouseButtonUp() const
+{
+	return m_mouseButtonUp;
+}
 //======================================================================================================
 int Input::GetMouseWheel() const
 {
@@ -120,6 +124,7 @@ void Input::Update()
 		case SDL_MOUSEBUTTONUP:
 		{
 			m_isMouseClicked = false;
+			m_mouseButtonUp = events.button.button;
 			m_mousePosition.x = events.motion.x;
 			m_mousePosition.y = events.motion.y;
 
