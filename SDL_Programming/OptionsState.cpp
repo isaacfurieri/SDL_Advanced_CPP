@@ -3,6 +3,7 @@
 bool OptionsState::OnEnter()
 {
 	sliders.push_back(SliderButton("MusicSlider"));
+	sliders.push_back(SliderButton("SoundSlider"));
 
 	for (auto& slider : sliders)
 	{
@@ -17,6 +18,9 @@ bool OptionsState::OnEnter()
 		button.SetPosition(buttonPos);
 		buttonPos.y += 100;
 	}
+	//Music
+	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
+	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 
 	return true;
 }
@@ -36,10 +40,49 @@ GameState* OptionsState::Update()
 
 		if (slider.GetState() == SliderButton::SliderState::Clicked)
 		{
+			if (tag == "SoundSlider")
+			{
+				slider.SetSliderPinPosition();
+
+				auto volume = static_cast<int>( slider.GetSliderValue() / 2);
+
+				//Volume min-max is 0-128 on SDL library.
+				if (volume < 0)
+				{
+					volume = 0;
+					Game::GetSound().SetVolume(volume);
+				}
+				else if (volume > 128)
+				{
+					volume = 128;
+					Game::GetSound().SetVolume(volume);
+				}
+				else
+				{
+					Game::GetSound().SetVolume(volume);
+				}
+			}
 			if (tag == "MusicSlider")
 			{
 				slider.SetSliderPinPosition();
-				Game::GetMusic().SetVolume(slider.GetSliderValue());
+
+				auto volume = static_cast<int>(slider.GetSliderValue() / 2);
+				
+				//Volume min-max is 0-128 on SDL library.
+				if (volume < 0)
+				{
+				volume = 0;
+				Game::GetMusic().SetVolume(volume);
+				}
+				else if (volume > 128)
+				{
+					volume = 128;
+					Game::GetMusic().SetVolume(volume);
+				}
+				else
+				{
+					Game::GetMusic().SetVolume(volume);
+				}
 			}
 		}
 	}
@@ -88,4 +131,5 @@ bool OptionsState::Render()
 
 void OptionsState::OnExit()
 {
+	Game::GetMusic().Unload();
 }

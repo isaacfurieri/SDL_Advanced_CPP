@@ -36,12 +36,9 @@ bool MenuState::OnEnter()
 	//Load menu background music
 
 	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	Game::GetMusic().SetVolume(15);
 	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load backdrop image
 	//Load Music
-	//m_isClickedMusic.Initialize();
-	//m_isOverMusic.Initialize();
 
 	return true;
 }

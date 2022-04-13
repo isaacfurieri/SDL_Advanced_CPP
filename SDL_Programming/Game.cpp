@@ -3,6 +3,7 @@
 //Screen Game::m_screen;
 //Input Game::m_input;
 Music Game::m_music;
+Sound Game::m_sound;
 
 bool Game::Initialize()
 {

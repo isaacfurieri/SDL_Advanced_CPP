@@ -1,5 +1,4 @@
 #include "Button.h"
-#include "Game.h"
 
 Button::Button(const std::string& filename)
 {
