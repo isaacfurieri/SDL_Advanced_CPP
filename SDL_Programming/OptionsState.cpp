@@ -10,6 +10,14 @@ bool OptionsState::OnEnter()
 		buttonPos.y += 100;
 	}
 
+	buttons.push_back(Button("Back"));
+
+	for (auto& button : buttons)
+	{
+		button.SetPosition(buttonPos);
+		buttonPos.y += 100;
+	}
+
 	return true;
 }
 
@@ -28,11 +36,34 @@ GameState* OptionsState::Update()
 
 		if (slider.GetState() == SliderButton::SliderState::Clicked)
 		{
-
 			if (tag == "SliderBar")
 			{
 				slider.SetSliderPinPosition();
 			}
+		}
+	}
+
+	for (auto& button : buttons)
+	{
+		auto tag = button.GetTag();
+
+		button.Update();
+		button.Render();
+
+		if (button.GetState() == Button::ButtonState::Hover)
+		{
+		}
+
+		if (button.GetState() == Button::ButtonState::Clicked)
+		{
+			if (Input::Instance()->GetMouseButtonUp())
+			{
+				if (tag == "Back")
+				{
+					return new MenuState;
+				}
+			}
+
 		}
 	}
 
@@ -44,6 +75,11 @@ bool OptionsState::Render()
 	for (auto& slider : sliders)
 	{
 		slider.Render();
+	}
+
+	for (auto& button : buttons)
+	{
+		button.Render();
 	}
 
 	return false;

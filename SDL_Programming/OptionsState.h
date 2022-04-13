@@ -1,23 +1,29 @@
 #pragma once
 #include <vector>
 
-#include "SliderButton.h"
+#include "Button.h"
 #include "Game.h"
 #include "GameState.h"
+#include "MenuState.h"
+#include "SliderButton.h"
 #include "Sprite.h"
 
 class OptionsState : public GameState
 {
 public:
+
 	~OptionsState() override {}
 
 	bool OnEnter() override;
-	GameState* Update() override;
 	bool Render() override;
 	void OnExit() override;
 
+	GameState* Update() override;
+
 private:
 
-	Vector<int> buttonPos{ 565, 100 };
+	std::vector<Button> buttons;
 	std::vector<SliderButton> sliders;
+
+	Vector<int> buttonPos{ 565, 100 };
 };

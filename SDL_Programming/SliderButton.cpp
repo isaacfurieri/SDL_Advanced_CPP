@@ -81,5 +81,5 @@ void SliderButton::Update()
 void SliderButton::Render()
 {
 	m_sliderBar.Render(m_sliderPosition.x, m_sliderPosition.y + 12, 0.0);
-	m_sliderPin.Render(GetPinPosition().x, m_sliderPosition.y, 0.0);
+	m_sliderPin.Render(GetPinPosition().x + m_sliderPin.GetSpriteDimension().y / 2, m_sliderPosition.y, 0.0);
 }
