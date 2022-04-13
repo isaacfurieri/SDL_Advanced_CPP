@@ -16,7 +16,8 @@ public:
 		Clicked
 	};
 
-	SliderButton(const std::string& sliderBarFileName, const std::string& sliderPinFilename);
+	int GetSliderValue();
+	SliderButton(const std::string& slidername);
 	const SliderState& GetState() const;
 	SDL_Rect GetPinPosition();
 	void SetSliderPinPosition();

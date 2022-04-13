@@ -2,7 +2,7 @@
 
 bool OptionsState::OnEnter()
 {
-	sliders.push_back(SliderButton("SliderBar", "SliderPin"));
+	sliders.push_back(SliderButton("MusicSlider"));
 
 	for (auto& slider : sliders)
 	{
@@ -36,9 +36,10 @@ GameState* OptionsState::Update()
 
 		if (slider.GetState() == SliderButton::SliderState::Clicked)
 		{
-			if (tag == "SliderBar")
+			if (tag == "MusicSlider")
 			{
 				slider.SetSliderPinPosition();
+				Game::GetMusic().SetVolume(slider.GetSliderValue());
 			}
 		}
 	}
