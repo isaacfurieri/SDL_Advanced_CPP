@@ -100,6 +100,7 @@ void Player::Update()
 	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
+	
 	//==========================================================
 
 	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction) 
@@ -115,6 +116,8 @@ void Player::Update()
 		}
 		m_direction = direction;
 	};
+
+	//TODO -- DIAGONAL MOVEMENTS IF PRESSING TWO BUTTONS
 
 	if (input->IsKeyPressed(HM_KEY_RIGHT))
 	{
@@ -132,121 +135,33 @@ void Player::Update()
 	{
 		ChangeStateAndDir(CastingDown, MovingDown, Vector<int>(0, 1));
 	}
+	else if (input->IsKeyPressed(HM_KEY_D))
+	{
+		ChangeStateAndDir(CastingRight, MovingRight, Vector<int>(1, 0));
+	}
+	else if (input->IsKeyPressed(HM_KEY_A))
+	{
+		ChangeStateAndDir(CastingLeft, MovingLeft, Vector<int>(-1, 0));
+	}
+	else if (input->IsKeyPressed(HM_KEY_W))
+	{
+		ChangeStateAndDir(CastingUp, MovingUp, Vector<int>(0, -1));
+	}
+	else if (input->IsKeyPressed(HM_KEY_S))
+	{
+		ChangeStateAndDir(CastingDown, MovingDown, Vector<int>(0, 1));
+	}
 	else
 	{
 		ChangeStateAndDir(CastingDown, Idle, Vector<int>(0, 0));
 	}
 
-	//TODO -- DIAGONAL MOVEMENTS IF PRESSING TWO BUTTONS
 
-	//WASD - Movement
-	//==========================================================
-	/*
-	if (input->IsKeyPressed(HM_KEY_W))
-	{
-		if (isCasting)
-		{
-			m_spellCast.Play();
-			m_state = CastingUp;
-			std::cout << "W key pressed while casting. Move player up with casting animation." << std::endl;
-		}
-		else
-		{
-			m_state = MovingUp;
-			std::cout << "W key pressed. Move player up." << std::endl;
-		}
-		m_direction.x = 0;
-		m_direction.y = -1;
-	}
-	else if (input->IsKeyPressed(HM_KEY_A) || input->IsKeyPressed(HM_KEY_A) && isCasting)
-	{
-		if (isCasting)
-		{
-			m_spellCast.Play();
-			m_state = CastingLeft;
-			std::cout << "A key pressed while casting. Move player left with casting animation." << std::endl;
-		}
-		else
-		{
-			m_state = MovingLeft;
-			std::cout << "A key pressed. Move player left." << std::endl;
-		}
-		m_direction.x = -1;
-		m_direction.y = 0;
-	}
-	else if (input->IsKeyPressed(HM_KEY_S) || input->IsKeyPressed(HM_KEY_S) && isCasting)
-	{
-		if (isCasting)
-		{
-			m_spellCast.Play();
-			m_state = CastingDown;
-			std::cout << "S key pressed while casting. Move player down with casting animation." << std::endl;
-		}
-		else
-		{
-			m_spellCast.Play();
-			m_state = MovingDown;
-			std::cout << "S key pressed. Move player down." << std::endl;
-		}
-		m_direction.x = 0;
-		m_direction.y = 1;
-	}
-	else if (input->IsKeyPressed(HM_KEY_D) || input->IsKeyPressed(HM_KEY_D) && isCasting)
-	{
-		if (isCasting)
-		{
-			m_spellCast.Play();
-			m_state = CastingRight;
-			std::cout << "D key pressed while casting. Move player right with casting animation." << std::endl;
-		}
-		else
-		{
-			m_state = MovingRight;
-			std::cout << "D key pressed. Move player right." << std::endl;
-		}
-		m_direction.x = 1;
-		std::cout << m_direction.x << std::endl;
-		m_direction.y = 0;
-	}
-	//==========================================================
-	else
-	{
-		m_spellCast.Play();
-		if (isCasting)
-		{
-			m_state = CastingDown;
-			std::cout << "Player casting Idle." << std::endl;
-		}
-		else
-		{
-			m_state = Idle;
-			std::cout << "Player Idle." << std::endl;
-		}
-		m_direction.x = 0;
-		m_direction.y = 0;
-	}
-	
-	*/
-	//==========================================================
-	// Spells
-	//if (input->GetKeyDown() == SDLK_e) {
-	//	std::cout << "E pressed. Shoot Fireball." << std::endl;
-	//	m_spellCast.Play();
-	//	isCasting = true;
-
-	//	//if (!m_spell)
-	//	//{
-	//	//	//m_spellPosition = m_position.Add(m_images[m_state].GetSpriteDimension().Divide(2));
-	//	//	m_spellPosition = m_position;
-	//	//	m_mousePosition = input->GetMousePosition();
-	//	//	m_spell = new Spell(m_spellPosition, m_mousePosition);
-	//	//}
-	//}
-	
 	//==========================================================
 	
+	static float time = 0.0f;
 
-	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !isCasting)
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !isCasting && time >= 1.0f)
 	{
 		std::cout << "Spell cast." << std::endl;
 		//m_spellCast.Play(0);
@@ -260,7 +175,6 @@ void Player::Update()
 	//==========================================================
 	
 	//timer for 10 secs
-	static float time = 0.0f;
 	std::cout << time << std::endl;
 	time += 0.1f;
 	//switch isCasting = false;
@@ -282,6 +196,7 @@ void Player::Update()
 		if (spell.GetPosition().x < 0 || Screen::Instance()->GetResolution().x)
 		{
 			spell.IsAlive(false);
+
 		}
 		else if (spell.GetPosition().y < 0 || spell.GetPosition().y >= Screen::Instance()->GetResolution().y)
 		{
