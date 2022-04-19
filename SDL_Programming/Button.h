@@ -19,6 +19,7 @@ public:
 	Button(const std::string& filename);
 
 	const ButtonState& GetState() const;
+	void Shutdown();
 
 	virtual void Update();
 	virtual void Render();

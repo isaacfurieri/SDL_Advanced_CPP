@@ -21,6 +21,11 @@ const Button::ButtonState& Button::GetState() const
 	return m_buttonState;
 }
 
+void Button::Shutdown()
+{
+	m_buttonSprite.Unload();
+}
+
 void Button::Update()
 {
 	m_buttonSprite.SetImageCel(1, 1);
@@ -59,11 +64,10 @@ void Button::Update()
 		{
 			m_sfxHover.Play(0);
 			isHover = true;
-			//std::cout << isHover << std::endl;
 		}
 	}
 
-	//this->SetPosition((Screen::Instance()->GetResolution().x / 2) - m_buttonSprite.GetSpriteDimension().x / 2, this->GetPosition().y);
+	this->SetPosition((Screen::Instance()->GetResolution().x / 2) - m_buttonSprite.GetSpriteDimension().x / 2, this->GetPosition().y);
 }
 
 void Button::Render()
