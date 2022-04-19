@@ -45,29 +45,34 @@ bool MenuState::OnEnter()
 
 GameState* MenuState::Update()
 {
+	static float time = 0.0f;
+
 	for (auto& button : buttons)
 	{
 		auto tag = button.GetTag();
 		
 		button.Update();
-		button.Render();
+		//button.Render();
 
 		if (button.GetState() == Button::ButtonState::Hover)
 		{
 		}
 
-		if (button.GetState() == Button::ButtonState::Clicked)
+		if (button.GetState() == Button::ButtonState::Clicked && time >= 2.0f)
 		{
 			if (tag == "Play")
 			{
+				time = 0.0;
 				return new PlayState;
 			}
 			if (tag == "Options")
 			{
+				time = 0.0;
 				return new OptionsState;
 			}
 			if (tag == "Exit")
 			{
+				time = 0.0;
 				return nullptr;
 			}
 		}
@@ -133,6 +138,9 @@ GameState* MenuState::Update()
 		return nullptr;
 	}
 	*/
+	std::cout << time << std::endl;
+	time += 0.1f;
+
 	return this;
 }
 
@@ -153,6 +161,13 @@ bool MenuState::Render()
 
 void MenuState::OnExit()
 {
+	
+	for (auto& button : buttons)
+	{
+		button.Shutdown();
+	}
+
+	buttons.clear();
 	//unload all music, text, sprites for this state
 	Game::GetMusic().Unload();
 	//m_isClickedMusic.Unload();
