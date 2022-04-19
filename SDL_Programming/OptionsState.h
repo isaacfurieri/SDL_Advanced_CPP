@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "GameState.h"
 #include "MenuState.h"
+#include "Sound.h"
 #include "SliderButton.h"
 #include "Sprite.h"
 

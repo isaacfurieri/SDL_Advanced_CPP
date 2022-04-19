@@ -27,6 +27,8 @@ bool OptionsState::OnEnter()
 
 GameState* OptionsState::Update()
 {
+	static float time = 0.0f;
+
 	for (auto& slider : sliders)
 	{
 		auto tag = slider.GetTag();
@@ -38,10 +40,11 @@ GameState* OptionsState::Update()
 		{
 		}
 
-		if (slider.GetState() == SliderButton::SliderState::Clicked)
+		if (slider.GetState() == SliderButton::SliderState::Clicked && time > 2.0)
 		{
 			if (tag == "SoundSlider")
 			{
+				time = 0.0f;
 				slider.SetSliderPinPosition();
 
 				auto volume = static_cast<int>( slider.GetSliderValue() / 2);
@@ -64,6 +67,7 @@ GameState* OptionsState::Update()
 			}
 			if (tag == "MusicSlider")
 			{
+				time = 0.0f;
 				slider.SetSliderPinPosition();
 
 				auto volume = static_cast<int>(slider.GetSliderValue() / 2);
@@ -85,6 +89,8 @@ GameState* OptionsState::Update()
 				}
 			}
 		}
+
+		time += 0.1f;
 	}
 
 	for (auto& button : buttons)
@@ -98,12 +104,13 @@ GameState* OptionsState::Update()
 		{
 		}
 
-		if (button.GetState() == Button::ButtonState::Clicked)
+		if (button.GetState() == Button::ButtonState::Clicked && time > 2.0)
 		{
 			if (Input::Instance()->GetMouseButtonUp())
 			{
 				if (tag == "Back")
 				{
+					time = 0.0f;
 					return new MenuState;
 				}
 			}
@@ -131,5 +138,18 @@ bool OptionsState::Render()
 
 void OptionsState::OnExit()
 {
+	for (auto& slider : sliders)
+	{
+		slider.Shutdown();
+	}
+
+	for (auto& button : buttons)
+	{
+		button.Shutdown();
+	}
+
+	sliders.clear();
+	buttons.clear();
+
 	Game::GetMusic().Unload();
 }
