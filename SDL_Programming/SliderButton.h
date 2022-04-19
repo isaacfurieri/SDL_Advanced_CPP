@@ -21,6 +21,7 @@ public:
 	const SliderState& GetState() const;
 	SDL_Rect GetPinPosition();
 	void SetSliderPinPosition();
+	void Shutdown();
 	virtual void Update();
 	virtual void Render();
 

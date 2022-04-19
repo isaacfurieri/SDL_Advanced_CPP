@@ -46,6 +46,12 @@ void SliderButton::SetSliderPinPosition()
 	}
 }
 
+void SliderButton::Shutdown()
+{
+	m_sliderBar.Unload();
+	m_sliderPin.Unload();
+}
+
 void SliderButton::Update()
 {
 	if (!m_sprite && m_sliderPosition.x > 0 && m_sliderPosition.y > 0)
