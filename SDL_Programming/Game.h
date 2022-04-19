@@ -28,6 +28,8 @@ public:
 	{
 		return m_sound;
 	}
+	//TODO SAVE MUSIC AND SOUND GLOBAL ACESSED
+	int m_soundVolume, m_musicVolume;
 
 private:
 

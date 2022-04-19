@@ -14,7 +14,7 @@ bool Game::Initialize()
 	Input::Instance();
 	Game::GetMusic().Initialize();
 
-	if (!Screen::Instance()->Initialize("Magebomb", 1280, 720))
+	if (!Screen::Instance()->Initialize("MageWar", 1280, 720))
 	{
 		return 0;
 	}
