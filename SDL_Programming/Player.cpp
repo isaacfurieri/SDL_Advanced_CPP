@@ -25,7 +25,7 @@ Player::Player()
 		}
 		else
 		{
-			m_images[i].SetImageDimension(9, 1, 351, 38);
+			m_images[i].SetImageDimension(9, 1, 360, 40);
 		}
 	}
 
@@ -64,7 +64,10 @@ Player::Player()
 
 Player::~Player()
 {
-	m_images[m_state].Unload();
+	for (int i = 0; i < TotalStates; i++)
+	{
+		m_images[i].Unload();
+	}
 }
 
 void Player::SetVelocity(const int& velocity)
