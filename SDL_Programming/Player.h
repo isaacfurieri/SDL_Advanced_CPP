@@ -47,16 +47,16 @@ public:
 
 private:
 	//TODO -- HP AND MP STATS
-	State m_state{ Idle };
+	State m_state{ State::Idle };
 	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	//std::unique_ptr<Spell> m_spell;
-	Sprite m_images[TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
+	Sprite m_images[State::TotalStates], m_playerSprites, m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
 	//Sound m_spellCast, m_footSteps;
 	Sound m_footSteps;
 
 	std::deque<Spell> m_spells;
 
-	bool isCasting{ false };
+	bool m_isCasting{ false };
 	int m_velocity{ 1 };
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 

@@ -2,32 +2,31 @@
 
 Player::Player()
 {
-	m_images[Idle].Load("Assets/Images/Character/Necromancer/necromancer_idle.png");
-	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/necromancer_moving_up.png");
-	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/necromancer_moving_down.png");
-	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/necromancer_moving_left.png");
-	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/necromancer_moving_right.png");
-	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/necromancer_casting_up2.png");
-	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/necromancer_casting_down2.png");
-	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/necromancer_casting_left.png");
-	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/necromancer_casting_right.png");
+	m_images[Idle].Load("Assets/Images/Character/Necromancer/PlayerSpriteIdle.png");
+	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingUp.png");
+	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingDown.png");
+	m_images[MovingLeft].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingLeft.png");
+	m_images[MovingRight].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingRight.png");
+	m_images[CastingUp].Load("Assets/Images/Character/Necromancer/PlayerSpriteCastingUp.png");
+	m_images[CastingDown].Load("Assets/Images/Character/Necromancer/PlayerSpriteCastingDown.png");
+	m_images[CastingLeft].Load("Assets/Images/Character/Necromancer/PlayerSpriteCastingLeft.png");
+	m_images[CastingRight].Load("Assets/Images/Character/Necromancer/PlayerSpriteCastingRight.png");
 
-	for (int i = 0; i < TotalStates; i++)
+	for (int i = 0; i < State::TotalStates; i++)
 	{
 		m_images[i].IsAnimationLooping(true);
-		m_images[i].SetSpriteDimension(100, 100);
+		m_images[i].SetSpriteDimension(150, 150);
 		m_images[i].IsAnimated(true);
 		m_images[i].SetAnimationVelocity(0.5f);
-
-		if (i == Idle || i == MovingUp || i == MovingDown || i == MovingLeft || i == MovingRight)
-		{
-			m_images[i].SetImageDimension(9, 1, 315, 35);
-		}
-		else
-		{
-			m_images[i].SetImageDimension(9, 1, 360, 40);
-		}
+		m_images[i].SetImageDimension(9, 1, 360, 40);
 	}
+
+	m_playerSprites.Load("Assets/Images/Character/Necromancer/PlayerSprite.png");
+	m_playerSprites.SetImageDimension(9, 8, 360, 320);
+	m_playerSprites.IsAnimationLooping(false);
+	m_playerSprites.SetSpriteDimension(100, 100);
+	m_playerSprites.IsAnimated(false);
+	m_playerSprites.SetAnimationVelocity(0.5f);
 
 	m_playerSpellHud.Load("Assets/Images/Character/Hud/SpellHud.png");
 	m_playerSpellHud.SetImageDimension(10, 9, 1000, 900);
@@ -92,7 +91,7 @@ const BoxCollider& Player::GetCollider() const
 
 bool Player::GetCasting() const
 {
-	return isCasting;
+	return m_isCasting;
 }
 
 void Player::Update()
@@ -103,54 +102,37 @@ void Player::Update()
 	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
-	
+	//==========================================================
 	//==========================================================
 
 	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction) 
 	{
-		if (isCasting)
+		if (m_isCasting)
 		{
 			m_state = castingState;
 		}
-		else if (!isCasting)
+		else if (!m_isCasting)
 		{
 			m_state = movingState;
-			std::cout << direction.x << std::endl;
 		}
 		m_direction = direction;
 	};
 
 	//TODO -- DIAGONAL MOVEMENTS IF PRESSING TWO BUTTONS
 
-	if (input->IsKeyPressed(HM_KEY_RIGHT))
+	if (input->IsKeyPressed(HM_KEY_RIGHT) || input->IsKeyPressed(HM_KEY_D))
 	{
 		ChangeStateAndDir(CastingRight, MovingRight, Vector<int>(1, 0));
 	}
-	else if (input->IsKeyPressed(HM_KEY_LEFT))
+	else if (input->IsKeyPressed(HM_KEY_LEFT) || input->IsKeyPressed(HM_KEY_A))
 	{
 		ChangeStateAndDir(CastingLeft, MovingLeft, Vector<int>(-1, 0));
 	}
-	else if (input->IsKeyPressed(HM_KEY_UP))
+	else if (input->IsKeyPressed(HM_KEY_UP) || input->IsKeyPressed(HM_KEY_W))
 	{
 		ChangeStateAndDir(CastingUp, MovingUp, Vector<int>(0, -1));
 	}
-	else if (input->IsKeyPressed(HM_KEY_DOWN)) 
-	{
-		ChangeStateAndDir(CastingDown, MovingDown, Vector<int>(0, 1));
-	}
-	else if (input->IsKeyPressed(HM_KEY_D))
-	{
-		ChangeStateAndDir(CastingRight, MovingRight, Vector<int>(1, 0));
-	}
-	else if (input->IsKeyPressed(HM_KEY_A))
-	{
-		ChangeStateAndDir(CastingLeft, MovingLeft, Vector<int>(-1, 0));
-	}
-	else if (input->IsKeyPressed(HM_KEY_W))
-	{
-		ChangeStateAndDir(CastingUp, MovingUp, Vector<int>(0, -1));
-	}
-	else if (input->IsKeyPressed(HM_KEY_S))
+	else if (input->IsKeyPressed(HM_KEY_DOWN) || input->IsKeyPressed(HM_KEY_S))
 	{
 		ChangeStateAndDir(CastingDown, MovingDown, Vector<int>(0, 1));
 	}
@@ -164,12 +146,12 @@ void Player::Update()
 	
 	static float time = 0.0f;
 
-	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !isCasting && time >= 1.0f)
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && time >= 1.0f)
 	{
 		std::cout << "Spell cast." << std::endl;
 		//m_spellCast.Play(0);
 		m_spells.push_front(Spell(m_position, m_mousePosition));
-		isCasting = true;
+		m_isCasting = true;
 	}
 
 		//delete m_spell;
@@ -185,7 +167,7 @@ void Player::Update()
 
 	if (time >= 10.0f && !m_spells.empty())
 	{
-		isCasting = false;
+		m_isCasting = false;
 		m_spells.pop_back();
 		time = 0.0f;
 	}

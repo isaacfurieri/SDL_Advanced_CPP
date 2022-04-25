@@ -99,7 +99,6 @@ void Sprite::Update()
 {
 	if (m_isAnimated)
 	{
-
 		static float total = 0.0f;
 		total += 0.1f;
 
