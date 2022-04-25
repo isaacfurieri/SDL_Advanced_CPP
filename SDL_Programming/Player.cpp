@@ -154,6 +154,11 @@ void Player::Update()
 		m_isCasting = true;
 	}
 
+	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && time >= 1.0f)
+	{
+		std::cout << "Healing Spell cast." << std::endl;
+		m_Healspells.push_front(HealSpell(m_position));
+	}
 		//delete m_spell;
 		//m_spell = nullptr;
 
@@ -169,6 +174,12 @@ void Player::Update()
 	{
 		m_isCasting = false;
 		m_spells.pop_back();
+		time = 0.0f;
+	}
+	if (time >= 10.0f && !m_Healspells.empty())
+	{
+		m_isCasting = false;
+		m_Healspells.pop_back();
 		time = 0.0f;
 	}
 
@@ -187,6 +198,10 @@ void Player::Update()
 		{
 			spell.IsAlive(false);
 		}
+	}
+	for (auto& spell : m_Healspells)
+	{
+		spell.Update();
 	}
 
 	//==========================================================
@@ -245,6 +260,11 @@ void Player::Render()
 	m_images[m_state].Render(m_position.x, m_position.y, m_angle);
 
 	for (auto& spell : m_spells)
+	{
+		spell.Render();
+	}
+
+	for (auto& spell : m_Healspells)
 	{
 		spell.Render();
 	}

@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Sound.h"
+#include "HealSpell.h"
 #include "Spell.h"
 
 
@@ -55,6 +56,7 @@ private:
 	Sound m_footSteps;
 
 	std::deque<Spell> m_spells;
+	std::deque<HealSpell> m_Healspells;
 
 	bool m_isCasting{ false };
 	int m_velocity{ 1 };
