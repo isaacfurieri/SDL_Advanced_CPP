@@ -54,6 +54,23 @@ void Sprite::SetImageDimension(int columns, int rows, int width, int height)
 	m_celDimension.y = height / rows;
 }
 
+void Sprite::SetFlipImage(Vector<int>& playerPosition, Vector<int>& mousePosition)
+{
+	if (playerPosition.x - mousePosition.x >= 0)
+	{
+		m_flipImage = SDL_FLIP_HORIZONTAL;
+	}
+	else
+	{
+		m_flipImage = SDL_FLIP_NONE;
+	}
+}
+
+SDL_Point Sprite::GetCentrePosition() const
+{
+	return { m_spriteDimension.x, m_spriteDimension.y };
+}
+
 SDL_Rect Sprite::GetSpritePositions() const
 {
 	return m_spritePositions;
@@ -134,8 +151,8 @@ void Sprite::Render(int xPos, int yPos, double angle)
 		m_spritePositions.w = m_spriteDimension.x;
 		m_spritePositions.h = m_spriteDimension.y;
 
-		SDL_Point centre{ m_spriteDimension.x, m_spriteDimension.y };
+		centre = GetCentrePosition();
 
-		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, m_flipImage);
 	}
 }

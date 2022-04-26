@@ -20,7 +20,9 @@ public:
 	void SetAnimationVelocity(float velocity);
 	void SetSpriteDimension(int width, int height); //on-screen
 	void SetImageDimension(int columns, int rows, int width, int height); //in-folder
+	void SetFlipImage(Vector<int>& playerPosition, Vector<int>& mousePosition); //decide to flip or NOT
 
+	SDL_Point GetCentrePosition() const;
 	SDL_Rect GetSpritePositions() const;
 
 	Vector<int> GetSpriteDimension() const;
@@ -42,8 +44,10 @@ private:
 	bool m_isAnimationDead;
 	bool m_isAnimationLooping;
 
-	SDL_Texture* m_image;
+	SDL_Point centre {0 , 0};
 	SDL_Rect m_spritePositions;
+	SDL_RendererFlip m_flipImage { SDL_FLIP_NONE };
+	SDL_Texture* m_image;
 	Vector<int> m_celDimension;
 	Vector<int> m_imageDimension;
 	Vector<int> m_spriteDimension;
