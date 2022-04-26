@@ -315,7 +315,7 @@ private:
 	int m_mouseWheel{ 0 };
 	int m_modifier{ HM_MOD_NONE };
 	int m_mouseButton{ HM_MOUSE_NONE };
-	int m_mouseButtonUp;
+	int m_mouseButtonUp{ HM_MOUSE_NONE };
 
 	bool m_isKeyPressed{ false };
 	bool m_isMouseClicked{ false };
