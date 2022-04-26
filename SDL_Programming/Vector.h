@@ -5,7 +5,7 @@ template <class T> class Vector
 {
 
 public:
-
+	
 	static const Vector<T> Up;
 	static const Vector<T> Down;
 	static const Vector<T> Left;
@@ -32,6 +32,7 @@ public:
 	T Magnitude() const;
 	T SqrMagnitude() const;
 	T Distance(const Vector<T>& second) const;
+	T Angle(const Vector<T>& second) const;
 	T Dot(const Vector<T>& second) const;
 
 	Vector<T> Normalize() const;
@@ -41,7 +42,6 @@ public:
 	T x;
 	T y;
 };
-
 template <class T> const Vector<T> Vector<T>::Up = Vector<T>(0, 1);
 template <class T> const Vector<T> Vector<T>::Down = Vector<T>(0, -1);
 template <class T> const Vector<T> Vector<T>::Left = Vector<T>(-1, 0);
@@ -131,6 +131,11 @@ template <class T> T Vector<T>::Distance(const Vector<T>& second) const
 	return (*this - second).Magnitude();
 }
 //======================================================================================================
+template <class T> T Vector<T>::Angle(const Vector<T>& second) const
+{
+	return atan((second.y - this->y) / (second.x - this->x));
+}
+//======================================================================================================
 template <class T> T Vector<T>::Dot(const Vector<T>& second) const
 {
 	return (x * second.x) + (y * second.y);
@@ -149,7 +154,7 @@ template <class T> Vector<T> Vector<T>::Lerp(const Vector<T>& second, float delt
 template<class T> Vector<T> Vector<T>::Slerp(const Vector<T>& second, float delta) const
 {
 	float dot = Dot(second);
-	dot = max(min(dot, 1), -1);
+	dot = std::max(std::min(dot, 1), -1);
 	float angle = acosf(dot) * delta;
 	Vector<T> relative = (second - *this * dot).Normalize();
 	return (*this * cosf(angle)) + (relative * sinf(angle));
