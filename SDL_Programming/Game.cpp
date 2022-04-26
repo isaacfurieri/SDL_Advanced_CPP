@@ -41,11 +41,14 @@ bool Game::Initialize()
 
 bool Game::Run(GameState* initialState)
 {
+	Uint64 deltaTime = 0;
+
 	m_gameState.reset(initialState);
 	m_gameState->OnEnter();
 
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
+		auto m_start = SDL_GetTicks();
 		//clearing the screen
 		Screen::Instance()->Clear();
 
@@ -57,7 +60,9 @@ bool Game::Run(GameState* initialState)
 		//updating the current game state
 		//current game state will return a pointer to a different state if a switch is required 
 		//If no switch is required then the current states pointer is returned
-		GameState* nextState = m_gameState->Update();
+		GameState* nextState = m_gameState->Update(deltaTime);
+
+		deltaTime = SDL_GetTicks() - m_start;
 
 		m_gameState->Render();
 
@@ -73,6 +78,8 @@ bool Game::Run(GameState* initialState)
 			}
 		}
 		Screen::Instance()->Present();
+
+		std::cout << deltaTime << std::endl;
 	}
 
 	return true;
