@@ -174,6 +174,7 @@ void Player::Update()
 	{
 		m_isCasting = false;
 		m_spells.pop_back();
+
 		time = 0.0f;
 	}
 	if (time >= 10.0f && !m_Healspells.empty())
