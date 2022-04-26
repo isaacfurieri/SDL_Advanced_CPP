@@ -7,7 +7,6 @@ int SliderButton::GetSliderValue()
 
 SliderButton::SliderButton(const std::string& slidername)
 {
-	//TODO FIX TAG AND BE ABLE TO CREATE MORE THEN ONCE SLIDER
 	SetTag(slidername);
 	m_mousePosition = { 0, 0, 0, 0 };
 	m_sliderState = SliderState::Default;
