@@ -21,13 +21,6 @@ Player::Player()
 		m_images[i].SetImageDimension(9, 1, 360, 40);
 	}
 
-	m_playerSprites.Load("Assets/Images/Character/Necromancer/PlayerSprite.png");
-	m_playerSprites.SetImageDimension(9, 8, 360, 320);
-	m_playerSprites.IsAnimationLooping(false);
-	m_playerSprites.SetSpriteDimension(100, 100);
-	m_playerSprites.IsAnimated(false);
-	m_playerSprites.SetAnimationVelocity(0.5f);
-
 	m_playerSpellHud.Load("Assets/Images/Character/Hud/SpellHud.png");
 	m_playerSpellHud.SetImageDimension(10, 9, 1000, 900);
 	m_playerSpellHud.IsAnimationLooping(true);
@@ -67,6 +60,14 @@ Player::~Player()
 	{
 		m_images[i].Unload();
 	}
+
+	m_necromancerHud.Unload();
+	m_playerHud.Unload();
+	m_playerHpBar.Unload();
+	m_playerMpBar.Unload();
+	m_playerSpellHud.Unload();
+	m_spells.~deque();
+	m_Healspells.~deque();
 }
 
 void Player::SetVelocity(const int& velocity)
@@ -94,7 +95,7 @@ bool Player::GetCasting() const
 	return m_isCasting;
 }
 
-void Player::Update()
+void Player::Update(Uint64 deltaTime)
 {
 	auto input = Input::Instance();
 	
@@ -141,21 +142,20 @@ void Player::Update()
 		ChangeStateAndDir(CastingDown, Idle, Vector<int>(0, 0));
 	}
 
-
 	//==========================================================
-	
-	static float time = 0.0f;
-
-	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && time >= 1.0f)
+	//TODO -- DeltaTime in all GameObjects
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && (m_spellCoolDown - deltaTime) >= 5.0)
 	{
+		m_spellCoolDown = deltaTime;
 		std::cout << "Spell cast." << std::endl;
 		//m_spellCast.Play(0);
 		m_spells.push_front(Spell(m_position, m_mousePosition));
 		m_isCasting = true;
 	}
 
-	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && time >= 1.0f)
+	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && (m_healingSpellCoolDown - deltaTime) >= 5.0)
 	{
+		m_healingSpellCoolDown = deltaTime;
 		std::cout << "Healing Spell cast." << std::endl;
 		m_Healspells.push_front(HealSpell(m_position));
 	}
@@ -163,25 +163,20 @@ void Player::Update()
 		//m_spell = nullptr;
 
 	//==========================================================
-	
-	//timer for 10 secs
-	std::cout << time << std::endl;
-	time += 0.1f;
 	//switch isCasting = false;
 	
 
-	if (time >= 10.0f && !m_spells.empty())
+	if (m_spellCoolDown >= 5.0f && !m_spells.empty())
 	{
 		m_isCasting = false;
 		m_spells.pop_back();
-
-		time = 0.0f;
+		m_spellCoolDown = 0;
 	}
-	if (time >= 10.0f && !m_Healspells.empty())
+	if (m_healingSpellCoolDown >= 5.0f && !m_Healspells.empty())
 	{
 		m_isCasting = false;
 		m_Healspells.pop_back();
-		time = 0.0f;
+		m_healingSpellCoolDown = 0;
 	}
 
 	//==========================================================

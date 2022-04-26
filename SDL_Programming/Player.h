@@ -43,7 +43,7 @@ public:
 
 	bool GetCasting() const;
 
-	virtual void Update();
+	virtual void Update(Uint64 deltaTime);
 	virtual void Render();
 
 private:
@@ -51,7 +51,7 @@ private:
 	State m_state{ State::Idle };
 	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
 	//std::unique_ptr<Spell> m_spell;
-	Sprite m_images[State::TotalStates], m_playerSprites, m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
+	Sprite m_images[State::TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
 	//Sound m_spellCast, m_footSteps;
 	Sound m_footSteps;
 
@@ -60,6 +60,8 @@ private:
 
 	bool m_isCasting{ false };
 	int m_velocity{ 1 };
+	Uint64 m_spellCoolDown = 0;
+	Uint64 m_healingSpellCoolDown = 0;
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;
