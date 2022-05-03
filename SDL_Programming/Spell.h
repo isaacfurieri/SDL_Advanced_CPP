@@ -14,7 +14,7 @@ class Spell : public GameObject
 public:
 
 	Spell(Vector<int>& spellPosition, Vector<int>& mousePosition);
-
+	~Spell();
 	const BoxCollider& GetCollider() const;
 
 	virtual void Update();

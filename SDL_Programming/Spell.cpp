@@ -25,6 +25,12 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 
 }
 
+Spell::~Spell()
+{
+	//m_image.Unload();
+	//m_spellSound.Unload();
+}
+
 const BoxCollider& Spell::GetCollider() const
 {
 	return m_collider;

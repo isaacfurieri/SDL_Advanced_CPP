@@ -43,7 +43,7 @@ public:
 
 	bool GetCasting() const;
 
-	virtual void Update(Uint64 deltaTime);
+	virtual void Update();
 	virtual void Render();
 
 private:
@@ -60,8 +60,8 @@ private:
 
 	bool m_isCasting{ false };
 	int m_velocity{ 1 };
-	Uint64 m_spellCoolDown = 0;
-	Uint64 m_healingSpellCoolDown = 0;
+	float m_spellCoolDown = 0;
+	float m_healingSpellCoolDown = 0;
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;

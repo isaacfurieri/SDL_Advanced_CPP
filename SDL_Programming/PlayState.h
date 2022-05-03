@@ -12,7 +12,7 @@ public:
 	~PlayState() override {}
 
 	bool OnEnter() override;
-	GameState* Update(Uint64 deltaTime) override;
+	GameState* Update() override;
 	bool Render() override;
 	void OnExit() override;
 

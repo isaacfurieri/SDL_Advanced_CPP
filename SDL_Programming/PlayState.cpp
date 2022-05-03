@@ -16,13 +16,13 @@ bool PlayState::OnEnter()
 	return true;
 }
 
-GameState* PlayState::Update(Uint64 deltaTime)
+GameState* PlayState::Update()
 {
 	//auto screen = Game::GetScreen();
 	auto input = Input::Instance();
 	//Check keypress and mouse clicks
 	m_background.Update();
-	m_player.Update( deltaTime);
+	m_player.Update();
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
 	/*

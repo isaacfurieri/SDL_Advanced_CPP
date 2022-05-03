@@ -43,7 +43,7 @@ bool MenuState::OnEnter()
 	return true;
 }
 
-GameState* MenuState::Update(Uint64 deltaTime)
+GameState* MenuState::Update()
 {
 	static float time = 0.0f;
 

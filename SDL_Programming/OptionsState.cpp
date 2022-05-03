@@ -25,7 +25,7 @@ bool OptionsState::OnEnter()
 	return true;
 }
 
-GameState* OptionsState::Update(Uint64 deltaTime)
+GameState* OptionsState::Update()
 {
 	static float time = 0.0f;
 

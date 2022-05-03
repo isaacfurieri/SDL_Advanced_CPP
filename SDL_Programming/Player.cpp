@@ -95,7 +95,7 @@ bool Player::GetCasting() const
 	return m_isCasting;
 }
 
-void Player::Update(Uint64 deltaTime)
+void Player::Update()
 {
 	auto input = Input::Instance();
 	
@@ -144,28 +144,27 @@ void Player::Update(Uint64 deltaTime)
 
 	//==========================================================
 	//TODO -- DeltaTime in all GameObjects
-	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && (m_spellCoolDown - deltaTime) >= 5.0)
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && m_spellCoolDown >= 5.0)
 	{
-		m_spellCoolDown = deltaTime;
+		m_spellCoolDown = 0;
 		std::cout << "Spell cast." << std::endl;
 		//m_spellCast.Play(0);
 		m_spells.push_front(Spell(m_position, m_mousePosition));
 		m_isCasting = true;
 	}
 
-	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && (m_healingSpellCoolDown - deltaTime) >= 5.0)
+	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && m_healingSpellCoolDown >= 5.0)
 	{
-		m_healingSpellCoolDown = deltaTime;
+		m_healingSpellCoolDown = 0;
 		std::cout << "Healing Spell cast." << std::endl;
 		m_Healspells.push_front(HealSpell(m_position));
+		m_isCasting = true;
 	}
 		//delete m_spell;
 		//m_spell = nullptr;
 
 	//==========================================================
 	//switch isCasting = false;
-	
-
 	if (m_spellCoolDown >= 5.0f && !m_spells.empty())
 	{
 		m_isCasting = false;
@@ -185,19 +184,20 @@ void Player::Update(Uint64 deltaTime)
 	{
 		spell.Update();
 
-		if (spell.GetPosition().x < 0 || Screen::Instance()->GetResolution().x)
+		if (spell.GetPosition().x < 0 || spell.GetPosition().x > Screen::Instance()->GetResolution().x)
 		{
 			spell.IsAlive(false);
-
 		}
 		else if (spell.GetPosition().y < 0 || spell.GetPosition().y >= Screen::Instance()->GetResolution().y)
 		{
 			spell.IsAlive(false);
 		}
+
 	}
 	for (auto& spell : m_Healspells)
 	{
 		spell.Update();
+		spell.SetPosition(this->GetPosition());
 	}
 
 	//==========================================================
@@ -247,8 +247,10 @@ void Player::Update(Uint64 deltaTime)
 	//	m_playerMpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
 	//}
 
-	//Update Spell
+	//Update Spell & Cooldowns
 	m_playerSpellHud.Update();
+	m_spellCoolDown += 0.1f;
+	m_healingSpellCoolDown += 0.1f;
 }
 
 void Player::Render()

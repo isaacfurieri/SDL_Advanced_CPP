@@ -27,7 +27,7 @@ bool GameState::OnEnter()
 //{
 //}
 
-GameState* GameState::Update(Uint64 deltaTime)
+GameState* GameState::Update()
 {
 	//Check keypress and mouse clicks
 	//check if buttons are clicked on

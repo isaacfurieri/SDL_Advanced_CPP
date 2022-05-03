@@ -19,7 +19,7 @@ public:
 	bool Render() override;
 	void OnExit() override;
 
-	GameState* Update(Uint64 deltaTime) override;
+	GameState* Update() override;
 
 private:
 

@@ -21,7 +21,7 @@ public:
 	bool OnEnter() override;
 	void OnExit() override;
 	
-	GameState* Update(Uint64 deltaTime) override;
+	GameState* Update() override;
 
 private:
 
