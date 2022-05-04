@@ -15,6 +15,11 @@ HealSpell::HealSpell(Vector<int>& spellPosition)
 	m_spellSound.Play(0);
 }
 
+bool HealSpell::AnimationSpell()
+{
+	return m_image.IsAnimationDead();
+}
+
 void HealSpell::Update()
 {
 	m_image.Update();

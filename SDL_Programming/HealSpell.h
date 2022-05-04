@@ -11,6 +11,7 @@ class HealSpell : public GameObject
 public:
 
 	HealSpell(Vector<int>& spellPosition);
+	bool AnimationSpell();
 
 	virtual void Update();
 	virtual void Render();
