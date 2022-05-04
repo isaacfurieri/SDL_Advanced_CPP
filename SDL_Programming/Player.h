@@ -37,8 +37,16 @@ public:
 	Player();
 	~Player();
 
-	void SetVelocity(const int& velocity);
+	int GetHealthPoints() const;
+	int GetManaPoints() const;
+	
+	void ReceiveDamage(const int monsterDamage);
+	void SetHealthPoints(int healthPoints);
+	void SetMaxHealthPoints(int maxHealth);
+	void SetManaPoints(int manaPoints);
+	void SetMaxManaPoints(int manaPoints);
 	void SetState(const State& state);
+	void SetVelocity(const int& velocity);
 	const BoxCollider& GetCollider() const;
 
 	bool GetCasting() const;
@@ -59,9 +67,10 @@ private:
 	std::deque<HealSpell> m_Healspells;
 
 	bool m_isCasting{ false };
-	int m_velocity{ 1 };
 	float m_spellCoolDown = 0;
 	float m_healingSpellCoolDown = 0;
+	int m_velocity{ 1 };
+	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints;
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;

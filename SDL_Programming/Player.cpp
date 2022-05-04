@@ -2,6 +2,8 @@
 
 Player::Player()
 {
+	//==========================================================
+	//LOADING ASSETS
 	m_images[Idle].Load("Assets/Images/Character/Necromancer/PlayerSpriteIdle.png");
 	m_images[MovingUp].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingUp.png");
 	m_images[MovingDown].Load("Assets/Images/Character/Necromancer/PlayerSpriteMovingDown.png");
@@ -39,19 +41,24 @@ Player::Player()
 
 	m_playerHpBar.Load("Assets/Images/Character/Hud/PlayerHpBar.png");
 	m_playerHpBar.SetImageDimension(1, 1, 174, 24);
-	m_playerHpBar.SetSpriteDimension(187, 24);
+	//m_playerHpBar.SetSpriteDimension(187, 24);
 
 	m_playerMpBar.Load("Assets/Images/Character/Hud/PlayerMpBar.png");
 	m_playerMpBar.SetImageDimension(1, 1, 206, 24);
 	m_playerMpBar.SetSpriteDimension(208, 24);
 
-	//m_image.SetSpriteDimension(200, 257);
-	//m_image.SetImageDimension(10, 1, 5880, 600);
-
-	//m_image.SetAnimationVelocity(4.5f);
-
-	//m_spellCast.Load("Assets/Music/fireball_cast.wav");
+	//==========================================================
+	//Sounds
 	m_footSteps.Load("Assets/Music/footsteps_walking.wav");
+	
+	//==========================================================
+	//Character Setup
+	m_maxHealthPoints = 150;
+	m_maxManaPoints = 150;
+	m_healthPoints = m_maxHealthPoints;
+	m_manaPoints = m_maxManaPoints;
+	//==========================================================
+
 }
 
 Player::~Player()
@@ -68,6 +75,62 @@ Player::~Player()
 	m_playerSpellHud.Unload();
 	m_spells.~deque();
 	m_Healspells.~deque();
+}
+
+int Player::GetHealthPoints() const
+{
+	return m_healthPoints;
+}
+
+int Player::GetManaPoints() const
+{
+	return m_manaPoints;
+}
+
+void Player::ReceiveDamage(const int monsterDamage)
+{
+	m_healthPoints -= monsterDamage;
+
+	if (m_healthPoints <= 0)
+	{
+		m_healthPoints = 0;
+		m_isAlive = false;
+	}
+}
+
+void Player::SetHealthPoints(int healthPoints)
+{
+	if (m_healthPoints + healthPoints > m_maxHealthPoints)
+	{
+		m_healthPoints = m_maxHealthPoints;
+	}
+	else
+	{
+		m_healthPoints += healthPoints;
+	}
+}
+
+void Player::SetMaxHealthPoints(int maxHealth)
+{
+	m_maxHealthPoints += maxHealth;
+}
+
+void Player::SetManaPoints(int manaPoints)
+{
+	if (m_manaPoints + manaPoints > m_maxManaPoints)
+	{
+		m_manaPoints = m_maxManaPoints;
+	}
+	else
+	{
+		m_manaPoints += manaPoints;
+	}
+}
+
+void Player::SetMaxManaPoints(int manaPoints)
+{
+
+	m_maxManaPoints += manaPoints;
 }
 
 void Player::SetVelocity(const int& velocity)
@@ -103,7 +166,6 @@ void Player::Update()
 	
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
-	//==========================================================
 	//==========================================================
 
 	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction) 
@@ -141,72 +203,14 @@ void Player::Update()
 	{
 		ChangeStateAndDir(CastingDown, Idle, Vector<int>(0, 0));
 	}
-
-	//==========================================================
-	//TODO -- DeltaTime in all GameObjects
-	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && m_spellCoolDown >= 5.0)
-	{
-		m_spellCoolDown = 0;
-		std::cout << "Spell cast." << std::endl;
-		//m_spellCast.Play(0);
-		m_spells.push_front(Spell(m_position, m_mousePosition));
-		m_isCasting = true;
-	}
-
-	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && m_healingSpellCoolDown >= 5.0)
-	{
-		m_healingSpellCoolDown = 0;
-		std::cout << "Healing Spell cast." << std::endl;
-		m_Healspells.push_front(HealSpell(m_position));
-		m_isCasting = true;
-	}
-		//delete m_spell;
-		//m_spell = nullptr;
-
-	//==========================================================
-	//switch isCasting = false;
-	if (m_spellCoolDown >= 5.0f && !m_spells.empty())
-	{
-		m_isCasting = false;
-		m_spells.pop_back();
-		m_spellCoolDown = 0;
-	}
-	if (m_healingSpellCoolDown >= 5.0f && !m_Healspells.empty())
-	{
-		m_isCasting = false;
-		m_Healspells.pop_back();
-		m_healingSpellCoolDown = 0;
-	}
-
-	//==========================================================
-
-	for (auto& spell : m_spells)
-	{
-		spell.Update();
-
-		if (spell.GetPosition().x < 0 || spell.GetPosition().x > Screen::Instance()->GetResolution().x)
-		{
-			spell.IsAlive(false);
-		}
-		else if (spell.GetPosition().y < 0 || spell.GetPosition().y >= Screen::Instance()->GetResolution().y)
-		{
-			spell.IsAlive(false);
-		}
-
-	}
-	for (auto& spell : m_Healspells)
-	{
-		spell.Update();
-		spell.SetPosition(this->GetPosition());
-	}
-
-	//==========================================================
-	
+	//Apply image State and Direction after Update.
 	m_direction = m_direction * m_velocity;
+	m_images[m_state].Update();
 
+	//==========================================================
+	//Checking screen size to prevent moving away
 	if (m_position.x < 20) 
 	{
-		//Do not move
 		std::cout << "Can't move." << std::endl;
 		m_position.x = 20;
 	}
@@ -230,10 +234,79 @@ void Player::Update()
 		m_position = m_position + m_direction;
 	}
 
-	//m_position = m_position + m_direction;
-	
-	m_images[m_state].Update();
+	//==========================================================
+	//Spells Keys
+	if (input->IsMouseClicked(HM_MOUSE_LEFT) && !m_isCasting && m_spellCoolDown >= 5.0)
+	{
+		m_spellCoolDown = 0;
+		std::cout << "Spell cast." << std::endl;
+		//m_spellCast.Play(0);
+		m_spells.push_front(Spell(m_position, m_mousePosition));
+		m_isCasting = true;
+	}
 
+	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && m_healingSpellCoolDown >= 5.0)
+	{
+		m_healingSpellCoolDown = 0;
+		std::cout << "Healing Spell cast." << std::endl;
+		m_Healspells.push_front(HealSpell(m_position));
+		m_isCasting = true;
+	}
+
+	//==========================================================
+	//Updating and checking Spells to Delete
+	for (auto& spell : m_spells)
+	{
+		spell.Update();
+
+		if (spell.GetPosition().x < 0 || spell.GetPosition().x > Screen::Instance()->GetResolution().x)
+		{
+			spell.IsAlive(false);
+			m_isCasting = false;
+			//spell.~Spell();
+		}
+		else if (spell.GetPosition().y < 0 || spell.GetPosition().y >= Screen::Instance()->GetResolution().y)
+		{
+			m_isCasting = false;
+			spell.IsAlive(false);
+			//spell.~Spell();
+		}
+	}
+	
+	auto CheckSpell = [&](const Spell& spell)
+	{
+		return !spell.IsAlive();
+	};
+
+	auto itS = std::remove_if(m_spells.begin(), m_spells.end(), CheckSpell);
+
+	m_spells.erase(itS, m_spells.end());
+	
+	for (auto& healSpell : m_Healspells)
+	{
+		healSpell.Update();
+		healSpell.SetPosition(this->GetPosition());
+
+		if (healSpell.AnimationSpell())
+		{
+			healSpell.IsAlive(false);
+			m_isCasting = false;
+		}
+	}
+
+	auto CheckHealSpell = [&](const HealSpell& healSpell)
+	{
+		return !healSpell.IsAlive();
+	};
+
+	auto itHs = std::remove_if(m_Healspells.begin(), m_Healspells.end(), CheckHealSpell);
+
+	m_Healspells.erase(itHs, m_Healspells.end());
+	
+	//==========================================================
+	//==========================================================
+	//==========================================================
+	//Collision Detection
 	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
