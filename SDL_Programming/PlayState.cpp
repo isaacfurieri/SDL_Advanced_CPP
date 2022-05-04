@@ -3,12 +3,15 @@
 
 bool PlayState::OnEnter()
 {
+	//Load assets for player and enemy
 	m_player.IsVisible(true);
 	m_player.SetPosition(100, 200);
 	m_player.SetAngle(0.0);
 	m_player.SetSize(60, 100);
 	m_player.SetVelocity(5);
-	//Load assets for player and enemy
+
+	m_enemy.SetPosition(500, 200);
+	m_enemy.SetSize(60, 100);
 	//Load all music for game 
 	Game::GetMusic().Load("Assets/Music/background_music.mp3");
 	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
@@ -23,19 +26,20 @@ GameState* PlayState::Update()
 	//Check keypress and mouse clicks
 	m_background.Update();
 	m_player.Update();
+	m_enemy.Update();
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
-	/*
-	if (userWishesToExitGame)
+	if (m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 2.0)
 	{
-		return new MenuState;
+		std::cout << "COLLISION" << std::endl;
+		m_player.ReceiveDamage(m_enemy.GetDamage());
+		m_time = 0;
 	}
-
-	if (userWishesToPause)
+	else
 	{
-		return new PauseState;
+		std::cout << "NO COLLISION" << std::endl;
+		std::cout << m_player.GetHealthPoints() << std::endl;
 	}
-	*/
 	
 	//If user press ESC > EXIT GAME
 	if (input->IsKeyPressed(HM_KEY_ESCAPE))
@@ -43,6 +47,8 @@ GameState* PlayState::Update()
 		return new MenuState;
 	}
 
+	m_time += 0.02f;
+	std::cout << m_time << std::endl;
 	return this;
 }
 
@@ -57,6 +63,7 @@ bool PlayState::Render()
 		m_player.Render();
 	}
 	//render enemy
+	m_enemy.Render();
 	//render ...
 
 	return true;
@@ -67,5 +74,6 @@ void PlayState::OnExit()
 	//unload all music, text, sprites for this state
 	Game::GetMusic().Unload();
 	m_player.~Player();
+	m_enemy.~Enemy();
 	m_background.~Background();
 }
