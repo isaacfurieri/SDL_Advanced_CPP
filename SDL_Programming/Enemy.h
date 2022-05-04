@@ -15,6 +15,7 @@ class Enemy : public GameObject
 		~Enemy();
 
 		void SetVelocity(int velocity);
+		int GetDamage() const;
 		const BoxCollider& GetCollider() const;
 		void Respawn(int posX, int posY);
 
@@ -25,8 +26,7 @@ private:
 
 	Sprite m_image;       //containment - enemy has an image
 	Sound m_dead;
-
-	bool isAlive;
+	int m_damage;
 	int m_velocity;
 	Vector<int> m_direction;
 

@@ -10,7 +10,7 @@ Enemy::Enemy()
 	m_image.IsAnimated(false);
 	//m_image.SetAnimationVelocity(1.5f);
 	m_velocity = 0;
-	isAlive = true;
+	m_damage = 20;
 }
 
 Enemy::~Enemy()
@@ -21,6 +21,11 @@ Enemy::~Enemy()
 void Enemy::SetVelocity(int velocity)
 {
 	m_velocity = velocity;
+}
+
+int Enemy::GetDamage() const
+{
+	return m_damage;
 }
 
 const BoxCollider& Enemy::GetCollider() const
