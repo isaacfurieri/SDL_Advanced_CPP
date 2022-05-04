@@ -17,6 +17,11 @@ Sprite::Sprite()
 	m_spritePositions = { 0, 0, 0, 0 };
 }
 
+bool Sprite::IsAnimationDead()
+{
+	return m_isAnimationDead;
+}
+
 void Sprite::IsAnimated(bool flag)
 {
 	m_isAnimated = flag;

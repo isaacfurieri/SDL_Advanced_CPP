@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <SDL.h>
 #include "Screen.h"
@@ -13,6 +14,8 @@ public:
 	Sprite();
 	~Sprite() {}
 
+	bool IsAnimationDead();
+	
 	void IsAnimated(bool flag);
 	void IsAnimationLooping(bool flag);
 
@@ -51,4 +54,8 @@ private:
 	Vector<int> m_celDimension;
 	Vector<int> m_imageDimension;
 	Vector<int> m_spriteDimension;
+
+	//TODO -- MAP OF TEXTURES -- https://github.com/karsten-vermeulen-dev/Handmade/blob/master/Handmade/Texture.cpp
+	//static std::string s_rootFolder;
+	//static std::map<std::string, SDL_Texture*> s_images;
 };
