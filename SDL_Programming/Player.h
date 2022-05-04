@@ -41,6 +41,7 @@ public:
 	int GetManaPoints() const;
 	
 	void ReceiveDamage(const int monsterDamage);
+	void UpdateHealthBar(float updatePercent);
 	void SetHealthPoints(int healthPoints);
 	void SetMaxHealthPoints(int maxHealth);
 	void SetManaPoints(int manaPoints);
@@ -71,6 +72,7 @@ private:
 	float m_healingSpellCoolDown = 0;
 	int m_velocity{ 1 };
 	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints;
+	int m_maxHealthBarSize, m_maxManaBarSize;
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	BoxCollider m_collider;

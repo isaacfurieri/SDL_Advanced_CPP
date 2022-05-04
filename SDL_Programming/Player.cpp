@@ -41,12 +41,12 @@ Player::Player()
 
 	m_playerHpBar.Load("Assets/Images/Character/Hud/PlayerHpBar.png");
 	m_playerHpBar.SetImageDimension(1, 1, 174, 24);
-	//m_playerHpBar.SetSpriteDimension(187, 24);
-
+	m_playerHpBar.SetSpriteDimension(187, 24);
+	m_maxHealthBarSize = m_playerHpBar.GetSpriteDimension().x;
 	m_playerMpBar.Load("Assets/Images/Character/Hud/PlayerMpBar.png");
 	m_playerMpBar.SetImageDimension(1, 1, 206, 24);
 	m_playerMpBar.SetSpriteDimension(208, 24);
-
+	m_maxManaBarSize = m_playerMpBar.GetImageDimension().x;
 	//==========================================================
 	//Sounds
 	m_footSteps.Load("Assets/Music/footsteps_walking.wav");
@@ -96,6 +96,15 @@ void Player::ReceiveDamage(const int monsterDamage)
 		m_healthPoints = 0;
 		m_isAlive = false;
 	}
+
+	UpdateHealthBar(static_cast<float>((m_maxHealthPoints * monsterDamage) / 100));
+}
+
+void Player::UpdateHealthBar(float updatePercent)
+{
+	auto spritePercent = (m_maxHealthBarSize / 100) * updatePercent;
+
+	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - spritePercent, m_playerHpBar.GetSpriteDimension().y);
 }
 
 void Player::SetHealthPoints(int healthPoints)
