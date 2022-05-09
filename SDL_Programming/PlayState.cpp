@@ -24,9 +24,6 @@ GameState* PlayState::Update()
 	//auto screen = Game::GetScreen();
 	auto input = Input::Instance();
 	//Check keypress and mouse clicks
-	m_background.Update();
-	m_player.Update();
-	m_enemy.Update();
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
 	if (m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 2.0)
@@ -54,6 +51,12 @@ GameState* PlayState::Update()
 	{
 		return new MenuState;
 	}
+
+	m_enemy.FlipToPlayer(m_player.GetPosition());
+
+	m_background.Update();
+	m_player.Update();
+	m_enemy.Update();
 
 	m_time += 0.02f;
 	std::cout << m_time << std::endl;
