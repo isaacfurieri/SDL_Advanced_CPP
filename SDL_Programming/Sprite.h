@@ -24,7 +24,7 @@ public:
 	void SetSpriteDimension(int width, int height); //on-screen
 	void SetImageDimension(int columns, int rows, int width, int height); //in-folder
 	void SetFlipImage(Vector<int>& playerPosition, Vector<int>& mousePosition); //decide to flip or NOT
-	void FlipImage(Vector<int> playerPosition, Vector<int> mousePosition); //decide to flip or NOT
+	void FlipImage(Vector<int> playerPosition, Vector<int> monsterPosition); //decide to flip or NOT
 
 	SDL_Point GetCentrePosition() const;
 	SDL_Rect GetSpritePositions() const;
