@@ -71,6 +71,18 @@ void Sprite::SetFlipImage(Vector<int>& playerPosition, Vector<int>& mousePositio
 	}
 }
 
+void Sprite::FlipImage(Vector<int> playerPosition, Vector<int> monsterPosition)
+{
+	if (playerPosition.x - monsterPosition.x <= 0)
+	{
+		m_flipImage = SDL_FLIP_HORIZONTAL;
+	}
+	else
+	{
+		m_flipImage = SDL_FLIP_NONE;
+	}
+}
+
 SDL_Point Sprite::GetCentrePosition() const
 {
 	return { m_spriteDimension.x, m_spriteDimension.y };
