@@ -40,6 +40,14 @@ GameState* PlayState::Update()
 		std::cout << "NO COLLISION" << std::endl;
 		std::cout << m_player.GetHealthPoints() << std::endl;
 	}
+
+	for (auto& spell : m_player.GetSpells())
+	{
+		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()))
+		{
+			m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+		}
+	}
 	
 	//If user press ESC > EXIT GAME
 	if (input->IsKeyPressed(HM_KEY_ESCAPE))

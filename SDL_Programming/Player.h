@@ -48,7 +48,9 @@ public:
 	void SetMaxManaPoints(int manaPoints);
 	void SetState(const State& state);
 	void SetVelocity(const int& velocity);
+
 	const BoxCollider& GetCollider() const;
+	const std::deque<Spell> GetSpells() const;
 
 	bool GetCasting() const;
 

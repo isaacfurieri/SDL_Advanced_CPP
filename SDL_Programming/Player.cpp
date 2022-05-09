@@ -162,6 +162,11 @@ const BoxCollider& Player::GetCollider() const
 	return m_collider;
 }
 
+const std::deque<Spell> Player::GetSpells() const
+{
+	return m_spells;
+}
+
 bool Player::GetCasting() const
 {
 	return m_isCasting;
@@ -254,7 +259,7 @@ void Player::Update()
 		m_isCasting = true;
 	}
 
-	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && m_healingSpellCoolDown >= 5.0)
+	if (input->IsKeyPressed(HM_KEY_SPACE) && !m_isCasting && m_healingSpellCoolDown >= 10.0)
 	{
 		m_healingSpellCoolDown = 0;
 		std::cout << "Healing Spell cast." << std::endl;
