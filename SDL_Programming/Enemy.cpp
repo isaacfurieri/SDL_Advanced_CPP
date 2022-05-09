@@ -3,12 +3,12 @@
 
 Enemy::Enemy()
 {
-	m_image.Load("Assets/Images/Character/Enemy/Enemy.png");
-	m_image.IsAnimationLooping(false);
-	m_image.SetImageDimension(1, 1, 72, 96);
-	m_image.SetSpriteDimension(72, 96);
-	m_image.IsAnimated(false);
-	//m_image.SetAnimationVelocity(1.5f);
+	m_image.Load("Assets/Images/Enemy/Flying_eye/Flight.png");
+	m_image.IsAnimationLooping(true);
+	m_image.SetImageDimension(8, 1, 1200, 150);
+	m_image.SetSpriteDimension(300, 300);
+	m_image.IsAnimated(true);
+	m_image.SetAnimationVelocity(1.0f);
 	m_velocity = 0;
 	m_damage = 20;
 }
@@ -16,6 +16,11 @@ Enemy::Enemy()
 Enemy::~Enemy()
 {
 	m_image.Unload();
+}
+
+void Enemy::FlipToPlayer(Vector<int> playerPosition)
+{
+	m_image.FlipImage(playerPosition, m_position);
 }
 
 void Enemy::SetVelocity(int velocity)
@@ -26,6 +31,11 @@ void Enemy::SetVelocity(int velocity)
 int Enemy::GetDamage() const
 {
 	return m_damage;
+}
+
+Sprite Enemy::GetImage() const
+{
+	return m_image;
 }
 
 const BoxCollider& Enemy::GetCollider() const

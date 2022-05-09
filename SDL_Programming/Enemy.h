@@ -15,7 +15,9 @@ class Enemy : public GameObject
 		~Enemy();
 
 		void SetVelocity(int velocity);
+		void FlipToPlayer(Vector<int> playerPosition);
 		int GetDamage() const;
+		Sprite GetImage() const;
 		const BoxCollider& GetCollider() const;
 		void Respawn(int posX, int posY);
 
