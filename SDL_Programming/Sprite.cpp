@@ -83,9 +83,9 @@ void Sprite::FlipImage(Vector<int> playerPosition, Vector<int> monsterPosition)
 	}
 }
 
-SDL_Point Sprite::GetCentrePosition() const
+Vector<int> Sprite::GetCentrePosition() const
 {
-	return { m_spriteDimension.x, m_spriteDimension.y };
+	return { m_spriteDimension.x / 2, m_spriteDimension.y / 2 };
 }
 
 SDL_Rect Sprite::GetSpritePositions() const
@@ -168,7 +168,8 @@ void Sprite::Render(int xPos, int yPos, double angle)
 		m_spritePositions.w = m_spriteDimension.x;
 		m_spritePositions.h = m_spriteDimension.y;
 
-		centre = GetCentrePosition();
+		centre.x = m_spriteDimension.x / 2;
+		centre.y = m_spriteDimension.y / 2;
 
 		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), m_image, &sourceRect, &targetRect, angle, &centre, m_flipImage);
 	}

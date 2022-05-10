@@ -26,7 +26,7 @@ public:
 	void SetFlipImage(Vector<int>& playerPosition, Vector<int>& mousePosition); //decide to flip or NOT
 	void FlipImage(Vector<int> playerPosition, Vector<int> monsterPosition); //decide to flip or NOT
 
-	SDL_Point GetCentrePosition() const;
+	Vector<int> GetCentrePosition() const;
 	SDL_Rect GetSpritePositions() const;
 
 	Vector<int> GetSpriteDimension() const;
