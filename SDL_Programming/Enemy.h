@@ -10,23 +10,35 @@
 
 class Enemy : public GameObject
 {
-	public:
-		Enemy();
-		~Enemy();
+public:
+	enum State
+	{
+		Idle,
+		Moving,
+		Attacking,
+		TakingHit,
+		Death,
+		TotalStates
+	};
 
-		void SetVelocity(int velocity);
-		void FlipToPlayer(Vector<int> playerPosition);
-		int GetDamage() const;
-		Sprite GetImage() const;
-		const BoxCollider& GetCollider() const;
-		void Respawn(int posX, int posY);
+	Enemy();
+	~Enemy();
 
-		virtual void Update();
-		virtual void Render();
+	void SetVelocity(int velocity);
+	void FlipToPlayer(Vector<int> playerPosition);
+	void UpdateDirection(Vector<int> playerPosition);
+	int GetDamage() const;
+	const BoxCollider& GetCollider() const;
+	void SetState(const State& state);
+	void Respawn(int posX, int posY);
+
+	virtual void Update();
+	virtual void Render();
 
 private:
 
-	Sprite m_image;       //containment - enemy has an image
+	State m_state{ State::Idle };
+	Sprite m_images[State::TotalStates];       //containment - enemy has an image
 	Sound m_dead;
 	int m_damage;
 	int m_velocity;
