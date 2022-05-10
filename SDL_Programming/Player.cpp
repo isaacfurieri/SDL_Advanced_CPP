@@ -57,6 +57,8 @@ Player::Player()
 	m_maxManaPoints = 150;
 	m_healthPoints = m_maxHealthPoints;
 	m_manaPoints = m_maxManaPoints;
+
+	m_loseHealth = 0;
 	//==========================================================
 
 }
@@ -97,7 +99,8 @@ void Player::ReceiveDamage(const int monsterDamage)
 		m_isAlive = false;
 	}
 
-	UpdateHealthBar(static_cast<float>((m_maxHealthPoints * monsterDamage) / 100));
+	SetLooseHealth(monsterDamage);
+	//UpdateHealthBar(static_cast<float>((m_maxHealthPoints * monsterDamage) / 100));
 }
 
 void Player::UpdateHealthBar(float updatePercent)
@@ -117,6 +120,11 @@ void Player::SetHealthPoints(int healthPoints)
 	{
 		m_healthPoints += healthPoints;
 	}
+}
+
+void Player::SetLooseHealth(int looseHealth)
+{
+	m_loseHealth += looseHealth;
 }
 
 void Player::SetMaxHealthPoints(int maxHealth)
@@ -145,6 +153,11 @@ void Player::SetMaxManaPoints(int manaPoints)
 void Player::SetVelocity(const int& velocity)
 {
 	m_velocity = velocity;
+}
+
+Sprite Player::GetImages() const
+{
+	return m_images[m_state];
 }
 
 void Player::SetState(const State& state)
@@ -324,15 +337,17 @@ void Player::Update()
 	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
-
-	//if (m_playerHpBar.GetSpriteDimension().x > 0)
-	//{
-	//	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
-	//}
-	//if (m_playerHpBar.GetSpriteDimension().x > 0)
-	//{
-	//	m_playerMpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
-	//}
+	
+	if (m_playerHpBar.GetSpriteDimension().x > 0 && m_loseHealth > 0)
+	{
+		m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
+		SetLooseHealth(-1);
+		std::cout << m_loseHealth << std::endl;
+	}
+	/*if (m_playerHpBar.GetSpriteDimension().x > 0)
+	{
+		m_playerMpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
+	}*/
 
 	//Update Spell & Cooldowns
 	m_playerSpellHud.Update();

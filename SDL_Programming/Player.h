@@ -43,11 +43,14 @@ public:
 	void ReceiveDamage(const int monsterDamage);
 	void UpdateHealthBar(float updatePercent);
 	void SetHealthPoints(int healthPoints);
+	void SetLooseHealth(int looseHealth);
 	void SetMaxHealthPoints(int maxHealth);
 	void SetManaPoints(int manaPoints);
 	void SetMaxManaPoints(int manaPoints);
 	void SetState(const State& state);
 	void SetVelocity(const int& velocity);
+
+	Sprite GetImages() const;
 
 	const BoxCollider& GetCollider() const;
 	const std::deque<Spell> GetSpells() const;
@@ -73,7 +76,7 @@ private:
 	float m_spellCoolDown = 0;
 	float m_healingSpellCoolDown = 0;
 	int m_velocity{ 1 };
-	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints;
+	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints, m_loseHealth;
 	int m_maxHealthBarSize, m_maxManaBarSize;
 	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
