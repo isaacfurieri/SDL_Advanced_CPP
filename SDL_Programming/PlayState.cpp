@@ -30,21 +30,44 @@ GameState* PlayState::Update()
 	{
 		std::cout << "COLLISION" << std::endl;
 		m_player.ReceiveDamage(m_enemy.GetDamage());
+		m_enemy.SetState(Enemy::State::Attacking);
 		m_time = 0;
 	}
-	else
+	if(!m_player.GetCollider().IsColliding(m_enemy.GetCollider()))
 	{
-		std::cout << "NO COLLISION" << std::endl;
-		std::cout << m_player.GetHealthPoints() << std::endl;
+		m_enemy.SetState(Enemy::State::Moving);
+		//std::cout << "NO COLLISION" << std::endl;
+		//std::cout << m_player.GetHealthPoints() << std::endl;
 	}
 
 	for (auto& spell : m_player.GetSpells())
 	{
 		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()))
 		{
-			m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+			//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+			m_enemy.SetState(Enemy::State::TakingHit);
 		}
 	}
+
+	//if (m_enemy.GetCollider().IsColliding(m_player.GetCollider()))
+	//{
+	//	//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+	//	m_enemy.SetState(Enemy::State::Attacking);
+	//}
+	Vector<int> centre;
+
+	centre.x = m_player.GetPosition().x - m_player.GetImages().GetCentrePosition().x;
+	centre.y = m_player.GetPosition().y - m_player.GetImages().GetCentrePosition().y;
+
+	m_enemy.UpdateDirection(centre);
+	m_enemy.FlipToPlayer(centre);
+
+	m_background.Update();
+	m_player.Update();
+	m_enemy.Update();
+
+	m_time += 0.02f;
+	//std::cout << m_time << std::endl;
 	
 	//If user press ESC > EXIT GAME
 	if (input->IsKeyPressed(HM_KEY_ESCAPE))
@@ -52,14 +75,12 @@ GameState* PlayState::Update()
 		return new MenuState;
 	}
 
-	m_enemy.FlipToPlayer(m_player.GetPosition());
+	if (!m_player.IsAlive())
+	{
+		//GAME OVER SCREEN
+		//return new EndState;
+	}
 
-	m_background.Update();
-	m_player.Update();
-	m_enemy.Update();
-
-	m_time += 0.02f;
-	std::cout << m_time << std::endl;
 	return this;
 }
 
