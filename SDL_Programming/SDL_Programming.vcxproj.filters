@@ -138,6 +138,9 @@
     <ClCompile Include="HealSpell.cpp">
       <Filter>Source Files\Game Objects\Character</Filter>
     </ClCompile>
+    <ClCompile Include="EndState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="HealSpell.h">
       <Filter>Header Files\Game Objects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="EndState.h">
+      <Filter>Header Files\Game State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
