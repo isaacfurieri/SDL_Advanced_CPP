@@ -19,8 +19,8 @@ bool OptionsState::OnEnter()
 		buttonPos.y += 100;
 	}
 	//Music
-	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
+	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
+	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 
 	return true;
 }
@@ -76,16 +76,16 @@ GameState* OptionsState::Update()
 				if (volume < 0)
 				{
 				volume = 0;
-				Game::GetMusic().SetVolume(volume);
+				//Game::GetMusic().SetVolume(volume);
 				}
 				else if (volume > 128)
 				{
 					volume = 128;
-					Game::GetMusic().SetVolume(volume);
+					//Game::GetMusic().SetVolume(volume);
 				}
 				else
 				{
-					Game::GetMusic().SetVolume(volume);
+					//Game::GetMusic().SetVolume(volume);
 				}
 			}
 		}
@@ -151,5 +151,5 @@ void OptionsState::OnExit()
 	sliders.clear();
 	buttons.clear();
 
-	Game::GetMusic().Unload();
+	//Game::GetMusic().Unload();
 }
