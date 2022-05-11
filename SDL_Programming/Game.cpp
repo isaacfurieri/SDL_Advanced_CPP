@@ -2,7 +2,7 @@
 
 //Screen Game::m_screen;
 //Input Game::m_input;
-Music Game::m_music;
+//Music Game::m_music;
 Sound Game::m_sound;
 
 bool Game::Initialize()
@@ -12,7 +12,8 @@ bool Game::Initialize()
 	//===========================================
 	Screen::Instance();
 	Input::Instance();
-	Game::GetMusic().Initialize();
+	//Game::GetMusic().Initialize();
+	m_music.Initialize();
 
 	if (!Screen::Instance()->Initialize("MageWar", 1280, 720))
 	{
@@ -87,7 +88,8 @@ void Game::Shutdown()
 	//delete score;
 
 	//Only call this once after the game has ended
-	Music::Shutdown();
+	m_music.Shutdown();
+	//Music::Shutdown();
 	//Text::Shutdown();
 	Screen::Instance()->Shutdown();
 }
