@@ -37,6 +37,7 @@ public:
 	Player();
 	~Player();
 
+	int GetDamage() const;
 	int GetHealthPoints() const;
 	int GetManaPoints() const;
 	
@@ -75,6 +76,7 @@ private:
 	bool m_isCasting{ false };
 	float m_spellCoolDown = 0;
 	float m_healingSpellCoolDown = 0;
+	int m_damage;
 	int m_velocity{ 1 };
 	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints, m_loseHealth;
 	int m_maxHealthBarSize, m_maxManaBarSize;

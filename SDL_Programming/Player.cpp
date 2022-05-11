@@ -17,7 +17,7 @@ Player::Player()
 	for (int i = 0; i < State::TotalStates; i++)
 	{
 		m_images[i].IsAnimationLooping(true);
-		m_images[i].SetSpriteDimension(150, 150);
+		m_images[i].SetSpriteDimension(75, 75);
 		m_images[i].IsAnimated(true);
 		m_images[i].SetAnimationVelocity(0.5f);
 		m_images[i].SetImageDimension(9, 1, 360, 40);
@@ -57,7 +57,7 @@ Player::Player()
 	m_maxManaPoints = 150;
 	m_healthPoints = m_maxHealthPoints;
 	m_manaPoints = m_maxManaPoints;
-
+	m_damage = 10;
 	m_loseHealth = 0;
 	//==========================================================
 	//Collision
@@ -78,6 +78,11 @@ Player::~Player()
 	m_playerSpellHud.Unload();
 	m_spells.~deque();
 	m_Healspells.~deque();
+}
+
+int Player::GetDamage() const
+{
+	return m_damage;
 }
 
 int Player::GetHealthPoints() const
@@ -342,7 +347,7 @@ void Player::Update()
 	{
 		m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
 		SetLooseHealth(-1);
-		std::cout << m_loseHealth << std::endl;
+		//std::cout << m_loseHealth << std::endl;
 	}
 	/*if (m_playerHpBar.GetSpriteDimension().x > 0)
 	{
