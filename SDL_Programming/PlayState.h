@@ -2,6 +2,8 @@
 #include "Background.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "EndState.h"
+#include "MenuState.h"
 #include "GameState.h"
 #include "Game.h"
 
@@ -13,6 +15,8 @@ public:
 	~PlayState() override {}
 
 	float m_time = 0;
+	float m_timeMonster = 0;
+	float m_gameFinished = 0.0f;
 	bool OnEnter() override;
 	GameState* Update() override;
 	bool Render() override;

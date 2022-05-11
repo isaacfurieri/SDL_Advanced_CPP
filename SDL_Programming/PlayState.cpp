@@ -1,8 +1,9 @@
 #include "PlayState.h"
-#include "MenuState.h"
 
 bool PlayState::OnEnter()
 {
+	m_background.Load("BigRoom", "background_music");
+
 	//Load assets for player and enemy
 	m_player.IsVisible(true);
 	m_player.SetPosition(100, 200);
@@ -13,27 +14,33 @@ bool PlayState::OnEnter()
 	m_enemy.SetPosition(500, 200);
 	m_enemy.SetSize(60, 100);
 	//Load all music for game 
-	Game::GetMusic().Load("Assets/Music/background_music.mp3");
-	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
+	//Game::GetMusic().Load("Assets/Music/background_music.mp3");
+	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
 	//Load images and fonts
+
+	m_gameFinished = 0;
 	return true;
 }
 
 GameState* PlayState::Update()
 {
+	m_background.Update();
 	//auto screen = Game::GetScreen();
 	auto input = Input::Instance();
 	//Check keypress and mouse clicks
 	//check if buttons are clicked on
 	//All main game mechanics are updated here
-	if (m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 2.0)
+	if (m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 2.0 && m_gameFinished <= 0)
 	{
 		std::cout << "COLLISION" << std::endl;
-		m_player.ReceiveDamage(m_enemy.GetDamage());
+		if (m_enemy.IsAlive())
+		{
+			m_player.ReceiveDamage(m_enemy.GetDamage());
+		}
 		m_enemy.SetState(Enemy::State::Attacking);
 		m_time = 0;
 	}
-	if(!m_player.GetCollider().IsColliding(m_enemy.GetCollider()))
+	if(!m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 1.0 && m_gameFinished <= 0)
 	{
 		m_enemy.SetState(Enemy::State::Moving);
 		//std::cout << "NO COLLISION" << std::endl;
@@ -42,10 +49,14 @@ GameState* PlayState::Update()
 
 	for (auto& spell : m_player.GetSpells())
 	{
-		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()))
+		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 2.0 && m_gameFinished <= 0)
 		{
 			//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+			m_enemy.ReceiveDamage(m_player.GetDamage());
 			m_enemy.SetState(Enemy::State::TakingHit);
+			std::cout << m_enemy.GetHealth() << std::endl;
+			m_timeMonster = 0;
+			m_time = 0;
 		}
 	}
 
@@ -62,11 +73,11 @@ GameState* PlayState::Update()
 	m_enemy.UpdateDirection(centre);
 	m_enemy.FlipToPlayer(centre);
 
-	m_background.Update();
 	m_player.Update();
 	m_enemy.Update();
 
 	m_time += 0.02f;
+	m_timeMonster += 0.02f;
 	//std::cout << m_time << std::endl;
 	
 	//If user press ESC > EXIT GAME
@@ -78,9 +89,19 @@ GameState* PlayState::Update()
 	if (!m_player.IsAlive())
 	{
 		//GAME OVER SCREEN
-		//return new EndState;
+		return new EndState(EndState::State::Lose);
+	}
+	if (!m_enemy.IsAlive())
+	{
+		//GAME OVER SCREEN
+		m_enemy.SetState(Enemy::State::Death);
+		m_gameFinished += 0.02f;
 	}
 
+	if (m_gameFinished > 5.0)
+	{
+		return new EndState(EndState::State::Win);
+	}
 	return this;
 }
 
@@ -104,8 +125,8 @@ bool PlayState::Render()
 void PlayState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	Game::GetMusic().Unload();
-	m_player.~Player();
-	m_enemy.~Enemy();
-	m_background.~Background();
+	////Game::GetMusic().Unload();
+	//m_player.~Player();
+	//m_enemy.~Enemy();
+	//m_background.~Background();
 }
