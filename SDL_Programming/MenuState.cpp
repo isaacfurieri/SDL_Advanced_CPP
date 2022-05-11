@@ -4,6 +4,7 @@
 
 bool MenuState::OnEnter()
 {
+	m_background.Load("MainMenu", "TheDevilTower");
 
 	buttons.push_back(Button("Menu"));
 	buttons.push_back(Button("Play"));
@@ -34,10 +35,11 @@ bool MenuState::OnEnter()
 	//m_buttonSprites.SetSpriteDimension(150, 75);
 
 	//Load menu background music
+	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
+	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
+	//Load background
 
-	Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
-	//Load backdrop image
+	// 
 	//Load Music
 
 	return true;
@@ -45,6 +47,7 @@ bool MenuState::OnEnter()
 
 GameState* MenuState::Update()
 {
+	m_background.Update();
 	static float time = 0.0f;
 
 	for (auto& button : buttons)
@@ -146,6 +149,8 @@ GameState* MenuState::Update()
 
 bool MenuState::Render()
 {
+	m_background.Render();
+	
 	for (auto& button : buttons)
 	{
 		button.Render();
@@ -169,7 +174,8 @@ void MenuState::OnExit()
 
 	buttons.clear();
 	//unload all music, text, sprites for this state
-	Game::GetMusic().Unload();
+	//m_background.~Background();
+	//Game::GetMusic().Unload();
 	//m_isClickedMusic.Unload();
 	//m_isOverMusic.Unload();
 }
