@@ -4,7 +4,7 @@ HealSpell::HealSpell(Vector<int>& spellPosition)
 {
 	m_image.Load("Assets/Images/Character/Heal.png");
 	m_image.SetImageDimension(6, 1, 384, 64);
-	m_image.SetSpriteDimension(150, 150);
+	m_image.SetSpriteDimension(75, 75);
 	m_image.SetAnimationVelocity(0.2f);
 	m_image.IsAnimated(true);
 	m_image.IsAnimationLooping(false);

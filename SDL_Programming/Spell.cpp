@@ -5,14 +5,14 @@ Spell::Spell(Vector<int>& spellPosition, Vector<int>& mousePosition)
 	//m_image.Load("Assets/Images/Character/GreenFireball.png");
 	m_image.Load("Assets/Images/Character/fireBall.png");
 	m_image.SetImageDimension(8, 8, 800, 800);
-	m_image.SetSpriteDimension(150, 150);
+	m_image.SetSpriteDimension(50, 50);
 
 	m_image.IsAnimated(true);
 	m_image.IsAnimationLooping(true);
 	m_image.SetAnimationVelocity(1.5f);
 	m_image.SetFlipImage(spellPosition, mousePosition);
 
-	m_spellSpeed = 20;
+	m_spellSpeed = 10;
 	m_position = spellPosition;
 	m_mousePosition = mousePosition;
 
