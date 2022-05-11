@@ -60,7 +60,8 @@ Player::Player()
 
 	m_loseHealth = 0;
 	//==========================================================
-
+	//Collision
+	m_collider.SetDimension(150, 150);
 }
 
 Player::~Player()
@@ -334,7 +335,6 @@ void Player::Update()
 	//==========================================================
 	//==========================================================
 	//Collision Detection
-	m_collider.SetDimension(m_size.x, m_size.y);
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
 	

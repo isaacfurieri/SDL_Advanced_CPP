@@ -22,11 +22,13 @@ Enemy::Enemy()
 		{
 			m_images[i].IsAnimationLooping(false);
 		}
+
 		m_velocity = 2;
 		m_damage = 20;
 	}
 
-	m_collider.SetDimension(m_images[m_state].GetSpriteDimension().x, m_images[m_state].GetSpriteDimension().y);
+	//m_collider.SetDimension(m_images[m_state].GetSpriteDimension().x, m_images[m_state].GetSpriteDimension().y);
+	m_collider.SetDimension(60, 60);
 }
 
 Enemy::~Enemy()
@@ -95,8 +97,7 @@ void Enemy::Update()
 
 	m_position += d;
 
-
-	m_collider.SetPosition(m_position.x, m_position.y);
+	m_collider.SetPosition(m_position.x + 115, m_position.y + 120);
 	m_collider.Update();
 
 	m_images[m_state].Update();
