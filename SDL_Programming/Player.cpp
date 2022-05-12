@@ -61,7 +61,7 @@ Player::Player()
 	m_loseHealth = 0;
 	//==========================================================
 	//Collision
-	m_collider.SetDimension(150, 150);
+	m_collider.SetDimension(75, 75);
 }
 
 Player::~Player()
@@ -379,4 +379,5 @@ void Player::Render()
 	m_playerSpellHud.Render(-10, -9, m_angle);
 	m_necromancerHud.Render(6, -1, m_angle);
 	m_playerHud.Render(1, 0, m_angle);
+	m_collider.Render();
 }

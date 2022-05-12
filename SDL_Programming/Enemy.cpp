@@ -155,9 +155,12 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	m_images[m_state].Render(m_position.x, m_position.y, m_angle);
+
 	if (IsAlive())
 	{
 		m_monsterRedHP.Render(m_position.x + 50, m_position.y + 50, m_angle);
+		m_monsterHP.Render(m_position.x + 50, m_position.y + 50, m_angle);
+		m_collider.Render();
 	}
-	m_monsterHP.Render(m_position.x + 50, m_position.y + 50, m_angle);
+
 }

@@ -61,4 +61,5 @@ void Spell::Update()
 void Spell::Render()
 {
 	m_image.Render(m_position.x, m_position.y, m_angle);
+	m_collider.Render();
 }
