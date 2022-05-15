@@ -43,9 +43,6 @@
     <Filter Include="Source Files\Game Objects\Collision">
       <UniqueIdentifier>{a591c857-73b7-4b90-a015-24fb11323f5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Objects\Character">
-      <UniqueIdentifier>{f7c4f35f-f63a-4f82-904f-eb22bb21d97d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game State">
       <UniqueIdentifier>{772c03eb-89cd-44fe-af1e-6a04db5e6698}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,9 @@
     </Filter>
     <Filter Include="Source Files\Game Objects\GUI">
       <UniqueIdentifier>{2ecd7a30-ecee-4b02-8da5-829fc17341f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Character">
+      <UniqueIdentifier>{f7c4f35f-f63a-4f82-904f-eb22bb21d97d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

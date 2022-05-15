@@ -13,7 +13,7 @@ public:
 	SDL_Renderer* GetRenderer();
 	SDL_Window* GetWindow();
 	Vector<int> GetResolution();
-	
+
 	bool Initialize(const std::string& windowTitle = "<No name>",
 		int width = 1280,
 		int height = 720);
