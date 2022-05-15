@@ -29,14 +29,15 @@ public:
 
 	Vector<T> operator-() const;
 
-	T Magnitude() const;
-	T SqrMagnitude() const;
-	T Distance(const Vector<T>& second) const;
 	T Angle(const Vector<T>& second) const;
+	T Distance(const Vector<T>& second) const;
 	T Dot(const Vector<T>& second) const;
+	T Magnitude() const;
+	T Percent(const int percent) const;
+	T SqrMagnitude() const;
 
-	Vector<T> Normalize() const;
 	Vector<T> Lerp(const Vector<T>& second, float delta) const;
+	Vector<T> Normalize() const;
 	Vector<T> Slerp(const Vector<T>& second, float delta) const;
 
 	T x;
@@ -120,6 +121,10 @@ template <class T> T Vector<T>::Magnitude() const
 {
 	return static_cast<T>(sqrtf(static_cast<float>(SqrMagnitude())));
 }
+template<class T> T Vector<T>::Percent(const int percent) const
+{
+	return (this / 100) * percent;
+}
 //======================================================================================================
 template <class T> T Vector<T>::SqrMagnitude() const
 {
@@ -133,7 +138,7 @@ template <class T> T Vector<T>::Distance(const Vector<T>& second) const
 //======================================================================================================
 template <class T> T Vector<T>::Angle(const Vector<T>& second) const
 {
-	return atan((second.y - this->y) / (second.x - this->x));
+	return static_cast<int>(atan((second.y - this->y) / (second.x - this->x)));
 }
 //======================================================================================================
 template <class T> T Vector<T>::Dot(const Vector<T>& second) const
