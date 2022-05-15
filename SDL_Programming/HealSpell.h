@@ -11,6 +11,8 @@ class HealSpell : public GameObject
 public:
 
 	HealSpell(Vector<int>& spellPosition);
+	~HealSpell();
+
 	bool AnimationSpell();
 
 	virtual void Update();
@@ -18,7 +20,7 @@ public:
 
 private:
 
-	Sound m_spellSound;
+	//Sound m_spellSound;
 	Sprite m_image;
 };
 

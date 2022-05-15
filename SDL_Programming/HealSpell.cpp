@@ -11,8 +11,14 @@ HealSpell::HealSpell(Vector<int>& spellPosition)
 
 	m_position = spellPosition;
 
-	m_spellSound.Load("Assets/Sounds/healingspell.wav");
-	m_spellSound.Play(0);
+	//TODO CHANGE SOUND TO GAME STATE
+	//m_spellSound.Load("Assets/Sounds/healingspell.wav");
+	//m_spellSound.Play(0);
+}
+
+HealSpell::~HealSpell()
+{
+	m_image.Unload();
 }
 
 bool HealSpell::AnimationSpell()
