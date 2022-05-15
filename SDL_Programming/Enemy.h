@@ -24,16 +24,18 @@ public:
 	Enemy();
 	~Enemy();
 
-	void ReceiveDamage(const int playerDamage);
-	void SetVelocity(int velocity);
-	void FlipToPlayer(Vector<int> playerPosition);
-	void UpdateDirection(Vector<int> playerPosition); 
-	void SetLooseHealth(int looseHealth);
-	int GetDamage() const;
 	int GetHealth() const;
-	const BoxCollider& GetCollider() const;
-	void SetState(const State& state);
+	int GetDamage() const;
+	
+	void FlipToPlayer(Vector<int> playerPosition);
+	void ReceiveDamage(const int playerDamage);
 	void Respawn(int posX, int posY);
+	void SetLooseHealth(int looseHealth);
+	void SetState(const State& state);
+	void SetVelocity(int velocity);
+	void UpdateDirection(Vector<int> playerPosition); 
+	
+	const BoxCollider& GetCollider() const;
 
 	virtual void Update();
 	virtual void Render();

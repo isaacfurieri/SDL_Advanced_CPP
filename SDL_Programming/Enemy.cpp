@@ -6,7 +6,7 @@ Enemy::Enemy()
 	m_images[Idle].Load("Assets/Images/Enemy/Flying_eye/Flight.png");
 	m_images[Moving].Load("Assets/Images/Enemy/Flying_eye/Flight.png");
 	m_images[Attacking].Load("Assets/Images/Enemy/Flying_eye/Attack.png");
-	m_images[TakingHit].Load("Assets/Images/Enemy/Flying_eye/Take_Hit.png");
+	m_images[TakingHit].Load("Assets/Images/Enemy/Flying_eye/TakeHit.png");
 	m_images[Death].Load("Assets/Images/Enemy/Flying_eye/Death.png");
 
 	for (int i = 0; i < State::TotalStates; i++)
@@ -15,10 +15,9 @@ Enemy::Enemy()
 		m_images[i].SetSpriteDimension(150, 150);
 		m_images[i].IsAnimated(true);
 		m_images[i].SetAnimationVelocity(0.5f);
-
 		m_images[i].IsAnimationLooping(true);
 		
-		if (i == State::Death)
+		if (i == State::Death || i == State::TakingHit)
 		{
 			m_images[i].IsAnimationLooping(false);
 		}
@@ -28,11 +27,11 @@ Enemy::Enemy()
 	}
 
 	//MONSTER HP BAR
-	m_monsterHP.Load("Assets/Images/Character/Info/monsterHP.png");
+	m_monsterHP.Load("Assets/Images/Info/monsterHP.png");
 	m_monsterHP.SetImageDimension(1, 1, 181, 11);
 	m_monsterHP.SetSpriteDimension(50, 5);
 	
-	m_monsterRedHP.Load("Assets/Images/Character/Info/monsterRedHP.png");
+	m_monsterRedHP.Load("Assets/Images/Info/monsterRedHP.png");
 	m_monsterRedHP.SetImageDimension(1, 1, 181, 11);
 	m_monsterRedHP.SetSpriteDimension(50, 5);
 
@@ -66,6 +65,18 @@ void Enemy::UpdateDirection(Vector<int> playerPosition)
 {
 	m_direction = playerPosition - m_position;
 
+	Vector<float> dir;
+	dir.x = static_cast<float>(m_direction.x);
+	dir.y = static_cast<float>(m_direction.y);
+
+	dir = dir.Normalize();
+	dir *= static_cast<float>(m_velocity);
+
+	Vector<int> d;
+	d.x = static_cast<int>(dir.x);
+	d.y = static_cast<int>(dir.y);
+
+	m_position += d;
 	//TODO FAMILIAR POSITION
 	//m_direction = playerPosition - m_position - m_images[m_state].GetCentrePosition();
 }
@@ -121,20 +132,10 @@ void Enemy::Respawn(int posX, int posY)
 
 void Enemy::Update()
 {
-
-	Vector<float> dir;
-	dir.x = static_cast<float>(m_direction.x);
-	dir.y = static_cast<float>(m_direction.y);
-
-	dir = dir.Normalize();
-	dir *= static_cast<float>(m_velocity);
-
-	Vector<int> d;
-	d.x = static_cast<int>(dir.x);
-	d.y = static_cast<int>(dir.y);
-
-	m_position += d;
-
+	if (m_images[m_state].IsAnimationDead() && IsAlive())
+	{
+		SetState(State::Moving);
+	}
 	m_collider.SetPosition(m_position.x + 50, m_position.y + 50);
 	m_collider.Update();
 
@@ -145,8 +146,6 @@ void Enemy::Update()
 		std::cout << m_loseHealth << std::endl;
 	}
 	
-	//HP
-
 	m_monsterHP.Update();
 	m_monsterRedHP.Update();
 	m_images[m_state].Update();
