@@ -47,19 +47,39 @@ GameState* PlayState::Update()
 		//std::cout << m_player.GetHealthPoints() << std::endl;
 	}
 
-	for (auto& spell : m_player.GetSpells())
+	/*for (auto& spell : m_player.GetSpells())
 	{
-		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 2.0 && m_gameFinished <= 0)
+		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 1.0 && m_gameFinished <= 0)
 		{
 			//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+			spell.IsAlive(false);
+			spell.IsActive(false);
+			spell.ChangeState(Spell::SpellState::Explosion);
 			m_enemy.ReceiveDamage(m_player.GetDamage());
 			m_enemy.SetState(Enemy::State::TakingHit);
 			std::cout << m_enemy.GetHealth() << std::endl;
 			m_timeMonster = 0;
 			m_time = 0;
 		}
-	}
 
+		spell.Update();
+	}*/
+	//==========================================================
+	//Spell ptr collider
+
+	if (m_player.GetSpellPtr() && m_player.GetSpellPtr()->IsAlive() && m_player.GetSpellPtr()->GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 1.0 && m_gameFinished <= 0)
+	{
+		//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
+		m_player.GetSpellPtr()->IsAlive(false);
+		m_player.GetSpellPtr()->ChangeState(Spell::SpellState::Explosion);
+		m_enemy.ReceiveDamage(m_player.GetDamage());
+		m_enemy.SetState(Enemy::State::TakingHit);
+		m_timeMonster = 0;
+		m_time = 0;
+
+		std::cout << m_enemy.GetHealth() << std::endl;
+	}
+	//==========================================================
 	//if (m_enemy.GetCollider().IsColliding(m_player.GetCollider()))
 	//{
 	//	//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));

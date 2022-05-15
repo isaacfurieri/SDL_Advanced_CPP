@@ -28,7 +28,7 @@ Player::Player()
 	m_playerSpellHud.IsAnimationLooping(true);
 	m_playerSpellHud.IsAnimated(true);
 	m_playerSpellHud.SetAnimationVelocity(5.0f);
-	m_playerSpellHud.SetSpriteDimension(95,95);
+	m_playerSpellHud.SetSpriteDimension(95, 95);
 
 
 	m_necromancerHud.Load("Assets/Images/Character/Hud/NecromancerHud.png");
@@ -37,7 +37,7 @@ Player::Player()
 
 	m_playerHud.Load("Assets/Images/Character/Hud/PlayerHud.png");
 	m_playerHud.SetImageDimension(1, 1, 273, 74);
-	m_playerHud.SetSpriteDimension(280,75);
+	m_playerHud.SetSpriteDimension(280, 75);
 
 	m_playerHpBar.Load("Assets/Images/Character/Hud/PlayerHpBar.png");
 	m_playerHpBar.SetImageDimension(1, 1, 174, 24);
@@ -50,7 +50,7 @@ Player::Player()
 	//==========================================================
 	//Sounds
 	m_footSteps.Load("Assets/Music/footsteps_walking.wav");
-	
+
 	//==========================================================
 	//Character Setup
 	m_maxHealthPoints = 150;
@@ -109,12 +109,12 @@ void Player::ReceiveDamage(const int monsterDamage)
 	//UpdateHealthBar(static_cast<float>((m_maxHealthPoints * monsterDamage) / 100));
 }
 
-void Player::UpdateHealthBar(float updatePercent)
-{
-	auto spritePercent = (m_maxHealthBarSize / 100) * updatePercent;
-
-	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - spritePercent, m_playerHpBar.GetSpriteDimension().y);
-}
+//void Player::UpdateHealthBar(float updatePercent)
+//{
+//	auto spritePercent = (m_maxHealthBarSize / 100) * updatePercent;
+//
+//	m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - spritePercent, m_playerHpBar.GetSpriteDimension().y);
+//}
 
 void Player::SetHealthPoints(int healthPoints)
 {
@@ -181,9 +181,14 @@ const BoxCollider& Player::GetCollider() const
 	return m_collider;
 }
 
-const std::deque<Spell> Player::GetSpells() const
+std::deque<Spell> Player::GetSpells()
 {
 	return m_spells;
+}
+
+Spell* Player::GetSpellPtr()
+{
+	return m_fireballSpell;
 }
 
 bool Player::GetCasting() const
@@ -194,14 +199,14 @@ bool Player::GetCasting() const
 void Player::Update()
 {
 	auto input = Input::Instance();
-	
+
 	m_mousePosition = input->GetMousePosition();
-	
+
 	//Manupulate/Read keys here
 	//UP DOWN LEFT RIGHT ARROW KEYS MOVIMENT
 	//==========================================================
 
-	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction) 
+	auto ChangeStateAndDir = [&](State castingState, State movingState, const Vector<int>& direction)
 	{
 		if (m_isCasting)
 		{
@@ -242,12 +247,12 @@ void Player::Update()
 
 	//==========================================================
 	//Checking screen size to prevent moving away
-	if (m_position.x < 20) 
+	if (m_position.x < 20)
 	{
 		std::cout << "Can't move." << std::endl;
 		m_position.x = 20;
 	}
-	else if ( m_position.x > Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x )
+	else if (m_position.x > Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x)
 	{
 		std::cout << "Can't move." << std::endl;
 		m_position.x = Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x;
@@ -274,7 +279,8 @@ void Player::Update()
 		m_spellCoolDown = 0;
 		std::cout << "Spell cast." << std::endl;
 		//m_spellCast.Play(0);
-		m_spells.push_front(Spell(m_position, m_mousePosition));
+		//m_spells.push_front(Spell(m_position, m_mousePosition));
+		m_fireballSpell = new Spell(m_position, m_mousePosition);
 		m_isCasting = true;
 	}
 
@@ -287,11 +293,9 @@ void Player::Update()
 	}
 
 	//==========================================================
-	//Updating and checking Spells to Delete
+	/*Updating and checking Spell Deque to Delete
 	for (auto& spell : m_spells)
 	{
-		spell.Update();
-
 		if (spell.GetPosition().x < 0 || spell.GetPosition().x > Screen::Instance()->GetResolution().x)
 		{
 			spell.IsAlive(false);
@@ -304,8 +308,11 @@ void Player::Update()
 			spell.IsAlive(false);
 			//spell.~Spell();
 		}
+		if (spell.IsAlive())
+		{
+			spell.Update();
+		}
 	}
-	
 	auto CheckSpell = [&](const Spell& spell)
 	{
 		return !spell.IsAlive();
@@ -314,7 +321,10 @@ void Player::Update()
 	auto itS = std::remove_if(m_spells.begin(), m_spells.end(), CheckSpell);
 
 	m_spells.erase(itS, m_spells.end());
+
+	*/
 	
+	//==========================================================
 	for (auto& healSpell : m_Healspells)
 	{
 		healSpell.Update();
@@ -335,19 +345,46 @@ void Player::Update()
 	auto itHs = std::remove_if(m_Healspells.begin(), m_Healspells.end(), CheckHealSpell);
 
 	m_Healspells.erase(itHs, m_Healspells.end());
+
+	if (m_fireballSpell)
+	{
+	if (m_fireballSpell->GetPosition().x < 0 || m_fireballSpell->GetPosition().x > Screen::Instance()->GetResolution().x)
+	{
+		m_fireballSpell->IsAlive(false);
+		m_fireballSpell->IsActive(false);
+		m_isCasting = false;
+		//spell.~Spell();
+	}
+	else if (m_fireballSpell->GetPosition().y < 0 || m_fireballSpell->GetPosition().y >= Screen::Instance()->GetResolution().y)
+	{
+		m_isCasting = false;
+		m_fireballSpell->IsAlive(false);
+		m_fireballSpell->IsActive(false);
+		//spell.~Spell();
+	}
+	if (m_fireballSpell->GetImage().IsAnimationDead())
+	{
+		m_fireballSpell->~Spell();
+		m_isCasting = false;
+	}
+		m_fireballSpell->Update();
+	}
+	//==========================================================
+
+
+	//==========================================================
 	
 	//==========================================================
-	//==========================================================
-	//==========================================================
+	
+
 	//Collision Detection
 	m_collider.SetPosition(m_position.x, m_position.y);
 	m_collider.Update();
-	
+
 	if (m_playerHpBar.GetSpriteDimension().x > 0 && m_loseHealth > 0)
 	{
 		m_playerHpBar.SetSpriteDimension(m_playerHpBar.GetSpriteDimension().x - 1, m_playerHpBar.GetSpriteDimension().y);
 		SetLooseHealth(-1);
-		//std::cout << m_loseHealth << std::endl;
 	}
 	/*if (m_playerHpBar.GetSpriteDimension().x > 0)
 	{
@@ -356,6 +393,7 @@ void Player::Update()
 
 	//Update Spell & Cooldowns
 	m_playerSpellHud.Update();
+
 	m_spellCoolDown += 0.1f;
 	m_healingSpellCoolDown += 0.1f;
 }
@@ -364,14 +402,20 @@ void Player::Render()
 {
 	m_images[m_state].Render(m_position.x, m_position.y, m_angle);
 
+	/* //render deque of spells
 	for (auto& spell : m_spells)
 	{
 		spell.Render();
-	}
+	}*/
 
 	for (auto& spell : m_Healspells)
 	{
 		spell.Render();
+	}
+
+	if (m_fireballSpell && m_fireballSpell->IsActive())
+	{
+		m_fireballSpell->Render();
 	}
 
 	m_playerHpBar.Render(69, 9, m_angle);

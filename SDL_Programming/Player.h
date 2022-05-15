@@ -42,7 +42,7 @@ public:
 	int GetManaPoints() const;
 	
 	void ReceiveDamage(const int monsterDamage);
-	void UpdateHealthBar(float updatePercent);
+	//void UpdateHealthBar(float updatePercent);
 	void SetHealthPoints(int healthPoints);
 	void SetLooseHealth(int looseHealth);
 	void SetMaxHealthPoints(int maxHealth);
@@ -54,8 +54,8 @@ public:
 	Sprite GetImages() const;
 
 	const BoxCollider& GetCollider() const;
-	const std::deque<Spell> GetSpells() const;
-
+	std::deque<Spell> GetSpells();
+	Spell* GetSpellPtr();
 	bool GetCasting() const;
 
 	virtual void Update();
@@ -64,8 +64,8 @@ public:
 private:
 	//TODO -- HP AND MP STATS
 	State m_state{ State::Idle };
-	//Spell* m_spell;       //pointer to 'Spell' object (dynamic creation)
-	//std::unique_ptr<Spell> m_spell;
+	Spell* m_fireballSpell;       //pointer to 'Spell' object (dynamic creation)
+	//std::unique_ptr<Spell> m_fireballSpell;
 	Sprite m_images[State::TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
 	//Sound m_spellCast, m_footSteps;
 	Sound m_footSteps;
