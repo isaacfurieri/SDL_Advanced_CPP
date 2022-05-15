@@ -2,7 +2,7 @@
 
 BoxCollider::BoxCollider()
 {
-	m_image.Load("Assets/Images/Character/Info/CollisionBox.png");
+	m_image.Load("Assets/Images/Info/CollisionBox.png");
 	m_image.SetImageDimension(1, 1, 500, 500);
 }
 
