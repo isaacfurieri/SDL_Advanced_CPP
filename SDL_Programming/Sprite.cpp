@@ -32,6 +32,11 @@ void Sprite::IsAnimationLooping(bool flag)
 	m_isAnimationLooping = flag;
 }
 
+void Sprite::IsAnimationDead(bool flag)
+{
+	m_isAnimationDead = flag;
+}
+
 void Sprite::SetImageCel(int column, int row)
 {
 	m_imageCel = ((row - 1) * m_imageDimension.x) + (column - 1);

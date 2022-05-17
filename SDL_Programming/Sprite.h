@@ -19,6 +19,7 @@ public:
 	void IsAnimated(bool flag);
 	void IsAnimationLooping(bool flag);
 
+	void IsAnimationDead(bool flag);
 	void SetImageCel(int column, int row);
 	void SetAnimationVelocity(float velocity);
 	void SetSpriteDimension(int width, int height); //on-screen
