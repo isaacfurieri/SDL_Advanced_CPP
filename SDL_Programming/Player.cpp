@@ -62,6 +62,8 @@ Player::Player()
 	//==========================================================
 	//Collision
 	m_collider.SetDimension(75, 75);
+	m_collider.SetPosition(m_position.x, m_position.y);
+	m_collider.Update();
 }
 
 Player::~Player()
@@ -257,10 +259,10 @@ void Player::Update()
 		std::cout << "Can't move." << std::endl;
 		m_position.x = Screen::Instance()->GetResolution().x - m_images[m_state].GetSpriteDimension().x;
 	}
-	else if (m_position.y < 65)
+	else if (m_position.y < 15)
 	{
 		std::cout << "Can't move." << std::endl;
-		m_position.y = 65;
+		m_position.y = 15;
 	}
 	else if (m_position.y > Screen::Instance()->GetResolution().y - m_images[m_state].GetSpriteDimension().y)
 	{
