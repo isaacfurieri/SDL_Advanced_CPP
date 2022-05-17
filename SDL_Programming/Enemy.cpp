@@ -113,6 +113,10 @@ int Enemy::GetHealth() const
 {
 	return m_healthPoints;
 }
+Sprite Enemy::GetImages()
+{
+	return m_images[m_state];
+}
 
 const BoxCollider& Enemy::GetCollider() const
 {

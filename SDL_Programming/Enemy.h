@@ -26,7 +26,7 @@ public:
 
 	int GetHealth() const;
 	int GetDamage() const;
-	
+
 	void FlipToPlayer(Vector<int> playerPosition);
 	void ReceiveDamage(const int playerDamage);
 	void Respawn(int posX, int posY);
@@ -35,6 +35,7 @@ public:
 	void SetVelocity(int velocity);
 	void UpdateDirection(Vector<int> playerPosition); 
 	
+	Sprite GetImages();
 	const BoxCollider& GetCollider() const;
 
 	virtual void Update();
