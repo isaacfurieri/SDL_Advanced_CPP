@@ -1,5 +1,10 @@
 #include "PlayState.h"
 
+void PlayState::Door(bool door)
+{
+	m_boolAnimation = door;
+}
+
 bool PlayState::OnEnter()
 {
 	m_background.Load("BigRoom", "background_music");
@@ -13,6 +18,17 @@ bool PlayState::OnEnter()
 
 	m_enemy.SetPosition(500, 200);
 	m_enemy.SetSize(60, 100);
+
+	m_doorAnimation.Load("Assets/Images/Background/OpeningDoor.png");
+	m_doorAnimation.SetImageDimension(8, 1, 304, 42);
+	m_doorAnimation.IsAnimationLooping(false);
+	m_doorAnimation.IsAnimated(false);
+	m_doorAnimation.SetAnimationVelocity(0.05f);
+	m_doorAnimation.SetSpriteDimension(60, 50);
+
+	m_doorOpening.Load("Assets/Music/ScaryWoodenDoorOpening.wav");
+	m_doorOpening.SetVolume(30);
+	
 	//Load all music for game 
 	//Game::GetMusic().Load("Assets/Music/background_music.mp3");
 	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
@@ -95,6 +111,7 @@ GameState* PlayState::Update()
 
 	m_player.Update();
 	m_enemy.Update();
+	m_doorAnimation.Update();
 
 	m_time += 0.02f;
 	m_timeMonster += 0.02f;
@@ -118,7 +135,20 @@ GameState* PlayState::Update()
 		m_gameFinished += 0.02f;
 	}
 
-	if (m_gameFinished > 5.0)
+	if (m_gameFinished > 5.0 && m_boolAnimation)
+	{
+		m_doorOpening.Play(0);
+		m_doorAnimation.IsAnimated(m_boolAnimation);
+
+		if (m_doorAnimation.IsAnimationDead())
+		{
+			m_doorAnimation.IsAnimationDead(!m_boolAnimation);
+			m_doorAnimation.IsAnimated(!m_boolAnimation);
+			m_doorAnimation.SetImageCel(8, 1);
+			Door(!m_boolAnimation);
+		}
+	}
+	if (m_player.GetPosition().x > 1110 && m_player.GetPosition().x < 1160 && m_player.GetPosition().y < 20 && !m_boolAnimation)
 	{
 		return new EndState(EndState::State::Win);
 	}
@@ -131,12 +161,15 @@ bool PlayState::Render()
 	m_background.Render();
 	
 	//Render player
+	m_enemy.Render();
+
+	m_doorAnimation.Render(1100, 03, 0.0);
+	
 	if (m_player.IsVisible())
 	{
 		m_player.Render();
 	}
 	//render enemy
-	m_enemy.Render();
 	//render ...
 
 	return true;
