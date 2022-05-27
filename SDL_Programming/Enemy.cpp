@@ -28,11 +28,11 @@ Enemy::Enemy()
 	}
 
 	//MONSTER HP BAR
-	m_monsterHP.Load("Assets/Images/Info/monsterHP.png");
+	m_monsterHP.Load("Assets/Images/Character/Info/monsterHP.png");
 	m_monsterHP.SetImageDimension(1, 1, 181, 11);
 	m_monsterHP.SetSpriteDimension(50, 5);
 	
-	m_monsterRedHP.Load("Assets/Images/Info/monsterRedHP.png");
+	m_monsterRedHP.Load("Assets/Images/Character/Info/monsterRedHP.png");
 	m_monsterRedHP.SetImageDimension(1, 1, 181, 11);
 	m_monsterRedHP.SetSpriteDimension(50, 5);
 
