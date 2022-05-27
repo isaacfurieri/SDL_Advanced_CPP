@@ -10,16 +10,16 @@ SliderButton::SliderButton(const std::string& slidername)
 	SetTag(slidername);
 	m_mousePosition = { 0, 0, 0, 0 };
 	m_sliderState = SliderState::Default;
-	
+
 	//Sprites
 	m_sliderBar.Load("Assets/Buttons/SliderBarButton.png");
 	m_sliderBar.SetImageDimension(1, 1, 206, 17);
 	m_sliderBar.SetSpriteDimension(207, 17);
-	
+
 	m_sliderPin.Load("Assets/Buttons/SliderPinButton.png");
 	m_sliderPin.SetImageDimension(1, 1, 22, 40);
 	m_sliderPin.SetSpriteDimension(22, 40);
-	
+
 	m_pinPosition = { 0, 0, m_sliderPin.GetSpriteDimension().x, m_sliderPin.GetSpriteDimension().y };
 	m_sliderPosition = { 0, 0, m_sliderBar.GetSpriteDimension().x, m_sliderPin.GetSpriteDimension().y };
 }
@@ -36,7 +36,7 @@ SDL_Rect SliderButton::GetPinPosition()
 
 void SliderButton::SetSliderPinPosition()
 {
-	if(Input::Instance()->GetMousePosition().x > m_sliderPosition.x && Input::Instance()->GetMousePosition().x < m_sliderPosition.x + m_sliderPosition.w)
+	if (Input::Instance()->GetMousePosition().x > m_sliderPosition.x && Input::Instance()->GetMousePosition().x < m_sliderPosition.x + m_sliderPosition.w)
 	{
 		if (this->GetPinPosition().x >= m_sliderPosition.x && this->GetPinPosition().x <= m_sliderPosition.x + m_sliderPosition.w)
 		{
@@ -72,7 +72,7 @@ void SliderButton::Update()
 
 	if (!SDL_HasIntersection(&m_mousePosition, &m_sliderPosition))
 	{
-		isHover = false;
+		m_isHover = false;
 	}
 	if (SDL_HasIntersection(&m_mousePosition, &m_sliderPosition))
 	{
@@ -82,9 +82,9 @@ void SliderButton::Update()
 			std::cout << GetPinPosition().x - m_sliderPosition.x << std::endl;
 			m_sliderState = SliderState::Clicked;
 		}
-		if (!isHover)
+		if (!m_isHover)
 		{
-			isHover = true;
+			m_isHover = true;
 		}
 	}
 }

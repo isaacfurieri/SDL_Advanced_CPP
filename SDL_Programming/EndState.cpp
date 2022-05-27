@@ -38,7 +38,6 @@ bool EndState::OnEnter()
 		button.SetPosition(buttonPos);
 		buttonPos.y += 100;
 	}
-
 	return true;
 }
 

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Game.h"
 
 
 Enemy::Enemy()
@@ -39,7 +40,6 @@ Enemy::Enemy()
 	m_healthPoints = m_maxHealthPoints;
 	m_loseHealth = 0;
 
-	//m_collider.SetDimension(m_images[m_state].GetSpriteDimension().x, m_images[m_state].GetSpriteDimension().y);
 	m_collider.SetDimension(50, 50);
 }
 
@@ -90,7 +90,7 @@ void Enemy::ReceiveDamage(const int playerDamage)
 {
 	m_healthPoints -= playerDamage;
 
-	if (m_healthPoints <= 0)
+	if (m_healthPoints <= 0 && m_isAlive == true)
 	{
 		m_healthPoints = 0;
 		m_isAlive = false;
@@ -165,5 +165,4 @@ void Enemy::Render()
 		m_monsterHP.Render(m_position.x + 50, m_position.y + 50, m_angle);
 		m_collider.Render();
 	}
-
 }

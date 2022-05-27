@@ -31,10 +31,7 @@ void Button::Update()
 	m_buttonSprite.SetImageCel(1, 1);
 	m_spritePosition.x = this->GetPosition().x;
 	m_spritePosition.y = this->GetPosition().y;
-	
-	//m_spritePosition.x = Screen::Instance()->GetResolution().x - m_buttonSprite.GetSpriteDimension().x / 2;
-	//m_spritePosition.y = this->GetPosition().y;
-	
+
 	m_spritePosition.w = m_buttonSprite.GetSpriteDimension().x;
 	m_spritePosition.h = m_buttonSprite.GetSpriteDimension().y;
 	
@@ -44,11 +41,9 @@ void Button::Update()
 	m_mousePosition.h = 1;
 
 	m_buttonState = ButtonState::Default;
-	//std::cout << isHover << std::endl;
 
 	if (!SDL_HasIntersection(&m_mousePosition, &m_spritePosition))
 	{
-		//std::cout << isHover << std::endl;
 		isHover = false;
 	}
 	if (SDL_HasIntersection(&m_mousePosition, &m_spritePosition))

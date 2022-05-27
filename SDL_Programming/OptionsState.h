@@ -23,8 +23,8 @@ public:
 
 private:
 
-	std::vector<Button> buttons;
-	std::vector<SliderButton> sliders;
+	std::vector<Button> m_buttons;
+	std::vector<SliderButton> m_sliders;
 
-	Vector<int> buttonPos{ 565, 100 };
+	Vector<int> m_buttonPos{ 565, 100 };
 };

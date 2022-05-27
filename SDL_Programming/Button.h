@@ -25,7 +25,9 @@ public:
 	virtual void Render();
 
 private:
+
 	bool isHover{ false };
+
 	ButtonState m_buttonState;
 	SDL_Rect m_mousePosition, m_spritePosition;
 	Sound m_sfxHover, m_sfxClicked;

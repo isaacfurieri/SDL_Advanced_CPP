@@ -10,8 +10,6 @@ class GameState
 
 public:
 
-	//GameState(Screen& screen);
-	//TODO MAKE MUSIC AND SOUND GAME STATE;
 	virtual ~GameState() = 0 {}
 
 	virtual bool OnEnter() = 0;       //Load assets in this function

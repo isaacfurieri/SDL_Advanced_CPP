@@ -79,6 +79,7 @@ void Text::Render(int xPos, int yPos)
 		SDL_DestroyTexture(m_texture);
 		SDL_Surface* textData = TTF_RenderText_Blended(m_font, m_text.c_str(), m_color);
 		m_texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), textData);
+		std::cout << SDL_GetError() << std::endl;
 		SDL_FreeSurface(textData);
 		m_isDirty = false;
 	}

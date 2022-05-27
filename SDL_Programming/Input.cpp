@@ -150,10 +150,8 @@ void Input::Update()
 			case SDL_BUTTON_MIDDLE: { m_mouseButton |= HM_MOUSE_MIDDLE; break; }
 			case SDL_BUTTON_RIGHT: { m_mouseButton |= HM_MOUSE_RIGHT; break;  }
 			}
-
 			break;
 		}
-
 		}
 	}
 }

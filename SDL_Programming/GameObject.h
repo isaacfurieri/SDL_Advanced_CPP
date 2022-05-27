@@ -42,14 +42,14 @@ public:
 
 protected:
 
-	float m_angle;
-	std::string m_tag;
-
 	bool m_isAlive;
 	bool m_isActive;
 	bool m_isVisible;
+	
+	float m_angle;
+
+	std::string m_tag;
 
 	Vector<int> m_size;
 	Vector<int> m_position;
-
 };

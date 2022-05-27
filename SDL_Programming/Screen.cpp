@@ -18,12 +18,13 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 	}
 
 	m_window = SDL_CreateWindow(windowTitle.c_str(),       //game window title
-							    SDL_WINDOWPOS_CENTERED,    //pos x
-							    SDL_WINDOWPOS_CENTERED,    //pos y
-							    width,                     //width
-							    height,                    //height
-							    0);                        //flags
-							    //SDL_WINDOW_RESIZABLE);                        //flags
+		SDL_WINDOWPOS_CENTERED,    //pos x
+		SDL_WINDOWPOS_CENTERED,    //pos y
+		width,                     //width
+		height,                    //height
+		0);                        //flags
+		//SDL_WINDOW_FULLSCREEN);                        //flags
+		//SDL_WINDOW_RESIZABLE);                        //flags
 
 	if (!m_window)
 	{
@@ -39,7 +40,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 		return false;
 	}
 
-    return true;
+	return true;
 }
 
 Vector<int> Screen::GetResolution()

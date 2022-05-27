@@ -22,10 +22,10 @@ public:
 
 private:
 
-	Sprite m_image;
-
 	int m_velocity;
+
 	Vector<int> m_direction;
 	BoxCollider m_collider;
+	Sprite m_image;
 	//SphereCollider m_collider;
 };

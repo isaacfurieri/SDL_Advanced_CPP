@@ -33,7 +33,6 @@ public:
 	T Distance(const Vector<T>& second) const;
 	T Dot(const Vector<T>& second) const;
 	T Magnitude() const;
-	T Percent(const int percent) const;
 	T SqrMagnitude() const;
 
 	Vector<T> Lerp(const Vector<T>& second, float delta) const;
@@ -120,10 +119,6 @@ template <class T> Vector<T> Vector<T>::operator-() const
 template <class T> T Vector<T>::Magnitude() const
 {
 	return static_cast<T>(sqrtf(static_cast<float>(SqrMagnitude())));
-}
-template<class T> T Vector<T>::Percent(const int percent) const
-{
-	return (this / 100) * percent;
 }
 //======================================================================================================
 template <class T> T Vector<T>::SqrMagnitude() const

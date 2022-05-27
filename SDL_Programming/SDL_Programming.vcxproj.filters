@@ -117,14 +117,8 @@
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
-    <ClCompile Include="PauseState.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuButtons.cpp">
-      <Filter>Source Files\Game Objects\GUI</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Game Objects\GUI</Filter>
@@ -200,14 +194,8 @@
     <ClInclude Include="MenuState.h">
       <Filter>Header Files\Game State</Filter>
     </ClInclude>
-    <ClInclude Include="PauseState.h">
-      <Filter>Header Files\Game State</Filter>
-    </ClInclude>
     <ClInclude Include="PlayState.h">
       <Filter>Header Files\Game State</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButtons.h">
-      <Filter>Header Files\Game Objects\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Header Files\Components</Filter>

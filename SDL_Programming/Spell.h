@@ -37,8 +37,6 @@ private:
 	int m_spellSpeed;
 
 	BoxCollider m_collider;
-	//TODO Change Sound to Game States
-	//Sound m_spellSound;
 	SpellState m_state{ SpellState::Moving };
 	Sprite m_image[static_cast<int>(SpellState::TotalStates)], m_explosion;
 	Vector<int> m_direction, m_mousePosition;

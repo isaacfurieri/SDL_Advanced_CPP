@@ -43,15 +43,17 @@ public:
 
 private:
 
+	int m_healthPoints, m_maxHealthPoints, m_loseHealth, m_maxHealthBarSize;
+	int m_damage;
+	int m_velocity;
+
+	BoxCollider m_collider;
 	State m_state{ State::Idle };
 	Sprite m_images[State::TotalStates];       //containment - enemy has an image
 	Sprite m_monsterHP, m_monsterRedHP;
 	Sound m_dead;
-	int m_healthPoints, m_maxHealthPoints, m_loseHealth, m_maxHealthBarSize;
-	int m_damage;
-	int m_velocity;
+
 	Vector<int> m_direction;
 
-	BoxCollider m_collider;
 };
 

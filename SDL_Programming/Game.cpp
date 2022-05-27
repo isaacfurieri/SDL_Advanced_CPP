@@ -1,37 +1,34 @@
 #include "Game.h"
 
-//Screen Game::m_screen;
-//Input Game::m_input;
-//Music Game::m_music;
+Text Game::m_text;
 Sound Game::m_sound;
 
 bool Game::Initialize()
 {
 	//===========================================
-	//Init screen 
+	//Init screen & Input
 	//===========================================
+
 	Screen::Instance();
 	Input::Instance();
-	//Game::GetMusic().Initialize();
+
+	//===========================================
+	//Init music system
+	//===========================================
+
 	m_music.Initialize();
+	m_music.SetVolume(50);
 
 	if (!Screen::Instance()->Initialize("MageWar", 1280, 720))
 	{
 		return 0;
 	}
+	
+	//===========================================
+	//Init Text system
+	//===========================================
 
-	//Music::Initialize(); //call once before any music object is loaded
-	
-
-	//===========================================
-	//Init music system
-	//===========================================
-	
-	
-	//===========================================
-	//Init Font system
-	//===========================================
-	//Text::Initialize();
+	m_text.Initialize();
 
 	//===========================================
 	//Init third-party libraries
@@ -54,8 +51,6 @@ bool Game::Run(GameState* initialState)
 
 		//updating the input
 		Input::Instance()->Update();
-
-		//checking delta time
 
 		//updating the current game state
 		//current game state will return a pointer to a different state if a switch is required 
@@ -84,12 +79,8 @@ bool Game::Run(GameState* initialState)
 void Game::Shutdown()
 {
 	//Close down everything you initialized in init()
-
-	//delete score;
-
 	//Only call this once after the game has ended
 	m_music.Shutdown();
-	//Music::Shutdown();
-	//Text::Shutdown();
+	m_text.Unload();
 	Screen::Instance()->Shutdown();
 }

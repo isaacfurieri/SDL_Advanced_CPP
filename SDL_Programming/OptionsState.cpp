@@ -2,22 +2,23 @@
 
 bool OptionsState::OnEnter()
 {
-	sliders.push_back(SliderButton("MusicSlider"));
-	sliders.push_back(SliderButton("SoundSlider"));
+	m_sliders.push_back(SliderButton("MusicSlider"));
+	m_sliders.push_back(SliderButton("SoundSlider"));
 
-	for (auto& slider : sliders)
+	for (auto& slider : m_sliders)
 	{
-		slider.SetPosition(buttonPos);
-		buttonPos.y += 100;
+		slider.SetPosition(m_buttonPos);
+		m_buttonPos.y += 100;
 	}
 
-	buttons.push_back(Button("Back"));
+	m_buttons.push_back(Button("Back"));
 
-	for (auto& button : buttons)
+	for (auto& button : m_buttons)
 	{
-		button.SetPosition(buttonPos);
-		buttonPos.y += 100;
+		button.SetPosition(m_buttonPos);
+		m_buttonPos.y += 100;
 	}
+	//TODO SAVE MUSIC AND SOUD VOLUME VALUES WHEN USING SLIDERS AND APPLY IN ALL GAME STATES.
 	//Music
 	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
 	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
@@ -29,7 +30,7 @@ GameState* OptionsState::Update()
 {
 	static float time = 0.0f;
 
-	for (auto& slider : sliders)
+	for (auto& slider : m_sliders)
 	{
 		auto tag = slider.GetTag();
 
@@ -47,22 +48,22 @@ GameState* OptionsState::Update()
 				time = 0.0f;
 				slider.SetSliderPinPosition();
 
-				auto volume = static_cast<int>( slider.GetSliderValue() / 2);
+				auto volume = static_cast<int>(slider.GetSliderValue() / 2);
 
 				//Volume min-max is 0-128 on SDL library.
 				if (volume < 0)
 				{
 					volume = 0;
-					Game::GetSound().SetVolume(volume);
+					//Game::GetSound().SetVolume(volume);
 				}
 				else if (volume > 128)
 				{
 					volume = 128;
-					Game::GetSound().SetVolume(volume);
+					//Game::GetSound().SetVolume(volume);
 				}
 				else
 				{
-					Game::GetSound().SetVolume(volume);
+					//Game::GetSound().SetVolume(volume);
 				}
 			}
 			if (tag == "MusicSlider")
@@ -71,12 +72,12 @@ GameState* OptionsState::Update()
 				slider.SetSliderPinPosition();
 
 				auto volume = static_cast<int>(slider.GetSliderValue() / 2);
-				
+
 				//Volume min-max is 0-128 on SDL library.
 				if (volume < 0)
 				{
-				volume = 0;
-				//Game::GetMusic().SetVolume(volume);
+					volume = 0;
+					//Game::GetMusic().SetVolume(volume);
 				}
 				else if (volume > 128)
 				{
@@ -93,7 +94,7 @@ GameState* OptionsState::Update()
 		time += 0.1f;
 	}
 
-	for (auto& button : buttons)
+	for (auto& button : m_buttons)
 	{
 		auto tag = button.GetTag();
 
@@ -114,42 +115,34 @@ GameState* OptionsState::Update()
 					return new MenuState;
 				}
 			}
-
 		}
 	}
-
 	return this;
 }
 
 bool OptionsState::Render()
 {
-	for (auto& slider : sliders)
+	for (auto& slider : m_sliders)
 	{
 		slider.Render();
 	}
-
-	for (auto& button : buttons)
+	for (auto& button : m_buttons)
 	{
 		button.Render();
 	}
-
 	return false;
 }
 
 void OptionsState::OnExit()
 {
-	for (auto& slider : sliders)
+	for (auto& slider : m_sliders)
 	{
 		slider.Shutdown();
 	}
-
-	for (auto& button : buttons)
+	for (auto& button : m_buttons)
 	{
 		button.Shutdown();
 	}
-
-	sliders.clear();
-	buttons.clear();
-
-	//Game::GetMusic().Unload();
+	m_sliders.clear();
+	m_buttons.clear();
 }

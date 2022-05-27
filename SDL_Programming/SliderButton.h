@@ -16,19 +16,24 @@ public:
 		Clicked
 	};
 
-	int GetSliderValue();
-	SliderButton(const std::string& slidername);
 	const SliderState& GetState() const;
-	SDL_Rect GetPinPosition();
+	int GetSliderValue();
 	void SetSliderPinPosition();
 	void Shutdown();
+	
+	SDL_Rect GetPinPosition();
+	
+	SliderButton(const std::string& slidername);
+	
 	virtual void Update();
 	virtual void Render();
 
 private:
-	bool isHover{ false }, m_sprite{ false };
-	SliderState m_sliderState;
+
+	bool m_isHover{ false }, m_sprite{ false };
+
 	SDL_Rect m_mousePosition, m_sliderPosition, m_pinPosition;
+	SliderState m_sliderState;
 	Sprite m_sliderBar, m_sliderPin;
 };
 

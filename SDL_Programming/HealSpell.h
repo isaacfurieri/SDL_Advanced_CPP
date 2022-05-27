@@ -20,7 +20,6 @@ public:
 
 private:
 
-	//Sound m_spellSound;
 	Sprite m_image;
 };
 

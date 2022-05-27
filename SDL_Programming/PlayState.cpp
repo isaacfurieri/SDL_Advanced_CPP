@@ -28,11 +28,10 @@ bool PlayState::OnEnter()
 
 	m_doorOpening.Load("Assets/Music/ScaryWoodenDoorOpening.wav");
 	m_doorOpening.SetVolume(30);
-	
-	//Load all music for game 
-	//Game::GetMusic().Load("Assets/Music/background_music.mp3");
-	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
-	//Load images and fonts
+
+	//Load Score
+	m_score.SetPosition(10, 50);
+	m_score.SetScore(0);
 
 	m_gameFinished = 0;
 	return true;
@@ -40,12 +39,11 @@ bool PlayState::OnEnter()
 
 GameState* PlayState::Update()
 {
-	m_background.Update();
-	//auto screen = Game::GetScreen();
-	auto input = Input::Instance();
-	//Check keypress and mouse clicks
-	//check if buttons are clicked on
 	//All main game mechanics are updated here
+	//==========================================================
+	auto input = Input::Instance();
+
+	//Collision & Damage
 	if (m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 2.0 && m_gameFinished <= 0)
 	{
 		std::cout << "COLLISION" << std::endl;
@@ -59,35 +57,16 @@ GameState* PlayState::Update()
 	if(!m_player.GetCollider().IsColliding(m_enemy.GetCollider()) && m_time > 1.0 && m_gameFinished <= 0)
 	{
 		m_enemy.SetState(Enemy::State::Moving);
-		//std::cout << "NO COLLISION" << std::endl;
-		//std::cout << m_player.GetHealthPoints() << std::endl;
 	}
-
-	/*for (auto& spell : m_player.GetSpells())
-	{
-		if (spell.GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 1.0 && m_gameFinished <= 0)
-		{
-			//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
-			spell.IsAlive(false);
-			spell.IsActive(false);
-			spell.ChangeState(Spell::SpellState::Explosion);
-			m_enemy.ReceiveDamage(m_player.GetDamage());
-			m_enemy.SetState(Enemy::State::TakingHit);
-			std::cout << m_enemy.GetHealth() << std::endl;
-			m_timeMonster = 0;
-			m_time = 0;
-		}
-
-		spell.Update();
-	}*/
-	//==========================================================
 	//Spell ptr collider
-
 	if (m_player.GetSpellPtr() && m_player.GetSpellPtr()->IsAlive() && m_player.GetSpellPtr()->GetCollider().IsColliding(m_enemy.GetCollider()) && m_timeMonster > 1.0 && m_gameFinished <= 0)
 	{
-		//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
 		m_player.GetSpellPtr()->IsAlive(false);
 		m_player.GetSpellPtr()->ChangeState(Spell::SpellState::Explosion);
+		if (m_enemy.GetHealth() - m_player.GetDamage() <= 0 && m_enemy.IsAlive())
+		{
+			m_score.SetScore(10);
+		}
 		m_enemy.ReceiveDamage(m_player.GetDamage());
 		m_enemy.SetState(Enemy::State::TakingHit);
 		m_timeMonster = 0;
@@ -95,12 +74,9 @@ GameState* PlayState::Update()
 
 		std::cout << m_enemy.GetHealth() << std::endl;
 	}
+
 	//==========================================================
-	//if (m_enemy.GetCollider().IsColliding(m_player.GetCollider()))
-	//{
-	//	//m_enemy.Respawn(rand() % (1100 - m_enemy.GetSize().x), (rand() % (690 - m_enemy.GetSize().y)));
-	//	m_enemy.SetState(Enemy::State::Attacking);
-	//}
+	//Enemy Update
 	Vector<int> centre;
 
 	centre.x = m_player.GetPosition().x - m_player.GetImages().GetCentrePosition().x;
@@ -109,15 +85,12 @@ GameState* PlayState::Update()
 	m_enemy.UpdateDirection(centre);
 	m_enemy.FlipToPlayer(centre);
 
-	m_player.Update();
-	m_enemy.Update();
-	m_doorAnimation.Update();
 
 	m_time += 0.02f;
 	m_timeMonster += 0.02f;
-	//std::cout << m_time << std::endl;
 	
-	//If user press ESC > EXIT GAME
+	//==========================================================
+	//Game Level Update
 	if (input->IsKeyPressed(HM_KEY_ESCAPE))
 	{
 		return new MenuState;
@@ -130,11 +103,9 @@ GameState* PlayState::Update()
 	}
 	if (!m_enemy.IsAlive())
 	{
-		//GAME OVER SCREEN
 		m_enemy.SetState(Enemy::State::Death);
 		m_gameFinished += 0.02f;
 	}
-
 	if (m_gameFinished > 5.0 && m_boolAnimation)
 	{
 		m_doorOpening.Play(0);
@@ -148,10 +119,19 @@ GameState* PlayState::Update()
 			Door(!m_boolAnimation);
 		}
 	}
-	if (m_player.GetPosition().x > 1110 && m_player.GetPosition().x < 1160 && m_player.GetPosition().y < 20 && !m_boolAnimation)
+	if (m_player.GetPosition().x + m_player.GetImages().GetSpriteDimension(). x / 2 > 1110 && m_player.GetPosition().x + m_player.GetImages().GetSpriteDimension().x / 2 < 1160 && m_player.GetPosition().y < 20 && !m_boolAnimation)
 	{
+		//GAME WIN SCREEN
 		return new EndState(EndState::State::Win);
 	}
+
+	//==========================================================
+	//Updates
+	m_background.Update();
+	m_score.Update();
+	m_doorAnimation.Update();
+	m_enemy.Update();
+	m_player.Update();
 	return this;
 }
 
@@ -159,27 +139,23 @@ bool PlayState::Render()
 {
 	//render background
 	m_background.Render();
-	
-	//Render player
-	m_enemy.Render();
-
 	m_doorAnimation.Render(1100, 03, 0.0);
-	
+	//Render player
 	if (m_player.IsVisible())
 	{
 		m_player.Render();
 	}
 	//render enemy
-	//render ...
-
+	m_enemy.Render();
+	//render score
+	m_score.Render();
 	return true;
 }
 
 void PlayState::OnExit()
 {
 	//unload all music, text, sprites for this state
-	////Game::GetMusic().Unload();
-	//m_player.~Player();
-	//m_enemy.~Enemy();
-	//m_background.~Background();
+	m_player.~Player();
+	m_enemy.~Enemy();
+	m_score.~Score();
 }

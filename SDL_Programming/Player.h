@@ -5,16 +5,13 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprite.h"
-#include "Sound.h"
 #include "HealSpell.h"
 #include "Spell.h"
 
-
 // Inheritance - IS-A 
 // Containment - HAS-A
-
-
 //my Player IS-A game Obj.
+
 class Player : public GameObject
 {
 
@@ -42,7 +39,6 @@ public:
 	int GetManaPoints() const;
 	
 	void ReceiveDamage(const int monsterDamage);
-	//void UpdateHealthBar(float updatePercent);
 	void SetHealthPoints(int healthPoints);
 	void SetLooseHealth(int looseHealth);
 	void SetMaxHealthPoints(int maxHealth);
@@ -54,7 +50,7 @@ public:
 	Sprite GetImages() const;
 
 	const BoxCollider& GetCollider() const;
-	std::deque<Spell> GetSpells();
+	//std::deque<Spell> GetSpells();
 	Spell* GetSpellPtr();
 	bool GetCasting() const;
 
@@ -62,16 +58,16 @@ public:
 	virtual void Render();
 
 private:
-	//TODO -- HP AND MP STATS
+	//TODO -- MP STATS
 	State m_state{ State::Idle };
-	Spell* m_fireballSpell;       //pointer to 'Spell' object (dynamic creation)
-	//std::unique_ptr<Spell> m_fireballSpell;
+	Spell* m_fireballSpell = nullptr;       //pointer to 'Spell' object (dynamic creation)
 	Sprite m_images[State::TotalStates], m_necromancerHud,m_playerHud, m_playerHpBar, m_playerMpBar, m_playerSpellHud;       //containment - player has an image
-	//Sound m_spellCast, m_footSteps;
-	Sound m_footSteps;
+	BoxCollider m_collider;
 
-	std::deque<Spell> m_spells;
+	//TODO DEQUE OF SPELLS TO CAST DIIFERENT SPELLS
+	//std::deque<Spell> m_spells;
 	std::deque<HealSpell> m_Healspells;
+	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
 	bool m_isCasting{ false };
 	float m_spellCoolDown = 0;
@@ -80,8 +76,6 @@ private:
 	int m_velocity{ 1 };
 	int m_healthPoints, m_manaPoints, m_maxHealthPoints, m_maxManaPoints, m_loseHealth;
 	int m_maxHealthBarSize, m_maxManaBarSize;
-	Vector<int> m_direction, m_spellPosition, m_mousePosition;
 
-	BoxCollider m_collider;
 	//SphereCollider m_collider;
 };

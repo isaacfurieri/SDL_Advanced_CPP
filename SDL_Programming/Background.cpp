@@ -10,7 +10,7 @@ void Background::Load(const std::string& imageName, const std::string& musicName
 {
 	//Load Image Settings
 	auto screenSize = Screen::Instance()->GetResolution();
-	
+
 	m_image.Load("Assets/Images/Background/" + imageName + ".png");
 	m_image.SetImageDimension(1, 1, screenSize.x, screenSize.y);
 	m_image.SetSpriteDimension(screenSize.x, screenSize.y);

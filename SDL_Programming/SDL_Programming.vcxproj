@@ -160,10 +160,8 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HealSpell.cpp" />
-    <ClCompile Include="MenuButtons.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="OptionsState.cpp" />
-    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SliderButton.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -190,10 +188,8 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="HealSpell.h" />
-    <ClInclude Include="MenuButtons.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="OptionsState.h" />
-    <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SliderButton.h" />
     <ClInclude Include="Sprite.h" />

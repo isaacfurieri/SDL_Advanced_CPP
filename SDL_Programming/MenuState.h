@@ -26,6 +26,6 @@ public:
 private:
 
 	Background m_background;
-	std::vector<Button> buttons;
-	Vector<int> buttonPos{ Screen::Instance()->GetResolution().x / 2, 200 };
+	std::vector<Button> m_buttons;
+	Vector<int> m_buttonPos{ Screen::Instance()->GetResolution().x / 2, 200 };
 };
