@@ -7,7 +7,7 @@ bool MenuState::OnEnter()
 	m_background.Load("MainMenu", "TheDevilTower");
 
 	m_buttons.push_back(Button("Play"));
-	m_buttons.push_back(Button("Options"));
+	m_buttons.push_back(Button("Controls"));
 	m_buttons.push_back(Button("Exit"));
 
 	for (auto& button : m_buttons)

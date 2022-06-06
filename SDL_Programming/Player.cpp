@@ -405,5 +405,5 @@ void Player::Render()
 	m_playerSpellHud.Render(-10, -9, m_angle);
 	m_necromancerHud.Render(6, -1, m_angle);
 	m_playerHud.Render(1, 0, m_angle);
-	m_collider.Render();
+	//m_collider.Render();
 }

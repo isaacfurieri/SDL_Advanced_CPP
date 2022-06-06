@@ -78,9 +78,6 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files\Main</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
@@ -133,6 +130,12 @@
       <Filter>Source Files\Game Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="EndState.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlsState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -213,6 +216,9 @@
       <Filter>Header Files\Game Objects\Character</Filter>
     </ClInclude>
     <ClInclude Include="EndState.h">
+      <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlsState.h">
       <Filter>Header Files\Game State</Filter>
     </ClInclude>
   </ItemGroup>

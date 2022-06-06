@@ -91,5 +91,5 @@ void Spell::Update()
 void Spell::Render()
 {
 	m_image[static_cast<int>(GetState())].Render(m_position.x, m_position.y, m_angle);
-	m_collider.Render();
+	//m_collider.Render();
 }

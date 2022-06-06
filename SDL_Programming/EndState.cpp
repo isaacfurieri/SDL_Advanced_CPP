@@ -31,7 +31,6 @@ bool EndState::OnEnter()
 
 	m_buttons.push_back(Button("Menu"));
 	m_buttons.push_back(Button("Play"));
-	m_buttons.push_back(Button("Exit"));
 
 	for (auto& button : m_buttons)
 	{

@@ -45,6 +45,7 @@ bool Game::Run(GameState* initialState)
 
 	while (m_gameState)  //will break if m_gameState == nullptr
 	{
+		auto start = SDL_GetPerformanceCounter();
 		auto m_start = SDL_GetTicks();
 		//clearing the screen
 		Screen::Instance()->Clear();
@@ -71,6 +72,9 @@ bool Game::Run(GameState* initialState)
 			}
 		}
 		Screen::Instance()->Present();
+		auto end = SDL_GetPerformanceCounter();
+		auto elapsed = (end - start) / (float)SDL_GetPerformanceFrequency();
+		//std::cout << "Current FPS: " << (1.0f / elapsed) << std::endl;
 	}
 
 	return true;
