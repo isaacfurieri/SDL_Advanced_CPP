@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "GameState.h"
 #include "OptionsState.h"
+#include "ControlsState.h"
 #include "PlayState.h"
 #include "Screen.h"
 #include "SliderButton.h"

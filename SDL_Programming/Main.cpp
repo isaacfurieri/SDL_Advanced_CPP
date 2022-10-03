@@ -17,5 +17,6 @@ int main(int argc, char* argv[])
 		game->Run(new MenuState);
 		game->Shutdown();
 	}
+
 	return 0;
 }

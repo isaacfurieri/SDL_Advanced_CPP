@@ -116,7 +116,7 @@ GameState* PlayState::Update()
 				m_score.SetScore(10);
 				m_respawnMob = false;
 				m_respawnTimer = 0;
-				SetRespawn(rand () % Screen::Instance()->GetResolution().x - m_enemies->GetSize().x + 1, rand() % Screen::Instance()->GetResolution().y - m_enemies->GetSize().y + 1);
+				SetRespawn(rand () % Screen::Instance()->GetResolution().x - m_enemies->GetImages().GetSpriteDimension().x + 1, rand() % Screen::Instance()->GetResolution().y - m_enemies->GetImages().GetSpriteDimension().y + 50);
 				delete m_enemies;
 			}
 			m_enemies->ReceiveDamage(m_player.GetDamage());

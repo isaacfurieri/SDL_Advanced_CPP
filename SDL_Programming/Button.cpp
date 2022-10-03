@@ -8,8 +8,17 @@ Button::Button(const std::string& filename)
 	m_buttonState = ButtonState::Default;
 	//Sprites
 	m_buttonSprite.Load("Assets/Buttons/" + GetTag() + "Button.png");
-	m_buttonSprite.SetImageDimension(2, 1, 1200, 200);
-	m_buttonSprite.SetSpriteDimension(150, 75);
+
+	if (filename == "ArrowLeft" || filename == "ArrowRight" || filename == "ArrowUp" || filename == "ArrowDown" || filename == "Return")
+	{
+		m_buttonSprite.SetImageDimension(2, 1, 400, 200);
+		m_buttonSprite.SetSpriteDimension(50, 50);
+	}
+	else
+	{
+		m_buttonSprite.SetImageDimension(2, 1, 1200, 200);
+		m_buttonSprite.SetSpriteDimension(150, 75);
+	}
 
 	//Sounds
 	m_sfxClicked.Load("Assets/Sounds/buttonClicked.wav");
@@ -61,8 +70,13 @@ void Button::Update()
 			isHover = true;
 		}
 	}
-
-	this->SetPosition((Screen::Instance()->GetResolution().x / 2) - m_buttonSprite.GetSpriteDimension().x / 2, this->GetPosition().y);
+	if (GetTag() == "ArrowLeft" || GetTag() == "ArrowRight" || GetTag() == "ArrowUp" || GetTag() == "ArrowDown" || GetTag() == "Return")
+	{
+	}
+	else
+	{
+		this->SetPosition((Screen::Instance()->GetResolution().x / 2) - m_buttonSprite.GetSpriteDimension().x / 2, this->GetPosition().y);
+	}
 }
 
 void Button::Render()

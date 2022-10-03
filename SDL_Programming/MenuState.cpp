@@ -39,10 +39,10 @@ GameState* MenuState::Update()
 				time = 0.0;
 				return new PlayState;
 			}
-			if (tag == "Options")
+			if (tag == "Controls")
 			{
 				time = 0.0;
-				return new OptionsState;
+				return new ControlsState;
 			}
 			if (tag == "Exit")
 			{
