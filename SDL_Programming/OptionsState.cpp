@@ -18,10 +18,10 @@ bool OptionsState::OnEnter()
 		button.SetPosition(m_buttonPos);
 		m_buttonPos.y += 100;
 	}
-	//TODO SAVE MUSIC AND SOUD VOLUME VALUES WHEN USING SLIDERS AND APPLY IN ALL GAME STATES.
+	
 	//Music
-	//Game::GetMusic().Load("Assets/Music/TheDevilTower.mp3");
-	//Game::GetMusic().Play(Music::PlayLoop::PLAY_ENDLESS);
+	//TODO Save music and sound settings such as (Volume values, Sound on/off) and apply to all game states.
+	//TODO Options to alter screen resolution (Full Screen, Resizable, 800x600, 1080x720, 1920x1080).
 
 	return true;
 }
@@ -32,7 +32,7 @@ GameState* OptionsState::Update()
 
 	for (auto& slider : m_sliders)
 	{
-		auto tag = slider.GetTag();
+		auto &tag = slider.GetTag();
 
 		slider.Update();
 		slider.Render();
@@ -96,7 +96,7 @@ GameState* OptionsState::Update()
 
 	for (auto& button : m_buttons)
 	{
-		auto tag = button.GetTag();
+		auto &tag = button.GetTag();
 
 		button.Update();
 		button.Render();

@@ -154,8 +154,8 @@ void Sprite::Render(int xPos, int yPos, double angle)
 {
 	if (!m_isAnimationDead)
 	{
-		SDL_Rect sourceRect;
-		SDL_Rect targetRect;
+		SDL_Rect sourceRect{};
+		SDL_Rect targetRect{};
 
 		sourceRect.x = (m_imageCel % m_imageDimension.x) * m_celDimension.x;
 		sourceRect.y = (m_imageCel / m_imageDimension.x) * m_celDimension.y;

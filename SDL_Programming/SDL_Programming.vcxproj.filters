@@ -55,11 +55,56 @@
     <Filter Include="Source Files\Game Objects\Character">
       <UniqueIdentifier>{f7c4f35f-f63a-4f82-904f-eb22bb21d97d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Sound">
+      <UniqueIdentifier>{8c48dac6-3a8c-4050-bbdb-b6cf0472d859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Images">
+      <UniqueIdentifier>{1c3b76f4-cc71-41b5-a911-3f250242bd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Text">
+      <UniqueIdentifier>{e7c45a80-e19f-40af-a907-6823f6597116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Objects\Character\Spells">
+      <UniqueIdentifier>{b90223ff-4a4e-464b-ac46-211d152fe79f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Objects\Items">
+      <UniqueIdentifier>{837be3b6-4184-4865-af37-8e2ad8a6bdca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Objects\Enemy">
+      <UniqueIdentifier>{4304541c-5d01-46c7-9f3d-48649fbbbb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Objects\Background">
+      <UniqueIdentifier>{15f65ddb-9130-4061-8932-c8a801dd4fad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Images">
+      <UniqueIdentifier>{0c280c21-5605-4de2-b080-b56d79af1244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Text">
+      <UniqueIdentifier>{e0474b6a-99d2-4f87-a812-a008f778450b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Sound">
+      <UniqueIdentifier>{9f247738-f265-44ce-9651-e8ea6d536d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Character\Spells">
+      <UniqueIdentifier>{4ae1d984-25ce-40e2-95ae-4abb5a923101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Items">
+      <UniqueIdentifier>{a6c44421-3f48-4e8e-afb3-1e82de1bef30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Enemy">
+      <UniqueIdentifier>{94741069-8e64-4319-a670-17699953a7c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Objects\Background">
+      <UniqueIdentifier>{095eb916-a203-4483-852e-da7c537129ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Networking">
+      <UniqueIdentifier>{9cd6f1ba-4329-4900-a43b-a842df4d6290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Networking">
+      <UniqueIdentifier>{3e12d8ed-6bbc-4c4e-a38e-a4b7c3404062}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Background.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
@@ -69,28 +114,7 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Music.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Stone.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Coin.cpp">
-      <Filter>Source Files\Game Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
@@ -100,9 +124,6 @@
       <Filter>Source Files\Game Objects\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Game Objects\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Spell.cpp">
       <Filter>Source Files\Game Objects\Character</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -126,9 +147,6 @@
     <ClCompile Include="OptionsState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
-    <ClCompile Include="HealSpell.cpp">
-      <Filter>Source Files\Game Objects\Character</Filter>
-    </ClCompile>
     <ClCompile Include="EndState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
@@ -138,20 +156,38 @@
     <ClCompile Include="ControlsState.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files\Components\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Components\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Components\Images</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Components\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="HealSpell.cpp">
+      <Filter>Source Files\Game Objects\Character\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Source Files\Game Objects\Character\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\Game Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Game Objects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Source Files\Game Objects\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Game Objects\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Music.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
@@ -164,18 +200,6 @@
     <ClInclude Include="Score.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Stone.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Coin.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="BoxCollider.h">
       <Filter>Header Files\Game Objects\Collision</Filter>
     </ClInclude>
@@ -183,9 +207,6 @@
       <Filter>Header Files\Game Objects\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Game Objects\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Spell.h">
       <Filter>Header Files\Game Objects\Character</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -212,14 +233,41 @@
     <ClInclude Include="OptionsState.h">
       <Filter>Header Files\Game State</Filter>
     </ClInclude>
-    <ClInclude Include="HealSpell.h">
-      <Filter>Header Files\Game Objects\Character</Filter>
-    </ClInclude>
     <ClInclude Include="EndState.h">
       <Filter>Header Files\Game State</Filter>
     </ClInclude>
     <ClInclude Include="ControlsState.h">
       <Filter>Header Files\Game State</Filter>
+    </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Header Files\Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Components\Images</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Components\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="HealSpell.h">
+      <Filter>Header Files\Game Objects\Character\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Header Files\Game Objects\Character\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Header Files\Game Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Game Objects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files\Game Objects\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Header Files\Game Objects\Background</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

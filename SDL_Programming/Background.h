@@ -4,6 +4,9 @@
 #include "Music.h"
 #include "Sprite.h"
 
+//TODO Add music to background class, instead of using it on MainGame.
+//Rebuild Background class
+//https://github.com/karsten-vermeulen-dev/Handmade/blob/master/Handmade/Background.h
 
 class Background : public GameObject
 {

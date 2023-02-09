@@ -58,6 +58,9 @@ private:
 	Vector<int> m_spriteDimension;
 
 	//TODO -- MAP OF TEXTURES -- https://github.com/karsten-vermeulen-dev/Handmade/blob/master/Handmade/Texture.cpp
+	//Find a better way to load/unload textures. (Load once, use when needs).
+	
 	//static std::string s_rootFolder;
 	//static std::map<std::string, SDL_Texture*> s_images;
+
 };

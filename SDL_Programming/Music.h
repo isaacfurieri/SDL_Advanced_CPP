@@ -2,6 +2,8 @@
 #include <string>
 #include <SDL_mixer.h>
 
+//Free Music to Check
+//https://www.reddit.com/r/gamedev/comments/z74sum/ive_uploaded_my_full_music_library_with_100_songs/
 class Music
 {
 

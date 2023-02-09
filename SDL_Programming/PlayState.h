@@ -32,8 +32,8 @@ public:
 	float m_respawnTimer = 0.0f;
 
 	void SetRespawn(int posX, int posY);
-
 	void Door(bool door);
+
 	bool OnEnter() override;
 	void OnExit() override;
 	bool Render() override;

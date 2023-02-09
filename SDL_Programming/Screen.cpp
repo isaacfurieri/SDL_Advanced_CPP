@@ -20,11 +20,11 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height)
 	m_window = SDL_CreateWindow(windowTitle.c_str(),       //game window title
 		SDL_WINDOWPOS_CENTERED,    //pos x
 		SDL_WINDOWPOS_CENTERED,    //pos y
-		width,                     //width
-		height,                    //height
-		//0);                        //flags
-		SDL_WINDOW_FULLSCREEN);                        //flags
-		//SDL_WINDOW_RESIZABLE);                        //flags
+		width,                       //width
+		height,                      //height
+		0);                     //flags            //Normal Screen Resolution
+		//SDL_WINDOW_FULLSCREEN);                       //Use this to Fullscreen
+		//SDL_WINDOW_RESIZABLE);                        //Use this to make screen resizable
 
 	if (!m_window)
 	{
